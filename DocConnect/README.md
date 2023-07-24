@@ -10,6 +10,8 @@ Currently, two official plugins are available:
 ## Installation:
 Open a terminal in "DocConnect" directory
 
+- if there is no "DocConnect" directory checkout the development branch with the following command `git checkout development`
 - to install run `npm install` or `npm i` in the terminal
 - to run the project `npm run dev`
 - to build the project run `npm build`
+- to run test run `npx cypress open`
