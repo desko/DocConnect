@@ -8,6 +8,11 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Installation:
+
+Make sure that you have Node version ^14.18.0 installed as it is required to run the project!
+To install Node plase take a look at this article:
+- [Node Version Manager – NVM Install Guide](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/)
+
 Open a terminal in "DocConnect" directory
 
 - if there is no "DocConnect" directory checkout the development branch with the following command `git checkout development`
