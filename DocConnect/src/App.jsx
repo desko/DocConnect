@@ -1,8 +1,14 @@
+import {Routes, Route, Outlet} from 'react-router-dom';
+import Home from './pages/Home';
 
 function App() {
   return (
     <div className="wrapper">
-      <h1>Hello World!</h1>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+      </Routes>
+
+      <Outlet />
     </div>
   );
 }
