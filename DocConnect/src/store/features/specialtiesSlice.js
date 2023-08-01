@@ -1,5 +1,6 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
+import {createSlice} from '@reduxjs/toolkit';
+
+import {fetchSpecialties} from '../../services/servicesSpecialties';
 
 const initialState = {
   status: 'idle',
@@ -7,13 +8,6 @@ const initialState = {
   specialties: [],
 };
 
-export const fetchSpecialties = createAsyncThunk('specialties/fetchSpecialties', async () => {
-  const response = await axios.get(`https://localhost:7038/api/Specialties`);
-  console.log(response.data);
-  // const data = await response.json();
-  // console.log(data);
-  return response.data;
-});
 
 const specialtiesSlice = createSlice({
   name: 'specialties',

@@ -1,35 +1,45 @@
 const globalStyles = {
   global: {
-    html: {
+    'html': {
       fontSize: '10px',
     },
-    body: {
+    '*': {
+      boxSizing: 'border-box',
+    },
+    '*:before': {
+      boxSizing: 'border-box',
+    },
+    '*:after': {
+      boxSizing: 'border-box',
+    },
+    'body': {
       bgColor: 'pink.50',
       color: 'licorice.400',
       fontSize: '1.6rem',
       lineHeight: '1.21',
+      minWidth: '32rem',
     },
-    h1: {
+    'h1': {
       fontWeight: '700',
       color: 'inherit',
     },
-    h2: {
+    'h2': {
       fontWeight: '700',
       color: 'inherit',
     },
-    h3: {
+    'h3': {
       fontWeight: '700',
       color: 'inherit',
     },
-    h4: {
+    'h4': {
       fontWeight: '700',
       color: 'inherit',
     },
-    h5: {
+    'h5': {
       fontWeight: '700',
       color: 'inherit',
     },
-    h6: {
+    'h6': {
       fontWeight: '700',
       color: 'inherit',
     },

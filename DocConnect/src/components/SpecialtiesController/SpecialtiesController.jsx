@@ -1,5 +1,5 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchSpecialties} from '../../store/features/specialtiesSlice';
+import {fetchSpecialties} from '../../services/servicesSpecialties';
 import {useEffect} from 'react';
 
 import {Grid, GridItem, Spinner, AlertIcon, Alert} from '@chakra-ui/react';
@@ -30,8 +30,20 @@ const SpecialtiesController = () => {
 
   return (
     <Grid
-      templateColumns='repeat(3, 1fr)'
-      gap='5rem 6.2rem'
+      templateColumns={
+        {
+          base: '1fr',
+          sm: 'repeat(2, minmax(0, 1fr))',
+          lg: 'repeat(3, minmax(0, 1fr))',
+        }
+      }
+      gap={
+        {
+          base: '2rem',
+          md: '2rem 3rem',
+          lg: '5rem 6.2rem',
+        }
+      }
       pt='1.6rem'
     >
       {
