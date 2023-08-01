@@ -4,6 +4,8 @@ import colors from './colors.theme';
 import fonts from './fonts.theme';
 import cardTheme from '../../components/Card/card.theme';
 import headingTheme from './heading.theme';
+import breakpoints from './breakpoints.theme';
+
 
 const theme = extendTheme({
   colors,
@@ -13,6 +15,7 @@ const theme = extendTheme({
     Card: cardTheme,
     Heading: headingTheme,
   },
+  breakpoints,
 });
 
 export default theme;
