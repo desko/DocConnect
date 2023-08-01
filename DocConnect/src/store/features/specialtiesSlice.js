@@ -9,7 +9,10 @@ const initialState = {
 
 export const fetchSpecialties = createAsyncThunk('specialties/fetchSpecialties', async () => {
   const response = await axios.get(`https://localhost:7038/api/Specialties`);
-  return response.json();
+  console.log(response.data);
+  // const data = await response.json();
+  // console.log(data);
+  return response.data;
 });
 
 const specialtiesSlice = createSlice({
@@ -36,7 +39,6 @@ const specialtiesSlice = createSlice({
   },
 });
 
-export const selectAllSpecialties = (state) => state.specialties;
 
 // export const {} = specialtiesSlice.actions;
 export const specialtiesReducer = specialtiesSlice.reducer;

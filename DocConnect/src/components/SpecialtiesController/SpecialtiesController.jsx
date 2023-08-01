@@ -1,23 +1,32 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {selectAllSpecialties, fetchSpecialties} from '../../store/features/specialtiesSlice';
+import {fetchSpecialties} from '../../store/features/specialtiesSlice';
 import {useEffect} from 'react';
 
-import {Grid, GridItem} from '@chakra-ui/react';
+import {Grid, GridItem, Spinner, AlertIcon, Alert} from '@chakra-ui/react';
 import Card from '../Card/Card';
 import CardContent from '../CardContent/CardContent';
 
 const SpecialtiesController = () => {
   const dispatch = useDispatch();
-  const {specialties} = useSelector(selectAllSpecialties);
-  const specialtiesStatus = useSelector((state) => state.specialties.status);
+  const {specialties, status} = useSelector((store) => store.specialties);
+
   console.log(specialties);
 
   useEffect(() =>{
-    if (specialtiesStatus === 'idle') {
+    if (status === 'idle') {
       dispatch(fetchSpecialties());
     }
-  }, [specialtiesStatus, dispatch]);
+  }, [status, dispatch]);
 
+  if (status === 'loading') {
+    return (<Spinner color='red.400' size='xl' display='block' mx='auto' /> );
+  }
+  if (status === 'failed') {
+    return (
+      <Alert status='error'>
+        <AlertIcon />There was an error processing your request
+      </Alert> );
+  }
 
   return (
     <Grid
@@ -29,7 +38,7 @@ const SpecialtiesController = () => {
         specialties.map((el) => {
           return (
             <GridItem key={el.id}>
-              <Card imageUrl={el.imgUrl} content={el.specialtyName} Component={CardContent} />
+              <Card imageUrl={el.imageUrl} content={el.name} Component={CardContent} />
             </GridItem>
           );
         })
