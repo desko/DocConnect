@@ -8,8 +8,9 @@ import CardContent from '../CardContent/CardContent';
 
 const SpecialtiesController = () => {
   const dispatch = useDispatch();
-  const specialties = useSelector(selectAllSpecialties);
+  const {specialties} = useSelector(selectAllSpecialties);
   const specialtiesStatus = useSelector((state) => state.specialties.status);
+  console.log(specialties);
 
   useEffect(() =>{
     if (specialtiesStatus === 'idle') {

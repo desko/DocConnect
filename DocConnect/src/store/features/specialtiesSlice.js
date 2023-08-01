@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const fetchSpecialties = createAsyncThunk('specialties/fetchSpecialties', async () => {
-  const response = await axios.get(`ApiUrl/specialties`);
+  const response = await axios.get(`https://localhost:7038/api/Specialties`);
   return response.json();
 });
 
