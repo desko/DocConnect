@@ -24,12 +24,12 @@ describe('Card', () => {
   it('Check render with image', () => {
     cy.findByRole('img', {
       name: /cardiology/i,
-    });
+    }).should('exist');
   });
 
   it('Check render with content', () => {
     cy.findByRole('heading', {
       name: /cardiology/i,
-    });
+    }).should('exist');
   });
 });

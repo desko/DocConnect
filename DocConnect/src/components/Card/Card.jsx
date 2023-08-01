@@ -5,6 +5,7 @@ const Card = ({Component, imageUrl, content}) => {
     <CardChakra
       role='group'
       variant='custom'
+      aria-label='Card'
     >
       <Box
         as='figure'
@@ -26,7 +27,7 @@ const Card = ({Component, imageUrl, content}) => {
       >
         <Image
           src={imageUrl}
-          alt={content}
+          alt={content.name || content}
           position='absolute'
           inset='0'
           w='100%'
