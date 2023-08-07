@@ -6,14 +6,11 @@ import {Grid, GridItem, Spinner, AlertIcon, Alert} from '@chakra-ui/react';
 import Card from '../Card/Card';
 import CardContent from '../CardContent/CardContent';
 
-
 import {sortAlphabetically} from '../../store/features/specialtiesSlice';
 
 const SpecialtiesController = () => {
   const dispatch = useDispatch();
   const {specialties, status} = useSelector((store) => store.specialties);
-
-  console.log(specialties);
 
   useEffect(() =>{
     if (status === 'idle') {

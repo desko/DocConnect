@@ -6,6 +6,7 @@ const Section = ({title, children}) => {
     <Box
       as='section'
       py='6.2rem'
+      aria-label='Section'
     >
       <Container>
         <Box
