@@ -1,10 +1,13 @@
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {fetchSpecialties} from '../../services/servicesSpecialties';
 import {useEffect} from 'react';
 
 import {Grid, GridItem, Spinner, AlertIcon, Alert} from '@chakra-ui/react';
 import Card from '../Card/Card';
 import CardContent from '../CardContent/CardContent';
+
+
+import {sortAlphabetically} from '../../store/features/specialtiesSlice';
 
 const SpecialtiesController = () => {
   const dispatch = useDispatch();
@@ -15,6 +18,7 @@ const SpecialtiesController = () => {
   useEffect(() =>{
     if (status === 'idle') {
       dispatch(fetchSpecialties());
+      dispatch(sortAlphabetically());
     }
   }, [status, dispatch]);
 

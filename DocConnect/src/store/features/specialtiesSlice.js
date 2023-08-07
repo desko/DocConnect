@@ -16,6 +16,9 @@ const specialtiesSlice = createSlice({
     updateIsLoaded: (state, action) => {
       state.isLoaded = action.payload;
     },
+    sortAlphabetically: (state) =>{
+      state.specialties.sort((a, b) => a.specialtyName.localeCompare(b.specialtyName));
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -33,6 +36,5 @@ const specialtiesSlice = createSlice({
   },
 });
 
-
-// export const {} = specialtiesSlice.actions;
+export const {sortAlphabetically} = specialtiesSlice.actions;
 export const specialtiesReducer = specialtiesSlice.reducer;
