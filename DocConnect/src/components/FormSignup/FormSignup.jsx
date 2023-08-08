@@ -12,21 +12,22 @@ import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
 import {Link} from 'react-router-dom';
 
+
 const FormSignup = () => {
+  const form = useForm();
+  const {register, handleSubmit, formState, watch} = form;
+  const {errors, isSubmitting} = formState;
+
+  // const regex = /^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-])$/;
+
   const onSubmit = (values) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        resolve();
-      }, 3000);
-    });
+    console.log(values);
   };
 
-  const {
-    handleSubmit,
-    register,
-    formState: {errors, isSubmitting},
-  } = useForm();
+  const onError = (values) => {
+    // console.log(values.password.ref.value);
+  };
+
 
   return (
     <Box
@@ -68,9 +69,10 @@ const FormSignup = () => {
         </Text>
       </Box>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
         <FormControl
           variant='custom'
+          isInvalid={errors.email}
         >
           <Box>
             <Box>
@@ -90,24 +92,29 @@ const FormSignup = () => {
               type='email'
               variant='custom'
               {...register('email', {
-                required: 'This is required',
-                minLength: {
-                  value: 4,
-                  message: 'Minimum len == 4',
+                required: {
+                  value: true,
+                  message: 'Please enter an email address.',
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,
+                  message: 'Please enter a valid email address.',
                 },
               })}
             />
           </Box>
+          {/* <p style={{color: 'red'}}>{errors.email?.message}</p> */}
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.email?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.firstName}
         >
           <Box>
             <FormLabel
@@ -124,18 +131,29 @@ const FormSignup = () => {
               placeholder='First Name'
               type='text'
               variant='custom'
+              {...register('firstName', {
+                required: {
+                  value: true,
+                  message: 'Please enter a first name.',
+                },
+                maxLength: {
+                  value: 50,
+                  message: 'First name must be less than 50 characters long.',
+                },
+              })}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.firstName?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.lastName}
         >
           <Box>
             <FormLabel
@@ -152,18 +170,28 @@ const FormSignup = () => {
               placeholder='Last Name'
               type='text'
               variant='custom'
+              {...register('lastName', {
+                required: {
+                  value: true,
+                  message: 'Please enter a last name.',
+                }, maxLength: {
+                  value: 50,
+                  message: 'Last name must be less than 50 characters long.',
+                },
+              })}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.lastName?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.password}
         >
           <Box>
             <FormLabel
@@ -177,9 +205,29 @@ const FormSignup = () => {
             }}
           >
             <Input
-              placeholder='placeholder@email.com'
+              placeholder=''
               type='password'
               variant='custom'
+              {...register('password', {
+                required: {
+                  value: true,
+                  message: 'Please enter a password.',
+                },
+                minLength: {
+                  value: 8,
+                  message: 'Password must be at least 8 characters long.',
+                },
+                maxLength: {
+                  value: 100,
+                  message: 'Pssword must be less than 100 characters long.',
+                },
+                pattern: {
+                  value: /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[^\da-zA-Z]).{8,}$/,
+                  // eslint-disable-next-line max-len
+                  message: 'Your password must have at least 8 characters, with a mix of uppercase, lowercase, numbers and symbols.',
+                },
+
+              })}
             />
           </Box>
 
@@ -190,12 +238,13 @@ const FormSignup = () => {
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.password?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.confirmPassword}
         >
           <Box>
             <FormLabel
@@ -209,16 +258,28 @@ const FormSignup = () => {
             }}
           >
             <Input
-              placeholder='placeholder@email.com'
+              placeholder=''
               type='password'
               variant='custom'
+              {...register('confirmPassword', {
+
+                required: {
+                  value: true,
+                  message: 'Please enter a password.',
+                },
+                validate: (val) => {
+                  if (watch('password') !== val) {
+                    return 'Those passwords didn’t match. Please try again.';
+                  }
+                },
+              })}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.confirmPassword?.message}
           </FormErrorMessage>
         </FormControl>
 
