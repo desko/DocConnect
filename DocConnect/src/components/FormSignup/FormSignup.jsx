@@ -1,4 +1,13 @@
-import {Box, FormControl, FormLabel, FormErrorMessage, Input, Heading, Text, FormHelperText} from '@chakra-ui/react';
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Input,
+  Heading,
+  Text,
+  FormHelperText,
+} from '@chakra-ui/react';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
 import {Link} from 'react-router-dom';
@@ -63,76 +72,124 @@ const FormSignup = () => {
         <FormControl
           variant='custom'
         >
-          <FormLabel>Email Address *</FormLabel>
+          <Box>
+            <Box>
+              <FormLabel
+                variant='custom'
+              >Email Address *</FormLabel>
+            </Box>
+          </Box>
 
-          <Input
-            placeholder='placeholder@email.com'
-            type='email'
-            variant='customPush'
-            {...register('email', {
-              required: 'This is required',
-              minLength: {
-                value: 4,
-                message: 'Minimum len == 4',
-              },
-            })}
-          />
-
-          <FormErrorMessage>
-            {errors.name && errors.name.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <FormControl
-          variant='custom'
-        >
-          <FormLabel>First Name *</FormLabel>
-
-          <Input
-            placeholder='First Name'
-            type='text'
-            variant='customPush'
-          />
-
-          <FormErrorMessage>
-            {errors.name && errors.name.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <FormControl
-          variant='custom'
-        >
-          <FormLabel>Last Name *</FormLabel>
-
-          <Input
-            placeholder='Last Name'
-            type='text'
-            variant='customPush'
-          />
-
-          <FormErrorMessage>
-            {errors.name && errors.name.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <FormControl
-          variant='custom'
-        >
-          <FormLabel>Password *</FormLabel>
-
-          <Input
-            placeholder='placeholder@email.com'
-            type='password'
-            variant='customPush'
-          />
-
-          <FormHelperText
-            as='p'
+          <Box
+            _last={{
+              mb: '2rem',
+            }}
           >
+            <Input
+              placeholder='placeholder@email.com'
+              type='email'
+              variant='custom'
+              {...register('email', {
+                required: 'This is required',
+                minLength: {
+                  value: 4,
+                  message: 'Minimum len == 4',
+                },
+              })}
+            />
+          </Box>
+
+          <FormErrorMessage
+            as='div'
+          >
+            {errors.name && errors.name.message}
+          </FormErrorMessage>
+        </FormControl>
+
+        <FormControl
+          variant='custom'
+        >
+          <Box>
+            <FormLabel
+              variant='custom'
+            >First Name *</FormLabel>
+          </Box>
+
+          <Box
+            _last={{
+              mb: '2rem',
+            }}
+          >
+            <Input
+              placeholder='First Name'
+              type='text'
+              variant='custom'
+            />
+          </Box>
+
+          <FormErrorMessage
+            as='div'
+          >
+            {errors.name && errors.name.message}
+          </FormErrorMessage>
+        </FormControl>
+
+        <FormControl
+          variant='custom'
+        >
+          <Box>
+            <FormLabel
+              variant='custom'
+            >Last Name *</FormLabel>
+          </Box>
+
+          <Box
+            _last={{
+              mb: '2rem',
+            }}
+          >
+            <Input
+              placeholder='Last Name'
+              type='text'
+              variant='custom'
+            />
+          </Box>
+
+          <FormErrorMessage
+            as='div'
+          >
+            {errors.name && errors.name.message}
+          </FormErrorMessage>
+        </FormControl>
+
+        <FormControl
+          variant='custom'
+        >
+          <Box>
+            <FormLabel
+              variant='custom'
+            >Password *</FormLabel>
+          </Box>
+
+          <Box
+            _last={{
+              mb: '2rem',
+            }}
+          >
+            <Input
+              placeholder='placeholder@email.com'
+              type='password'
+              variant='custom'
+            />
+          </Box>
+
+          <FormHelperText>
             Use 8 or more characters, with a mix of uppercase, lowercase, numbers and symbols.
           </FormHelperText>
 
-          <FormErrorMessage>
+          <FormErrorMessage
+            as='div'
+          >
             {errors.name && errors.name.message}
           </FormErrorMessage>
         </FormControl>
@@ -140,15 +197,27 @@ const FormSignup = () => {
         <FormControl
           variant='custom'
         >
-          <FormLabel>Confirm Password *</FormLabel>
+          <Box>
+            <FormLabel
+              variant='custom'
+            >Confirm Password *</FormLabel>
+          </Box>
 
-          <Input
-            placeholder='placeholder@email.com'
-            type='password'
-            variant='customPush'
-          />
+          <Box
+            _last={{
+              mb: '2rem',
+            }}
+          >
+            <Input
+              placeholder='placeholder@email.com'
+              type='password'
+              variant='custom'
+            />
+          </Box>
 
-          <FormErrorMessage>
+          <FormErrorMessage
+            as='div'
+          >
             {errors.name && errors.name.message}
           </FormErrorMessage>
         </FormControl>
@@ -156,6 +225,9 @@ const FormSignup = () => {
         <Btn
           text='Sign Up'
           type='submit'
+          styleProps={{
+            width: '100%',
+          }}
           customProps={{
             isLoading: isSubmitting,
           }}

@@ -22,27 +22,6 @@ const variants = {
       },
     },
   }),
-  customPush: definePartsStyle({
-    field: {
-      fontSize: '1.6rem',
-      color: 'quicksilver.400',
-      border: '.1rem solid currentColor',
-      height: 'auto',
-      lineHeight: '2.38',
-      _last: {
-        mb: '2rem',
-      },
-      _placeholder: {
-        color: 'quicksilver.400',
-      },
-      _hover: {
-        color: 'bodyText',
-      },
-      _focus: {
-        color: 'bodyText',
-      },
-    },
-  }),
 };
 
 const inputTheme = defineMultiStyleConfig({

@@ -8,7 +8,7 @@ const variants = {
     container: {
       pb: '2rem',
     },
-    requiredIndicator: {
+    label: {
       fontSize: '2rem',
     },
     helperText: {
