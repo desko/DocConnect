@@ -5,6 +5,8 @@ import fonts from './fonts.theme';
 import cardTheme from '../../components/Card/card.theme';
 import headingTheme from './heading.theme';
 import breakpoints from './breakpoints.theme';
+import inputTheme from './input.theme';
+import formTheme from './form.theme';
 
 
 const theme = extendTheme({
@@ -14,6 +16,8 @@ const theme = extendTheme({
   components: {
     Card: cardTheme,
     Heading: headingTheme,
+    Input: inputTheme,
+    Form: formTheme,
   },
   breakpoints,
 });
