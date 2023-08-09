@@ -1,9 +1,11 @@
+import FormLogin from '../components/FormLogin/FormLogin';
 import SectionWave from '../components/SectionWave/SectionWave';
+
 
 const Login = () => {
   return (
     <SectionWave>
-      <p>Login</p>
+      <FormLogin />
     </SectionWave>
   );
 };

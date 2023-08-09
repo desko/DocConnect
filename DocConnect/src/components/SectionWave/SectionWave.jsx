@@ -10,11 +10,14 @@ const SectionWave = ({title = '', children}) => {
       aria-label='Section'
       position='relative'
       minH='100vh'
+      display='flex'
+      alignItems='center'
     >
       <Container
         styleProps={{
           position: 'relative',
           zIndex: '2',
+          minHeight: '100%',
         }}
       >
         {
@@ -29,7 +32,12 @@ const SectionWave = ({title = '', children}) => {
           </Box>
         }
 
-        <Box>
+        <Box
+          display='flex'
+          flexDirection='column'
+          justifyContent='center'
+          alignItems='center'
+        >
           {children}
         </Box>
       </Container>

@@ -31,6 +31,7 @@ const FormSignup = () => {
       bgColor='offwhite.400'
       p='4rem 7rem'
       maxW='48rem'
+      w='100%'
       mx='auto'
       boxShadow='0 .4rem .4rem rgba(0,0,0, .25)'
       borderRadius='1.5rem'
