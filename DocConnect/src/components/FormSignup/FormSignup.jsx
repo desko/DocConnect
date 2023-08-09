@@ -12,21 +12,19 @@ import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
 import {Link} from 'react-router-dom';
 
+import {SIGNUP_VALIDATION} from '../../common/formConsts';
+
+
 const FormSignup = () => {
+  const form = useForm({mode: 'onTouched'});
+  const {register, handleSubmit, formState, watch} = form;
+  const {errors, isSubmitting} = formState;
+
+
   const onSubmit = (values) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        resolve();
-      }, 3000);
-    });
+
   };
 
-  const {
-    handleSubmit,
-    register,
-    formState: {errors, isSubmitting},
-  } = useForm();
 
   return (
     <Box
@@ -68,9 +66,10 @@ const FormSignup = () => {
         </Text>
       </Box>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormControl
           variant='custom'
+          isInvalid={errors.email}
         >
           <Box>
             <Box>
@@ -89,25 +88,20 @@ const FormSignup = () => {
               placeholder='placeholder@email.com'
               type='email'
               variant='custom'
-              {...register('email', {
-                required: 'This is required',
-                minLength: {
-                  value: 4,
-                  message: 'Minimum len == 4',
-                },
-              })}
+              {...register('email', SIGNUP_VALIDATION.EMAIL)}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.email?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.firstName}
         >
           <Box>
             <FormLabel
@@ -124,18 +118,20 @@ const FormSignup = () => {
               placeholder='First Name'
               type='text'
               variant='custom'
+              {...register('firstName', SIGNUP_VALIDATION.FIRST_NAME)}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.firstName?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.lastName}
         >
           <Box>
             <FormLabel
@@ -152,18 +148,20 @@ const FormSignup = () => {
               placeholder='Last Name'
               type='text'
               variant='custom'
+              {...register('lastName', SIGNUP_VALIDATION.LAST_NAME)}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.lastName?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.password}
         >
           <Box>
             <FormLabel
@@ -177,9 +175,10 @@ const FormSignup = () => {
             }}
           >
             <Input
-              placeholder='placeholder@email.com'
+              placeholder=''
               type='password'
               variant='custom'
+              {...register('password', SIGNUP_VALIDATION.PASSWORD)}
             />
           </Box>
 
@@ -190,12 +189,13 @@ const FormSignup = () => {
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.password?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.confirmPassword}
         >
           <Box>
             <FormLabel
@@ -209,16 +209,28 @@ const FormSignup = () => {
             }}
           >
             <Input
-              placeholder='placeholder@email.com'
+              placeholder=''
               type='password'
               variant='custom'
+              {...register('confirmPassword', {
+
+                required: {
+                  value: true,
+                  message: 'Please enter a password.',
+                },
+                validate: (val) => {
+                  if (watch('password') !== val) {
+                    return 'Those passwords didn’t match. Please try again.';
+                  }
+                },
+              })}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.confirmPassword?.message}
           </FormErrorMessage>
         </FormControl>
 
