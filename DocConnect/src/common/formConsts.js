@@ -52,3 +52,24 @@ export const SIGNUP_VALIDATION = {
 
   },
 };
+
+
+export const LOGIN_VALIDATION = {
+  EMAIL: {
+    required: {
+      value: true,
+      message: 'Please enter an email address.',
+    },
+    pattern: {
+      // eslint-disable-next-line max-len
+      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+      message: 'Please enter a valid email address.',
+    },
+  },
+  PASSWORD: {
+    required: {
+      value: true,
+      message: 'Please enter your password.',
+    },
+  },
+};
