@@ -11,21 +11,16 @@ import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
 import {Link} from 'react-router-dom';
 
-const FormLogin = () => {
-  const onSubmit = (values) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        resolve();
-      }, 3000);
-    });
-  };
+import {LOGIN_VALIDATION} from '../../common/formConsts';
 
-  const {
-    handleSubmit,
-    register,
-    formState: {errors, isSubmitting},
-  } = useForm();
+const FormLogin = () => {
+  const form = useForm({mode: 'onTouched'});
+  const {register, handleSubmit, formState} = form;
+  const {errors, isSubmitting} = formState;
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
 
   return (
     <Box
@@ -48,9 +43,10 @@ const FormLogin = () => {
         >Login</Heading>
       </Box>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormControl
           variant='custom'
+          isInvalid={errors.email}
         >
           <Box>
             <Box>
@@ -69,25 +65,20 @@ const FormLogin = () => {
               placeholder='placeholder@email.com'
               type='email'
               variant='custom'
-              {...register('email', {
-                required: 'This is required',
-                minLength: {
-                  value: 4,
-                  message: 'Minimum len == 4',
-                },
-              })}
+              {...register('email', LOGIN_VALIDATION.EMAIL)}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.email?.message}
           </FormErrorMessage>
         </FormControl>
 
         <FormControl
           variant='custom'
+          isInvalid={errors.password}
         >
           <Box>
             <FormLabel
@@ -101,16 +92,17 @@ const FormLogin = () => {
             }}
           >
             <Input
-              placeholder='Password'
-              type='passowrd'
+              placeholder=''
+              type='password'
               variant='custom'
+              {...register('password', LOGIN_VALIDATION.PASSWORD)}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.name && errors.name.message}
+            {errors.password?.message}
           </FormErrorMessage>
         </FormControl>
 
