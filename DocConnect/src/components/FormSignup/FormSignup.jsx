@@ -12,20 +12,17 @@ import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
 import {Link} from 'react-router-dom';
 
+import {SIGNUP_VALIDATION} from '../../common/formConsts';
+
 
 const FormSignup = () => {
-  const form = useForm();
+  const form = useForm({mode: 'onTouched'});
   const {register, handleSubmit, formState, watch} = form;
   const {errors, isSubmitting} = formState;
 
-  // const regex = /^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-])$/;
 
   const onSubmit = (values) => {
-    console.log(values);
-  };
 
-  const onError = (values) => {
-    // console.log(values.password.ref.value);
   };
 
 
@@ -69,7 +66,7 @@ const FormSignup = () => {
         </Text>
       </Box>
 
-      <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormControl
           variant='custom'
           isInvalid={errors.email}
@@ -91,19 +88,9 @@ const FormSignup = () => {
               placeholder='placeholder@email.com'
               type='email'
               variant='custom'
-              {...register('email', {
-                required: {
-                  value: true,
-                  message: 'Please enter an email address.',
-                },
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,
-                  message: 'Please enter a valid email address.',
-                },
-              })}
+              {...register('email', SIGNUP_VALIDATION.EMAIL)}
             />
           </Box>
-          {/* <p style={{color: 'red'}}>{errors.email?.message}</p> */}
 
           <FormErrorMessage
             as='div'
@@ -131,16 +118,7 @@ const FormSignup = () => {
               placeholder='First Name'
               type='text'
               variant='custom'
-              {...register('firstName', {
-                required: {
-                  value: true,
-                  message: 'Please enter a first name.',
-                },
-                maxLength: {
-                  value: 50,
-                  message: 'First name must be less than 50 characters long.',
-                },
-              })}
+              {...register('firstName', SIGNUP_VALIDATION.FIRST_NAME)}
             />
           </Box>
 
@@ -170,15 +148,7 @@ const FormSignup = () => {
               placeholder='Last Name'
               type='text'
               variant='custom'
-              {...register('lastName', {
-                required: {
-                  value: true,
-                  message: 'Please enter a last name.',
-                }, maxLength: {
-                  value: 50,
-                  message: 'Last name must be less than 50 characters long.',
-                },
-              })}
+              {...register('lastName', SIGNUP_VALIDATION.LAST_NAME)}
             />
           </Box>
 
@@ -208,26 +178,7 @@ const FormSignup = () => {
               placeholder=''
               type='password'
               variant='custom'
-              {...register('password', {
-                required: {
-                  value: true,
-                  message: 'Please enter a password.',
-                },
-                minLength: {
-                  value: 8,
-                  message: 'Password must be at least 8 characters long.',
-                },
-                maxLength: {
-                  value: 100,
-                  message: 'Pssword must be less than 100 characters long.',
-                },
-                pattern: {
-                  value: /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[^\da-zA-Z]).{8,}$/,
-                  // eslint-disable-next-line max-len
-                  message: 'Your password must have at least 8 characters, with a mix of uppercase, lowercase, numbers and symbols.',
-                },
-
-              })}
+              {...register('password', SIGNUP_VALIDATION.PASSWORD)}
             />
           </Box>
 
