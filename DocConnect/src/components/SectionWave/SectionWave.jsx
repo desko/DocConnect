@@ -2,11 +2,11 @@ import {Box, Heading} from '@chakra-ui/react';
 import Container from '../Container/Container';
 import Waves from '../Waves/Waves';
 
-const SectionWave = ({title, children}) => {
+const SectionWave = ({title = '', children}) => {
   return (
     <Box
       as='section'
-      py='6.2rem'
+      py='8rem'
       aria-label='Section'
       position='relative'
       minH='100vh'
@@ -17,15 +17,17 @@ const SectionWave = ({title, children}) => {
           zIndex: '2',
         }}
       >
-        <Box
-          as='header'
-          pb='2rem'
-        >
-          <Heading
-            as='h2'
-            size='xl'
-          >{title}</Heading>
-        </Box>
+        {
+          title !== '' && <Box
+            as='header'
+            pb='2rem'
+          >
+            <Heading
+              as='h2'
+              size='xl'
+            >{title}</Heading>
+          </Box>
+        }
 
         <Box>
           {children}

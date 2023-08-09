@@ -6,7 +6,7 @@ const sizes = {
     lineHeight: 'inherit',
   }),
   'sm': defineStyle({
-    fontSize: '2rrem',
+    fontSize: '2rem',
     lineHeight: 'inherit',
   }),
   'md': defineStyle({

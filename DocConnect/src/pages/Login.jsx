@@ -2,7 +2,7 @@ import SectionWave from '../components/SectionWave/SectionWave';
 
 const Login = () => {
   return (
-    <SectionWave title='Login'>
+    <SectionWave>
       <p>Login</p>
     </SectionWave>
   );

@@ -9,6 +9,9 @@ const colors = {
     400: '#fffffd',
   },
   bodyText: '#200017',
+  quicksilver: {
+    400: '#ACA1A6',
+  },
 };
 
 export default colors;
