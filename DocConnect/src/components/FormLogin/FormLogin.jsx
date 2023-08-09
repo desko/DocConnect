@@ -25,7 +25,10 @@ const FormLogin = () => {
   return (
     <Box
       bgColor='offwhite.400'
-      p='4rem 7rem'
+      p={{
+        base: '2rem 3rem',
+        md: '4rem 7rem',
+      }}
       maxW='48rem'
       w='100%'
       mx='auto'
@@ -58,7 +61,10 @@ const FormLogin = () => {
 
           <Box
             _last={{
-              mb: '2rem',
+              mb: {
+                base: '0rem',
+                md: '2rem',
+              },
             }}
           >
             <Input
@@ -88,7 +94,10 @@ const FormLogin = () => {
 
           <Box
             _last={{
-              mb: '2rem',
+              mb: {
+                base: '0rem',
+                md: '2rem',
+              },
             }}
           >
             <Input

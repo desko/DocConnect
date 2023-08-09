@@ -3,7 +3,26 @@
 	height: auto;
 	display: inline-block;
 	font-size: 0;
-	transform: translateY(15rem);
+	transform: scaleY(1.5);
+	transform-origin: bottom;
+}
+
+@media (min-width: 768px) {
+	.wave {
+		transform: scaleY(1.2);
+	}
+}
+
+@media (min-width: 1024px) {
+	.wave {
+		transform: scaleY(.8);
+	}
+}
+
+@media (min-width: 1921px) {
+	.wave {
+		transform: scaleY(.6);
+	}
 }
 
 .wave .wave--offset-1 {
@@ -35,6 +54,7 @@
 }
 
 @media (prefers-reduced-motion) {
+
 	.wave .wave--offset-1,
 	.wave .wave--offset-2,
 	.wave .wave--offset-3,
@@ -48,9 +68,11 @@
 	0% {
 		transform: translateY(0%);
 	}
+
 	50% {
 		transform: translateY(25%);
 	}
+
 	100% {
 		transform: translateY(0%);
 	}
@@ -60,9 +82,11 @@
 	0% {
 		transform: translateY(0%);
 	}
+
 	50% {
 		transform: translateY(25%);
 	}
+
 	100% {
 		transform: translateY(0%);
 	}
@@ -72,9 +96,11 @@
 	0% {
 		transform: translateY(0%);
 	}
+
 	50% {
 		transform: translateY(35%);
 	}
+
 	100% {
 		transform: translateY(0%);
 	}
@@ -84,9 +110,11 @@
 	0% {
 		transform: translateY(0%);
 	}
+
 	50% {
 		transform: translateY(11%);
 	}
+
 	100% {
 		transform: translateY(0%);
 	}
@@ -96,9 +124,11 @@
 	0% {
 		transform: translateY(0%);
 	}
+
 	50% {
 		transform: translateY(22%);
 	}
+
 	100% {
 		transform: translateY(0%);
 	}

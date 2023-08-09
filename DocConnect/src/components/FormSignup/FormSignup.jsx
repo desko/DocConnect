@@ -20,16 +20,17 @@ const FormSignup = () => {
   const {register, handleSubmit, formState, watch} = form;
   const {errors, isSubmitting} = formState;
 
-
   const onSubmit = (values) => {
 
   };
 
-
   return (
     <Box
       bgColor='offwhite.400'
-      p='4rem 7rem'
+      p={{
+        base: '2rem 3rem',
+        md: '4rem 7rem',
+      }}
       maxW='48rem'
       w='100%'
       mx='auto'
@@ -46,7 +47,14 @@ const FormSignup = () => {
           pb='.5rem'
         >Sign up</Heading>
 
-        <Text>
+        <Text
+          display='inline-flex'
+          gap={{
+            base: '.5rem',
+            md: '1rem',
+          }}
+          flexWrap='wrap'
+        >
           Already have an account?
 
           <Text
@@ -56,7 +64,6 @@ const FormSignup = () => {
             textDecorationColor='currentcolor'
             textDecorationThickness='.2rem'
             textUnderlineOffset='.3rem'
-            pl='1rem'
             transition='text-decoration-color .4s'
             _hover={{
               textDecorationColor: 'transparent',
@@ -82,7 +89,10 @@ const FormSignup = () => {
 
           <Box
             _last={{
-              mb: '2rem',
+              mb: {
+                base: '0rem',
+                md: '2rem',
+              },
             }}
           >
             <Input
@@ -112,7 +122,10 @@ const FormSignup = () => {
 
           <Box
             _last={{
-              mb: '2rem',
+              mb: {
+                base: '0rem',
+                md: '2rem',
+              },
             }}
           >
             <Input
@@ -142,7 +155,10 @@ const FormSignup = () => {
 
           <Box
             _last={{
-              mb: '2rem',
+              mb: {
+                base: '0rem',
+                md: '2rem',
+              },
             }}
           >
             <Input
@@ -172,7 +188,10 @@ const FormSignup = () => {
 
           <Box
             _last={{
-              mb: '2rem',
+              mb: {
+                base: '0rem',
+                md: '2rem',
+              },
             }}
           >
             <Input
@@ -206,7 +225,10 @@ const FormSignup = () => {
 
           <Box
             _last={{
-              mb: '2rem',
+              mb: {
+                base: '0rem',
+                md: '2rem',
+              },
             }}
           >
             <Input
