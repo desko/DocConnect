@@ -9,7 +9,7 @@ const SectionWave = ({title = '', children}) => {
       py='8rem'
       aria-label='Section'
       position='relative'
-      minH='100vh'
+      minH='calc(100vh - var(--header-height))'
       display='flex'
       alignItems='center'
     >
