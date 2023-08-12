@@ -1,7 +1,10 @@
 const globalStyles = {
   global: {
     'html.header-active': {
-      overflow: 'hidden',
+      overflow: {
+        base: 'hidden',
+        lg: 'initial',
+      },
     },
     'html': {
       fontSize: '10px',
