@@ -1,5 +1,8 @@
 const globalStyles = {
   global: {
+    'html.header-active': {
+      overflow: 'hidden',
+    },
     'html': {
       fontSize: '10px',
     },

@@ -21,6 +21,10 @@ const Header = () => {
     setActive(false);
   }, [location]);
 
+  useEffect(() => {
+    document.documentElement.classList.toggle('header-active', active);
+  }, [active]);
+
   return (
     <Box
       role='group'
