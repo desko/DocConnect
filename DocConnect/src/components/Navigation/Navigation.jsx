@@ -1,25 +1,14 @@
-import {Box, Flex} from '@chakra-ui/react';
-import {Link} from 'react-router-dom';
+import {Box, Flex, Link as ChakraLink} from '@chakra-ui/react';
+import {NavLink as ReactRouterLink} from 'react-router-dom';
+import {NAV_LINKS} from '../../common/constants';
+import {navigationStyle} from './Navigation.theme';
 
-const links = [
-  {
-    name: 'Specialties',
-    url: '/specialties',
-  },
-  {
-    name: 'Specialists',
-    url: '/specialists',
-  },
-  {
-    name: 'Appointments',
-    url: '/appointments',
-  },
-];
 
-const Navigation = ({styleProps}) => {
+const Navigation = ({styleProps = {}}) => {
   return (
     <Box
       as='nav'
+      {...navigationStyle}
       {...styleProps}
     >
       <Flex
@@ -34,9 +23,13 @@ const Navigation = ({styleProps}) => {
         }}
       >
         {
-          links.map((link, index) => {
+          NAV_LINKS.map((link, index) => {
             return (<li key={link.name + index}>
-              <Link to={link.url}>{link.name}</Link>
+              <ChakraLink
+                as={ReactRouterLink}
+                to={link.url}
+                variant='navLink'
+              >{link.name}</ChakraLink>
             </li>);
           })
         }
