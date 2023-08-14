@@ -9,17 +9,34 @@ import {
 } from '@chakra-ui/react';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {LOGIN_VALIDATION} from '../../common/formConsts';
+import {loginUser} from '../../services/servicesUsers';
+import {useEffect} from 'react';
 
 const FormLogin = () => {
   const form = useForm({mode: 'onTouched'});
-  const {register, handleSubmit, formState} = form;
+  const {register, handleSubmit, formState, setError} = form;
   const {errors, isSubmitting} = formState;
+  const {token} = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit = (values) => {
-    console.log(values);
+  useEffect(() =>{
+    localStorage.setItem('userToken', token);
+  }, [token]);
+
+
+  const onSubmit = async (values) => {
+    const response = await dispatch(loginUser(values));
+    if (response.payload.errorMessage) {
+      setError('emailAddress', {message: response.payload.errorMessage});
+      setError('password', {message: response.payload.errorMessage});
+    } else if (response.payload.httpStatusCode === 200) {
+      navigate('/');
+    }
   };
 
   return (
@@ -49,7 +66,7 @@ const FormLogin = () => {
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormControl
           variant='custom'
-          isInvalid={errors.email}
+          isInvalid={errors.emailAddress}
         >
           <Box>
             <Box>
@@ -71,14 +88,14 @@ const FormLogin = () => {
               placeholder='placeholder@email.com'
               type='email'
               variant='custom'
-              {...register('email', LOGIN_VALIDATION.EMAIL)}
+              {...register('emailAddress', LOGIN_VALIDATION.EMAIL)}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
           >
-            {errors.email?.message}
+            {errors.emailAddress?.message}
           </FormErrorMessage>
         </FormControl>
 

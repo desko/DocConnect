@@ -11,18 +11,79 @@ import {
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
 import {Link} from 'react-router-dom';
-
 import {SIGNUP_VALIDATION} from '../../common/formConsts';
+import {registerUser} from '../../services/servicesUsers';
+import {useState} from 'react';
 
 
 const FormSignup = () => {
   const form = useForm({mode: 'onTouched'});
-  const {register, handleSubmit, formState, watch} = form;
+  const {register, handleSubmit, formState, watch, setError} = form;
   const {errors, isSubmitting} = formState;
+  const [isRegistered, setIsRegistered] = useState(false);
 
-  const onSubmit = (values) => {
-
+  const onSubmit = async (values) => {
+    const response = registerUser(values);
+    if (response.errorMessage) {
+      setError('emailAddress', {message: response.errorMessage});
+    } else if (response.httpStatusCode === 201) {
+      setIsRegistered(true);
+    }
   };
+
+  if (isRegistered) {
+    return (
+      <Box
+        bgColor='offwhite.400'
+        p={{
+          base: '2rem 3rem',
+          md: '4rem 7rem',
+        }}
+        maxW='48rem'
+        w='100%'
+        mx='auto'
+        boxShadow='0 .4rem .4rem rgba(0,0,0, .25)'
+        borderRadius='1.5rem'
+      >
+        <Box
+          as='header'
+          pb='3rem'
+        >
+          <Heading
+            as='h2'
+            size='md'
+            pb='.5rem'
+          >Congratulations!</Heading>
+
+          <Text
+            display='inline-flex'
+            gap={{
+              base: '.5rem',
+              md: '1rem',
+            }}
+            flexWrap='wrap'
+          >
+          Your account has been created successfully.
+
+            <Text
+              as='span'
+              color='red.400'
+              textDecoration='underline'
+              textDecorationColor='currentcolor'
+              textDecorationThickness='.2rem'
+              textUnderlineOffset='.3rem'
+              transition='text-decoration-color .4s'
+              _hover={{
+                textDecorationColor: 'transparent',
+              }}
+            >
+              <Link to='/login'>Go to the Login page</Link>
+            </Text>
+          </Text>
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -77,7 +138,7 @@ const FormSignup = () => {
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormControl
           variant='custom'
-          isInvalid={errors.email}
+          isInvalid={errors.emailAddress}
         >
           <Box>
             <Box>
@@ -99,14 +160,18 @@ const FormSignup = () => {
               placeholder='placeholder@email.com'
               type='email'
               variant='custom'
-              {...register('email', SIGNUP_VALIDATION.EMAIL)}
+              {...register('emailAddress', SIGNUP_VALIDATION.EMAIL)}
             />
           </Box>
 
           <FormErrorMessage
             as='div'
+            fontSize='1.2rem'
+            color='red.400'
+            lineHeight='1.33'
+            letterSpacing='0.033em'
           >
-            {errors.email?.message}
+            {errors.emailAddress?.message}
           </FormErrorMessage>
         </FormControl>
 
@@ -138,6 +203,10 @@ const FormSignup = () => {
 
           <FormErrorMessage
             as='div'
+            fontSize='1.2rem'
+            color='red.400'
+            lineHeight='1.33'
+            letterSpacing='0.033em'
           >
             {errors.firstName?.message}
           </FormErrorMessage>
@@ -171,6 +240,10 @@ const FormSignup = () => {
 
           <FormErrorMessage
             as='div'
+            fontSize='1.2rem'
+            color='red.400'
+            lineHeight='1.33'
+            letterSpacing='0.033em'
           >
             {errors.lastName?.message}
           </FormErrorMessage>
@@ -208,6 +281,10 @@ const FormSignup = () => {
 
           <FormErrorMessage
             as='div'
+            fontSize='1.2rem'
+            color='red.400'
+            lineHeight='1.33'
+            letterSpacing='0.033em'
           >
             {errors.password?.message}
           </FormErrorMessage>
@@ -252,6 +329,10 @@ const FormSignup = () => {
 
           <FormErrorMessage
             as='div'
+            fontSize='1.2rem'
+            color='red.400'
+            lineHeight='1.33'
+            letterSpacing='0.033em'
           >
             {errors.confirmPassword?.message}
           </FormErrorMessage>
