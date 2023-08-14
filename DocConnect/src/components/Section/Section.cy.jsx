@@ -25,7 +25,7 @@ describe('<Section />', () => {
     cy.findByRole('banner').as('header').should('exist');
   });
 
-  it('has Title in a header', () => {
+  it('has content after header', () => {
     cy.findByText(/test/i).should('exist');
   });
 });
