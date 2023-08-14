@@ -27,10 +27,10 @@ const FormSignup = () => {
   const [isRegistered, setIsRegistered] = useState(false);
 
   const onSubmit = async (values) => {
-    const response = registerUser(values);
-    if (response.errorMessage) {
-      setError('emailAddress', {message: response.errorMessage});
-    } else if (response.httpStatusCode === 201) {
+    const response = await registerUser(values);
+    if (response.data.errorMessage) {
+      setError('emailAddress', {message: response.data.errorMessage});
+    } else if (response.data.httpStatusCode === 201) {
       setIsRegistered(true);
     }
   };
