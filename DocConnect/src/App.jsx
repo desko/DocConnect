@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Header from './components/Header/Header';
 import NotFound from './pages/NotFound';
 import {HOME_PAGE, LOGIN_PAGE, SIGNUP_PAGE} from './common/routes';
+import {Logged} from './hoc/Logged';
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
 
       <Routes>
         <Route path={HOME_PAGE} element={<Home />}></Route>
-        <Route path={LOGIN_PAGE} element={<Login />}></Route>
-        <Route path={SIGNUP_PAGE} element={<Signup />}></Route>
+        <Route path={LOGIN_PAGE} element={<Logged><Login /></Logged>}></Route>
+        <Route path={SIGNUP_PAGE} element={<Logged><Signup /></Logged>}></Route>
         <Route path="/*" element={<NotFound />}></Route>
       </Routes>
 
