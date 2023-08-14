@@ -10,9 +10,11 @@ const Navigation = ({styleProps = {}}) => {
       as='nav'
       {...navigationStyle}
       {...styleProps}
+      aria-label='Main Navigation'
     >
       <Flex
         as='ul'
+        listStyleType='none'
         gap={{
           base: '1rem',
           lg: '4rem',
