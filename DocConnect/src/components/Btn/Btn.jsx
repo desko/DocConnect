@@ -1,13 +1,16 @@
 import {Button} from '@chakra-ui/react';
 
-const Btn = ({styleProps = {}, customProps = {}, text, type}) => {
+const Btn = ({styleProps = {}, customProps = {}, text, type, children}) => {
   return (
     <Button
       variant='custom'
       type={type}
       {...styleProps}
       {...customProps}
-    >{text}</Button>
+    >
+      {text}
+      {children}
+    </Button>
   );
 };
 

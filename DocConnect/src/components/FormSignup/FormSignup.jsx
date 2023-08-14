@@ -7,13 +7,17 @@ import {
   Heading,
   Text,
   FormHelperText,
+  Link as ChakraLink,
 } from '@chakra-ui/react';
+import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
-import {Link} from 'react-router-dom';
+import {Link as ReactRouterLink} from 'react-router-dom';
+
 import {SIGNUP_VALIDATION} from '../../common/formConsts';
+import {LOGIN_PAGE} from '../../common/routes';
+
 import {registerUser} from '../../services/servicesUsers';
-import {useState} from 'react';
 
 
 const FormSignup = () => {
@@ -77,7 +81,13 @@ const FormSignup = () => {
                 textDecorationColor: 'transparent',
               }}
             >
-              <Link to='/login'>Go to the Login page</Link>
+
+              <ChakraLink
+                as={ReactRouterLink}
+                to={LOGIN_PAGE}
+                variant='custom'
+              >Go to the Login page</ChakraLink>
+
             </Text>
           </Text>
         </Box>
@@ -118,20 +128,11 @@ const FormSignup = () => {
         >
           Already have an account?
 
-          <Text
-            as='span'
-            color='red.400'
-            textDecoration='underline'
-            textDecorationColor='currentcolor'
-            textDecorationThickness='.2rem'
-            textUnderlineOffset='.3rem'
-            transition='text-decoration-color .4s'
-            _hover={{
-              textDecorationColor: 'transparent',
-            }}
-          >
-            <Link to='/login'>Login</Link>
-          </Text>
+          <ChakraLink
+            as={ReactRouterLink}
+            to={LOGIN_PAGE}
+            variant='custom'
+          >Login</ChakraLink>
         </Text>
       </Box>
 

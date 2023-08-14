@@ -1,5 +1,11 @@
 const globalStyles = {
   global: {
+    'html.header-active': {
+      overflow: {
+        base: 'hidden',
+        lg: 'initial',
+      },
+    },
     'html': {
       fontSize: '10px',
     },
@@ -18,6 +24,14 @@ const globalStyles = {
       fontSize: '1.6rem',
       lineHeight: '1.21',
       minWidth: '32rem',
+      minHeight: '100vh',
+    },
+    '#root': {
+      minHeight: '100vh',
+    },
+    '.wrapper': {
+      minHeight: '100vh',
+      paddingTop: 'var(--header-height, 7.1rem)',
     },
     'h1': {
       fontWeight: '700',

@@ -5,16 +5,18 @@ import {
   FormErrorMessage,
   Input,
   Heading,
-  Text,
+  Link as ChakraLink,
 } from '@chakra-ui/react';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link as ReactRouterLink, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {LOGIN_VALIDATION} from '../../common/formConsts';
 import {loginUser} from '../../services/servicesUsers';
 import {useEffect} from 'react';
+
+import {HOME_PAGE} from '../../common/routes';
 
 const FormLogin = () => {
   const form = useForm({mode: 'onTouched'});
@@ -136,21 +138,11 @@ const FormLogin = () => {
           textAlign='right'
           pb='2rem'
         >
-          <Text
-            as='span'
-            color='red.400'
-            textDecoration='underline'
-            textDecorationColor='currentcolor'
-            textDecorationThickness='.2rem'
-            textUnderlineOffset='.3rem'
-            pl='1rem'
-            transition='text-decoration-color .4s'
-            _hover={{
-              textDecorationColor: 'transparent',
-            }}
-          >
-            <Link to='/'>Forgot Password?</Link>
-          </Text>
+          <ChakraLink
+            as={ReactRouterLink}
+            to={HOME_PAGE}
+            variant='custom'
+          >Forgot Password?</ChakraLink>
         </Box>
 
         <Btn

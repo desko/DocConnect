@@ -9,6 +9,7 @@ import inputTheme from './input.theme';
 import formTheme from './form.theme';
 import formLabelTheme from './formLabel.theme';
 import buttonTheme from '../../components/Btn/Btn.theme';
+import linkTheme from './link.theme';
 
 const theme = extendTheme({
   colors,
@@ -21,6 +22,7 @@ const theme = extendTheme({
     Form: formTheme,
     FormLabel: formLabelTheme,
     Button: buttonTheme,
+    Link: linkTheme,
   },
   breakpoints,
 });
