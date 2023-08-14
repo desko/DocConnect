@@ -12,6 +12,12 @@ const colors = {
   quicksilver: {
     400: '#ACA1A6',
   },
+  lavender: {
+    400: '#FFF2F8',
+  },
+  red: {
+    1000: '#300b0d',
+  },
 };
 
 export default colors;
