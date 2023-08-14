@@ -15,7 +15,7 @@ import {LOGIN_PAGE} from '../../common/routes';
 import {registerUser} from '../../services/servicesUsers';
 import FormRow from '../FormRow/FormRow';
 import BoxCard from '../BoxCard/BoxCard';
-
+import SignupSuccess from '../SignupSuccess/SignupSuccess';
 
 const FormSignup = () => {
   const form = useForm({mode: 'onTouched'});
@@ -45,67 +45,11 @@ const FormSignup = () => {
   };
 
   if (isRegistered) {
-    return (
-      <BoxCard>
-        <Box
-          as='header'
-          pb='3rem'
-        >
-          <Heading
-            as='h2'
-            size='md'
-            pb='.5rem'
-          >Congratulations!</Heading>
-
-          <Text
-            display='inline-flex'
-            gap={{
-              base: '.5rem',
-              md: '1rem',
-            }}
-            flexWrap='wrap'
-          >
-          Your account has been created successfully.
-
-            <Text
-              as='span'
-              color='red.400'
-              textDecoration='underline'
-              textDecorationColor='currentcolor'
-              textDecorationThickness='.2rem'
-              textUnderlineOffset='.3rem'
-              transition='text-decoration-color .4s'
-              _hover={{
-                textDecorationColor: 'transparent',
-              }}
-            >
-
-              <ChakraLink
-                as={ReactRouterLink}
-                to={LOGIN_PAGE}
-                variant='custom'
-              >Go to the Login page</ChakraLink>
-
-            </Text>
-          </Text>
-        </Box>
-      </BoxCard>
-    );
+    return <SignupSuccess />;
   }
 
   return (
-    <Box
-      bgColor='offwhite.400'
-      p={{
-        base: '2rem 3rem',
-        md: '4rem 7rem',
-      }}
-      maxW='48rem'
-      w='100%'
-      mx='auto'
-      boxShadow='0 .4rem .4rem rgba(0,0,0, .25)'
-      borderRadius='1.5rem'
-    >
+    <BoxCard>
       <Box
         as='header'
         pb='3rem'
@@ -199,7 +143,7 @@ const FormSignup = () => {
           }}
         />
       </form>
-    </Box>
+    </BoxCard>
   );
 };
 
