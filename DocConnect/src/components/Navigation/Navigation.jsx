@@ -14,6 +14,7 @@ const Navigation = ({styleProps = {}}) => {
     >
       <Flex
         as='ul'
+        listStyleType='none'
         gap={{
           base: '1rem',
           lg: '4rem',

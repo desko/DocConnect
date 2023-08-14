@@ -29,6 +29,7 @@ const Header = () => {
     <Box
       role='group'
       as='header'
+      aria-label='Header'
       ref={headerRef}
       data-checked={active || null}
       {...headerStyle}
@@ -71,10 +72,11 @@ const Header = () => {
 
           <Btn
             customProps={{
-              variant: 'hamburger',
-              onClick: () => {
+              'variant': 'hamburger',
+              'onClick': () => {
                 setActive(!active);
               },
+              'aria-label': 'Menu Button',
             }}
           >
             <Text

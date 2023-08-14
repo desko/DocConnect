@@ -18,6 +18,9 @@ const variants = {
     transition: 'background-color .4s',
     _hover: {
       bgColor: 'red.400',
+      _disabled: {
+        bgColor: 'red.400',
+      },
     },
   }),
   customOutline: defineStyle({
