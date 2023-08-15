@@ -1,6 +1,6 @@
 import {Box} from '@chakra-ui/react';
 
-const BoxCard = ({children}) => {
+const BoxCard = ({styleProps = {}, customProps = {}, children}) => {
   return (
     <Box
       bgColor='offwhite.400'
@@ -13,6 +13,8 @@ const BoxCard = ({children}) => {
       mx='auto'
       boxShadow='0 .4rem .4rem rgba(0,0,0, .25)'
       borderRadius='1.5rem'
+      {...styleProps}
+      {...customProps}
     >
       {children}
     </Box>

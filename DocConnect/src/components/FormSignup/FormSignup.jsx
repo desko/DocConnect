@@ -49,7 +49,12 @@ const FormSignup = () => {
   }
 
   return (
-    <BoxCard>
+    <BoxCard
+      customProps={{
+        'aria-label': 'Signup',
+        'role': 'group',
+      }}
+    >
       <Box
         as='header'
         pb='3rem'
