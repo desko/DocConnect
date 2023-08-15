@@ -76,7 +76,54 @@ describe('<FormSignup />', () => {
     cy.findByRole('button', {name: /sign up/i}).should('exist');
   });
 
-  it('submits form on button click', () => {
+  it('populates form and submits form on button click with duplicate email', () => {
+    const mockFormData = {
+      email: 'test1@test.com',
+      fname: 'Test',
+      lname: 'Testov',
+      password: 'Test123!',
+      confirmPassword: 'Test123!',
+    };
 
+    cy.get('@inputEmail').type(mockFormData.email);
+    cy.get('@inputFName').type(mockFormData.fname);
+    cy.get('@inputLName').type(mockFormData.lname);
+    cy.get('@inputPassword').type(mockFormData.password);
+    cy.get('@inputConfirmPassword').type(mockFormData.confirmPassword);
+
+    cy.get('@buttonSubmit').click();
+    cy.intercept('POST', 'api/User/Register', {
+      body: {
+        success: false,
+        httpStatusCode: 400,
+        errorMessage: 'This email is already registered by another user.',
+        result: null,
+      },
+    }).as('signupUser');
+
+    // eslint-disable-next-line max-len
+    cy.wait('@signupUser').its('response').as('request').its('statusCode').should('eq', 200);
+    cy.get('@request').its('body').should('have.property', 'success');
+  });
+
+  it('populates form and submits form on button click with incorrect data - no request to server', () => {
+    const mockFormData = {
+      email: 'test1@test.com',
+      fname: 'Test',
+      lname: 'Testov',
+      password: 'Test123!',
+      confirmPassword: 'Test123',
+    };
+
+    cy.get('@inputEmail').type(mockFormData.email);
+    cy.get('@inputFName').type(mockFormData.fname);
+    cy.get('@inputLName').type(mockFormData.lname);
+    cy.get('@inputPassword').type(mockFormData.password);
+    cy.get('@inputConfirmPassword').type(mockFormData.confirmPassword);
+
+    cy.get('@buttonSubmit').click();
+    cy.intercept('POST', 'api/User/Register', cy.spy().as('myRequest'));
+
+    cy.get('@myRequest').should('not.have.been.called');
   });
 });
