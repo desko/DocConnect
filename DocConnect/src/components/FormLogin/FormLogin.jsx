@@ -40,7 +40,12 @@ const FormLogin = () => {
   };
 
   return (
-    <BoxCard>
+    <BoxCard
+      customProps={{
+        'aria-label': 'Login',
+        'role': 'group',
+      }}
+    >
       <Box
         as='header'
         pb='3rem'
