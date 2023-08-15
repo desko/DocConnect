@@ -1,9 +1,5 @@
 import {
   Box,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
   Heading,
   Link as ChakraLink,
 } from '@chakra-ui/react';
@@ -17,6 +13,8 @@ import {loginUser} from '../../services/servicesUsers';
 import {useEffect} from 'react';
 
 import {HOME_PAGE} from '../../common/routes';
+import FormRow from '../FormRow/FormRow';
+import BoxCard from '../BoxCard/BoxCard';
 
 const FormLogin = () => {
   const form = useForm({mode: 'onTouched'});
@@ -42,18 +40,7 @@ const FormLogin = () => {
   };
 
   return (
-    <Box
-      bgColor='offwhite.400'
-      p={{
-        base: '2rem 3rem',
-        md: '4rem 7rem',
-      }}
-      maxW='48rem'
-      w='100%'
-      mx='auto'
-      boxShadow='0 .4rem .4rem rgba(0,0,0, .25)'
-      borderRadius='1.5rem'
-    >
+    <BoxCard>
       <Box
         as='header'
         pb='3rem'
@@ -66,73 +53,26 @@ const FormLogin = () => {
       </Box>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <FormControl
-          variant='custom'
-          isInvalid={errors.emailAddress}
-        >
-          <Box>
-            <Box>
-              <FormLabel
-                variant='custom'
-              >Email Address *</FormLabel>
-            </Box>
-          </Box>
+        <FormRow
+          type='email'
+          placeholder='Email Address *'
+          labelText='Email Address *'
+          register={register}
+          registerName='emailAddress'
+          registerValidation={LOGIN_VALIDATION.EMAIL}
+          error={errors.emailAddress?.message}
+          invalidate={errors.emailAddress}
+        />
 
-          <Box
-            _last={{
-              mb: {
-                base: '0rem',
-                md: '2rem',
-              },
-            }}
-          >
-            <Input
-              placeholder='placeholder@email.com'
-              type='email'
-              variant='custom'
-              {...register('emailAddress', LOGIN_VALIDATION.EMAIL)}
-            />
-          </Box>
-
-          <FormErrorMessage
-            as='div'
-          >
-            {errors.emailAddress?.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <FormControl
-          variant='custom'
-          isInvalid={errors.password}
-        >
-          <Box>
-            <FormLabel
-              variant='custom'
-            >Password *</FormLabel>
-          </Box>
-
-          <Box
-            _last={{
-              mb: {
-                base: '0rem',
-                md: '2rem',
-              },
-            }}
-          >
-            <Input
-              placeholder=''
-              type='password'
-              variant='custom'
-              {...register('password', LOGIN_VALIDATION.PASSWORD)}
-            />
-          </Box>
-
-          <FormErrorMessage
-            as='div'
-          >
-            {errors.password?.message}
-          </FormErrorMessage>
-        </FormControl>
+        <FormRow
+          type='password'
+          labelText='Password *'
+          register={register}
+          registerName='password'
+          registerValidation={LOGIN_VALIDATION.PASSWORD}
+          error={errors.password?.message}
+          invalidate={errors.password}
+        />
 
         <Box
           textAlign='right'
@@ -156,7 +96,7 @@ const FormLogin = () => {
           }}
         />
       </form>
-    </Box>
+    </BoxCard>
   );
 };
 
