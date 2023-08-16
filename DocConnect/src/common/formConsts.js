@@ -17,8 +17,12 @@ export const SIGNUP_VALIDATION = {
       value: true,
       message: 'Please enter a first name.',
     },
+    pattern: {
+      value: /^(?!\s+$).*/,
+      message: 'Please enter a first name.',
+    },
     maxLength: {
-      value: 50,
+      value: 49,
       message: 'First name must be less than 50 characters long.',
     },
   },
@@ -26,8 +30,13 @@ export const SIGNUP_VALIDATION = {
     required: {
       value: true,
       message: 'Please enter a last name.',
-    }, maxLength: {
-      value: 50,
+    },
+    pattern: {
+      value: /^(?!\s+$).*/,
+      message: 'Please enter a last name.',
+    },
+    maxLength: {
+      value: 49,
       message: 'Last name must be less than 50 characters long.',
     },
   },
@@ -41,8 +50,8 @@ export const SIGNUP_VALIDATION = {
       message: 'Password must be at least 8 characters long.',
     },
     maxLength: {
-      value: 100,
-      message: 'Pssword must be less than 100 characters long.',
+      value: 99,
+      message: 'Password must be less than 100 characters long.',
     },
     pattern: {
       value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
