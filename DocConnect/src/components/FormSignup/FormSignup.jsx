@@ -119,6 +119,7 @@ const FormSignup = () => {
 
         <FormRow
           type='password'
+          placeholder='Password'
           labelText='Password *'
           invalidate={errors.password}
           error={errors.password?.message}
@@ -130,6 +131,7 @@ const FormSignup = () => {
 
         <FormRow
           type='password'
+          placeholder='Confirm Password'
           labelText='Confirm Password *'
           invalidate={errors.confirmPassword}
           error={errors.confirmPassword?.message}
