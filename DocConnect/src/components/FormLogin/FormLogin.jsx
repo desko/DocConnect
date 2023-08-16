@@ -61,7 +61,7 @@ const FormLogin = () => {
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormRow
           type='email'
-          placeholder='Email Address *'
+          placeholder='placeholder@email.com'
           labelText='Email Address *'
           register={register}
           registerName='emailAddress'
@@ -73,6 +73,7 @@ const FormLogin = () => {
         <FormRow
           type='password'
           labelText='Password *'
+          placeholder='Password'
           register={register}
           registerName='password'
           registerValidation={LOGIN_VALIDATION.PASSWORD}
