@@ -18,8 +18,8 @@ export const SIGNUP_VALIDATION = {
       message: 'Please enter a first name.',
     },
     pattern: {
-      value: /^(?!\s+$).*/,
-      message: 'Please enter a first name.',
+      value: /^(?!.*\s{2,})\S(?:\s?\S)*$/,
+      message: 'Please enter a valid first name.',
     },
     maxLength: {
       value: 49,
@@ -32,8 +32,8 @@ export const SIGNUP_VALIDATION = {
       message: 'Please enter a last name.',
     },
     pattern: {
-      value: /^(?!\s+$).*/,
-      message: 'Please enter a last name.',
+      value: /^(?!.*\s{2,})\S(?:\s?\S)*$/,
+      message: 'Please enter a valid last name.',
     },
     maxLength: {
       value: 49,
@@ -67,7 +67,7 @@ export const LOGIN_VALIDATION = {
   EMAIL: {
     required: {
       value: true,
-      message: 'Please enter an email address.',
+      message: 'Please enter your email address.',
     },
     pattern: {
       // eslint-disable-next-line max-len
