@@ -125,6 +125,7 @@ const FormSignup = () => {
           register={register}
           registerName='password'
           registerValidation={SIGNUP_VALIDATION.PASSWORD}
+          helpText='Use 8 or more characters, with a mix of uppercase, lowercase, numbers and symbols.'
         />
 
         <FormRow

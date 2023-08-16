@@ -1,5 +1,17 @@
-import {Box, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input} from '@chakra-ui/react';
-
+import {
+  Box,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from '@chakra-ui/react';
+import {useState} from 'react';
+import Btn from '../Btn/Btn';
+import {ReactComponent as IconShow} from '../../assets/icon-show.svg';
+import {ReactComponent as IconHide} from '../../assets/icon-hide.svg';
 
 const FormRow = ({
   type,
@@ -12,6 +24,12 @@ const FormRow = ({
   invalidate,
   helpText = '',
 }) => {
+  const [show, setShow] = useState(false);
+
+  const handleVisibilityClick = () => {
+    setShow(!show);
+  };
+
   return (
     <FormControl
       variant='custom'
@@ -31,12 +49,50 @@ const FormRow = ({
           },
         }}
       >
-        <Input
-          placeholder={placeholder}
-          type={type}
-          variant='custom'
-          {...register(registerName, registerValidation)}
-        />
+        {
+          type === 'password' ? (
+            <InputGroup size='md'>
+              <Input
+                placeholder={placeholder}
+                type={show ? 'text' : type}
+                variant='custom'
+                {...register(registerName, registerValidation)}
+              />
+              <InputRightElement
+                height='auto'
+                top='50%'
+                transform='translateY(-50%)'
+                right='1rem'
+              >
+                <Btn
+                  styleProps={{
+                    padding: '0',
+                    color: 'inherit',
+                    bgColor: 'transparent',
+                    userSelect: 'initial',
+                    _hover: {
+                      bgColor: 'transparent',
+                    },
+                  }}
+                  customProps={{
+                    'onClick': handleVisibilityClick,
+                  }}
+                >
+                  {
+                    show ? <IconHide /> : <IconShow />
+                  }
+                </Btn>
+              </InputRightElement>
+            </InputGroup>
+          ) : (
+            <Input
+              placeholder={placeholder}
+              type={type}
+              variant='custom'
+              {...register(registerName, registerValidation)}
+            />
+          )
+        }
       </Box>
 
       {
