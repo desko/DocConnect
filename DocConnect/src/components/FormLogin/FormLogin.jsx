@@ -2,6 +2,7 @@ import {
   Box,
   Heading,
   Link as ChakraLink,
+  Text,
 } from '@chakra-ui/react';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
@@ -12,7 +13,7 @@ import {LOGIN_VALIDATION} from '../../common/formConsts';
 import {loginUser} from '../../services/servicesUsers';
 import {useEffect} from 'react';
 
-import {HOME_PAGE} from '../../common/routes';
+import {HOME_PAGE, SIGNUP_PAGE} from '../../common/routes';
 import FormRow from '../FormRow/FormRow';
 import BoxCard from '../BoxCard/BoxCard';
 
@@ -60,7 +61,7 @@ const FormLogin = () => {
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormRow
           type='email'
-          placeholder='Email Address *'
+          placeholder='placeholder@email.com'
           labelText='Email Address *'
           register={register}
           registerName='emailAddress'
@@ -72,6 +73,7 @@ const FormLogin = () => {
         <FormRow
           type='password'
           labelText='Password *'
+          placeholder='Password'
           register={register}
           registerName='password'
           registerValidation={LOGIN_VALIDATION.PASSWORD}
@@ -101,6 +103,29 @@ const FormLogin = () => {
           }}
         />
       </form>
+
+      <Box
+        pt='3.5rem'
+      >
+        <Text
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          gap={{
+            base: '.5rem',
+            md: '1rem',
+          }}
+          flexWrap='wrap'
+        >
+          Don’t have an account yet?
+
+          <ChakraLink
+            as={ReactRouterLink}
+            to={SIGNUP_PAGE}
+            variant='custom'
+          >Sign up</ChakraLink>
+        </Text>
+      </Box>
     </BoxCard>
   );
 };
