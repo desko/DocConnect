@@ -20,7 +20,7 @@ import BoxCard from '../BoxCard/BoxCard';
 const FormLogin = () => {
   const form = useForm({mode: 'onTouched'});
   const {register, handleSubmit, formState, setError} = form;
-  const {errors, isSubmitting, isDirty, isValid} = formState;
+  const {errors, isSubmitting, isValid} = formState;
   const {token} = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ const FormLogin = () => {
           }}
           customProps={{
             isLoading: isSubmitting,
-            isDisabled: !isDirty && !isValid,
+            isDisabled: !isValid,
           }}
         />
       </form>
