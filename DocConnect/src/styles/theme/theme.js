@@ -10,6 +10,8 @@ import formTheme from './form.theme';
 import formLabelTheme from './formLabel.theme';
 import buttonTheme from '../../components/Btn/Btn.theme';
 import linkTheme from './link.theme';
+import checkboxTheme from './checkbox.theme';
+
 
 const theme = extendTheme({
   colors,
@@ -23,6 +25,7 @@ const theme = extendTheme({
     FormLabel: formLabelTheme,
     Button: buttonTheme,
     Link: linkTheme,
+    Checkbox: checkboxTheme,
   },
   breakpoints,
 });
