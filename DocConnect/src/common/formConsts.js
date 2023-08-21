@@ -58,7 +58,24 @@ export const SIGNUP_VALIDATION = {
       // eslint-disable-next-line max-len
       message: 'Your password must have at least 8 characters, with a mix of uppercase, lowercase, numbers and symbols.',
     },
-
+  },
+  REQUIRED_PRIVACY_AGREEMENT: {
+    required: {
+      value: true,
+      message: 'You must be asd',
+    },
+  },
+  REQUIRED_USER_AGREEMENT: {
+    required: {
+      value: true,
+      message: 'You must be asd',
+    },
+  },
+  REQUIRED_AGE: {
+    required: {
+      value: true,
+      message: 'You must be over 18 years of age',
+    },
   },
 };
 

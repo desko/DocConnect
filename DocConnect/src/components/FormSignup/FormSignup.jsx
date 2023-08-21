@@ -10,17 +10,18 @@ import Btn from '../Btn/Btn';
 import {Link as ReactRouterLink} from 'react-router-dom';
 
 import {SIGNUP_VALIDATION} from '../../common/formConsts';
-import {LOGIN_PAGE} from '../../common/routes';
+import {LOGIN_PAGE, PRIVACY_POLICY_PAGE, USER_AGREEMENT_PAGE} from '../../common/routes';
 
 import {registerUser} from '../../services/servicesUsers';
 import FormRow from '../FormRow/FormRow';
 import BoxCard from '../BoxCard/BoxCard';
 import SignupSuccess from '../SignupSuccess/SignupSuccess';
+import FormCheckbox from '../FormCheckbox/FormCheckbox';
 
 const FormSignup = () => {
   const form = useForm({mode: 'onTouched'});
-  const {register, handleSubmit, formState, watch, setError} = form;
-  const {errors, isSubmitting} = formState;
+  const {register, handleSubmit, formState, watch, setError, control} = form;
+  const {errors, isSubmitting, isValid} = formState;
   const [isRegistered, setIsRegistered] = useState(false);
 
   const onSubmit = async (values) => {
@@ -140,6 +141,52 @@ const FormSignup = () => {
           registerValidation={validateConfirmPassword}
         />
 
+        <FormCheckbox
+          labelText='I am over the age of 18'
+          register={register}
+          registerName='ageAgreement'
+          registerValidation={SIGNUP_VALIDATION.REQUIRED_AGE}
+          error={errors.ageAgreement?.message}
+          invalidate={errors.ageAgreement}
+          control={control}
+        />
+
+        <FormCheckbox
+          LabelElement={
+            () => <span>
+              I have read and agree to the <ChakraLink
+                as={ReactRouterLink}
+                to={PRIVACY_POLICY_PAGE}
+                variant='custom'
+              >Privacy Policy</ChakraLink>
+            </span>
+          }
+          register={register}
+          registerName='privacyAgreement'
+          registerValidation={SIGNUP_VALIDATION.REQUIRED_PRIVACY_AGREEMENT}
+          error={errors.privacyAgreement?.message}
+          invalidate={errors.privacyAgreement}
+          control={control}
+        />
+
+        <FormCheckbox
+          LabelElement={
+            () => <span>
+              I have read and agree to the <ChakraLink
+                as={ReactRouterLink}
+                to={USER_AGREEMENT_PAGE}
+                variant='custom'
+              >User Agreement</ChakraLink>
+            </span>
+          }
+          register={register}
+          registerName='userAgreement'
+          registerValidation={SIGNUP_VALIDATION.REQUIRED_USER_AGREEMENT}
+          error={errors.userAgreement?.message}
+          invalidate={errors.userAgreement}
+          control={control}
+        />
+
         <Btn
           text='Sign Up'
           type='submit'
@@ -148,6 +195,7 @@ const FormSignup = () => {
           }}
           customProps={{
             isLoading: isSubmitting,
+            isDisabled: !isValid,
           }}
         />
       </form>
