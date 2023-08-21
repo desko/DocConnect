@@ -5,6 +5,9 @@ const {definePartsStyle, defineMultiStyleConfig} = createMultiStyleConfigHelpers
 
 const variants = definePartsStyle({
   custom: definePartsStyle({
+    container: {
+      alignItems: 'flex-start',
+    },
     label: {
       fontSize: '1.4rem',
     },
@@ -13,6 +16,7 @@ const variants = definePartsStyle({
       width: '1.6rem',
       height: '1.6rem',
       borderRadius: '.2rem',
+      borderWidth: '.1rem',
       borderColor: 'base',
       _checked: {
         bgColor: 'red.400',

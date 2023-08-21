@@ -62,13 +62,13 @@ export const SIGNUP_VALIDATION = {
   REQUIRED_PRIVACY_AGREEMENT: {
     required: {
       value: true,
-      message: 'You must be asd',
+      message: 'You must agree with the Privacy Policy',
     },
   },
   REQUIRED_USER_AGREEMENT: {
     required: {
       value: true,
-      message: 'You must be asd',
+      message: 'You must accept the User Agreement',
     },
   },
   REQUIRED_AGE: {

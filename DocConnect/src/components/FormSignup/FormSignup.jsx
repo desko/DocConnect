@@ -142,7 +142,7 @@ const FormSignup = () => {
         />
 
         <FormCheckbox
-          labelText='I am over the age of 18'
+          labelText='I am over 18 years of age'
           register={register}
           registerName='ageAgreement'
           registerValidation={SIGNUP_VALIDATION.REQUIRED_AGE}
@@ -155,6 +155,7 @@ const FormSignup = () => {
           LabelElement={
             () => <span>
               I have read and agree to the <ChakraLink
+                target='_blank'
                 as={ReactRouterLink}
                 to={PRIVACY_POLICY_PAGE}
                 variant='custom'
@@ -173,6 +174,7 @@ const FormSignup = () => {
           LabelElement={
             () => <span>
               I have read and agree to the <ChakraLink
+                target='_blank'
                 as={ReactRouterLink}
                 to={USER_AGREEMENT_PAGE}
                 variant='custom'
