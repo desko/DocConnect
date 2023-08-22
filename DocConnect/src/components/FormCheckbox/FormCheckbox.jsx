@@ -13,6 +13,7 @@ const FormCheckbox = ({
 }) => {
   return (
     <FormControl
+      aria-label={registerName}
       variant='custom'
       isInvalid={invalidate}
     >

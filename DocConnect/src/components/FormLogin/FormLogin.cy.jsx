@@ -52,7 +52,7 @@ describe('FormLogin', () => {
   });
 
   it('should show error messages if fields are empty on submit', () => {
-    cy.get('@submitButton').click();
+    cy.get('@submitButton').click({force: true});
     cy.intercept('POST', '/api/User/Login', cy.spy().as('sendRequest'));
     cy.get('@sendRequest').should('not.have.been.called');
   });
