@@ -55,21 +55,21 @@ const FormSignup = () => {
         'role': 'group',
       }}
     >
-      <Box as="header" pb="3rem">
-        <Heading as="h2" size="md" pb=".5rem">
+      <Box as='header' pb='3rem'>
+        <Heading as='h2' size='md' pb='.5rem'>
           Sign up
         </Heading>
 
         <Text
-          display="inline-flex"
+          display='inline-flex'
           gap={{
             base: '.5rem',
             md: '1rem',
           }}
-          flexWrap="wrap"
+          flexWrap='wrap'
         >
           Already have an account?
-          <ChakraLink as={ReactRouterLink} to={LOGIN_PAGE} variant="custom">
+          <ChakraLink as={ReactRouterLink} to={LOGIN_PAGE} variant='custom'>
             Login
           </ChakraLink>
         </Text>
@@ -77,58 +77,58 @@ const FormSignup = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormRow
-          type="email"
-          placeholder="placeholder@email.com"
+          type='email'
+          placeholder='placeholder@email.com'
           invalidate={errors.emailAddress}
           error={errors.emailAddress?.message}
-          labelText="Email Address *"
+          labelText='Email Address *'
           register={register}
-          registerName="emailAddress"
+          registerName='emailAddress'
           registerValidation={SIGNUP_VALIDATION.EMAIL}
         />
 
         <FormRow
-          type="text"
-          placeholder="First Name"
-          labelText="First Name *"
+          type='text'
+          placeholder='First Name'
+          labelText='First Name *'
           invalidate={errors.firstName}
           error={errors.firstName?.message}
           register={register}
-          registerName="firstName"
+          registerName='firstName'
           registerValidation={SIGNUP_VALIDATION.FIRST_NAME}
         />
 
         <FormRow
-          type="text"
-          placeholder="Last Name"
-          labelText="Last Name *"
+          type='text'
+          placeholder='Last Name'
+          labelText='Last Name *'
           invalidate={errors.lastName}
           error={errors.lastName?.message}
           register={register}
-          registerName="lastName"
+          registerName='lastName'
           registerValidation={SIGNUP_VALIDATION.LAST_NAME}
         />
 
         <FormRow
-          type="password"
-          placeholder="Password"
-          labelText="Password *"
+          type='password'
+          placeholder='Password'
+          labelText='Password *'
           invalidate={errors.password}
           error={errors.password?.message}
           register={register}
-          registerName="password"
+          registerName='password'
           registerValidation={SIGNUP_VALIDATION.PASSWORD}
-          helpText="Use 8 or more characters, with a mix of uppercase, lowercase, numbers and symbols."
+          helpText='Use 8 or more characters, with a mix of uppercase, lowercase, numbers and symbols.'
         />
 
         <FormRow
-          type="password"
-          placeholder="Confirm Password"
-          labelText="Confirm Password *"
+          type='password'
+          placeholder='Confirm Password'
+          labelText='Confirm Password *'
           invalidate={errors.confirmPassword}
           error={errors.confirmPassword?.message}
           register={register}
-          registerName="confirmPassword"
+          registerName='confirmPassword'
           registerValidation={validateConfirmPassword}
         />
 
@@ -181,8 +181,8 @@ const FormSignup = () => {
         />
 
         <Btn
-          text="Sign Up"
-          type="submit"
+          text='Sign Up'
+          type='submit'
           styleProps={{
             width: '100%',
           }}
