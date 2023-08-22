@@ -8,12 +8,15 @@ import {
   HOME_PAGE,
   LOGIN_PAGE,
   PRIVACY_POLICY_PAGE,
+  FORGOTTEN_PASSWORD_PAGE,
   SIGNUP_PAGE,
   USER_AGREEMENT_PAGE,
-  USER_VERIFICATION} from './common/routes';
+  USER_VERIFICATION,
+} from './common/routes';
 import {Logged} from './hoc/Logged';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import UserAgreement from './pages/UserAgreement';
+import ForgottenPassword from './pages/ForgottenPassword';
 import UserVerification from './pages/UserVerification';
 
 
@@ -28,6 +31,11 @@ function App() {
         <Route path={LOGIN_PAGE} element={
           <Logged>
             <Login />
+          </Logged>
+        }></Route>
+        <Route path={FORGOTTEN_PASSWORD_PAGE} element={
+          <Logged>
+            <ForgottenPassword />
           </Logged>
         }></Route>
         <Route path={SIGNUP_PAGE} element={
