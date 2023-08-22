@@ -41,14 +41,7 @@ const FormRow = ({
         >{labelText}</FormLabel>
       </Box>
 
-      <Box
-        _last={{
-          mb: {
-            base: '0rem',
-            md: '2rem',
-          },
-        }}
-      >
+      <Box>
         {
           type === 'password' ? (
             <InputGroup size='md'>
