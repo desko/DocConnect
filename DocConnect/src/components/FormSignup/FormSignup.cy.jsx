@@ -37,6 +37,21 @@ describe('<FormSignup />', () => {
     cy.findByText(/confirm password \*/i).as('labelConfirmPassword');
     cy.findByLabelText(/confirm password \*/i).as('inputConfirmPassword');
 
+    // checkbox age
+    cy.findByRole('group', {name: /ageagreement/i}).as('parentAge');
+    cy.get('@parentAge').find('input').as('checkboxAge');
+    cy.get('@parentAge').find('label').as('labelAge');
+
+    // checkbox privacy
+    cy.findByRole('group', {name: /privacyagreement/i}).as('parentPrivacy');
+    cy.get('@parentPrivacy').find('input').as('checkboxPrivacy');
+    cy.get('@parentPrivacy').find('label').as('labelPrivacy');
+
+    // checkbox user agreement
+    cy.findByRole('group', {name: /useragreement/i}).as('parentUserAgreement');
+    cy.get('@parentUserAgreement').find('input').as('checkboxUserAgreement');
+    cy.get('@parentUserAgreement').find('label').as('labelUserAgreement');
+
     // button signup
     cy.findByRole('button', {name: /sign up/i}).as('buttonSubmit');
   });
@@ -72,6 +87,14 @@ describe('<FormSignup />', () => {
     cy.get('@labelConfirmPassword').should('exist');
     cy.get('@inputConfirmPassword').should('exist');
 
+    // checkboxes
+
+    cy.get('@checkboxAge').should('exist');
+    cy.get('@labelAge').should('exist');
+
+    cy.get('@checkboxPrivacy').should('exist');
+    cy.get('@checkboxUserAgreement').should('exist');
+
     // button signup
     cy.findByRole('button', {name: /sign up/i}).should('exist');
   });
@@ -90,6 +113,10 @@ describe('<FormSignup />', () => {
     cy.get('@inputLName').type(mockFormData.lname);
     cy.get('@inputPassword').type(mockFormData.password);
     cy.get('@inputConfirmPassword').type(mockFormData.confirmPassword);
+
+    cy.get('@labelAge').click();
+    cy.get('@labelPrivacy').click();
+    cy.get('@labelUserAgreement').click();
 
     cy.get('@buttonSubmit').click();
     cy.intercept('POST', 'api/User/Register', {
@@ -121,7 +148,11 @@ describe('<FormSignup />', () => {
     cy.get('@inputPassword').type(mockFormData.password);
     cy.get('@inputConfirmPassword').type(mockFormData.confirmPassword);
 
-    cy.get('@buttonSubmit').click();
+    cy.get('@labelAge').click();
+    cy.get('@labelPrivacy').click();
+    cy.get('@labelUserAgreement').click();
+
+    cy.get('@buttonSubmit').click({force: true});
     cy.intercept('POST', 'api/User/Register', cy.spy().as('myRequest'));
 
     cy.get('@myRequest').should('not.have.been.called');
