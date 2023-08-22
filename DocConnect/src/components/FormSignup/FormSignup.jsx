@@ -1,9 +1,4 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Link as ChakraLink,
-} from '@chakra-ui/react';
+import {Box, Heading, Text, Link as ChakraLink} from '@chakra-ui/react';
 import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
@@ -15,7 +10,7 @@ import {LOGIN_PAGE, PRIVACY_POLICY_PAGE, USER_AGREEMENT_PAGE} from '../../common
 import {registerUser} from '../../services/servicesUsers';
 import FormRow from '../FormRow/FormRow';
 import BoxCard from '../BoxCard/BoxCard';
-import SignupSuccess from '../SignupSuccess/SignupSuccess';
+import SystemMessage from '../SystemMessage/SystemMessage';
 import FormCheckbox from '../FormCheckbox/FormCheckbox';
 
 const FormSignup = () => {
@@ -46,7 +41,11 @@ const FormSignup = () => {
   };
 
   if (isRegistered) {
-    return <SignupSuccess />;
+    return (
+      <SystemMessage
+        type={'SUCCESSFUL_REGISTRATION'}
+      />
+    );
   }
 
   return (
@@ -56,15 +55,10 @@ const FormSignup = () => {
         'role': 'group',
       }}
     >
-      <Box
-        as='header'
-        pb='3rem'
-      >
-        <Heading
-          as='h2'
-          size='md'
-          pb='.5rem'
-        >Sign up</Heading>
+      <Box as='header' pb='3rem'>
+        <Heading as='h2' size='md' pb='.5rem'>
+          Sign up
+        </Heading>
 
         <Text
           display='inline-flex'
@@ -75,12 +69,9 @@ const FormSignup = () => {
           flexWrap='wrap'
         >
           Already have an account?
-
-          <ChakraLink
-            as={ReactRouterLink}
-            to={LOGIN_PAGE}
-            variant='custom'
-          >Login</ChakraLink>
+          <ChakraLink as={ReactRouterLink} to={LOGIN_PAGE} variant='custom'>
+            Login
+          </ChakraLink>
         </Text>
       </Box>
 
