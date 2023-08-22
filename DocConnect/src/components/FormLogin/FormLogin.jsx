@@ -13,7 +13,7 @@ import {LOGIN_VALIDATION} from '../../common/formConsts';
 import {loginUser} from '../../services/servicesUsers';
 import {useEffect} from 'react';
 
-import {HOME_PAGE, SIGNUP_PAGE} from '../../common/routes';
+import {FORGOTTEN_PASSWORD_PAGE, SIGNUP_PAGE} from '../../common/routes';
 import FormRow from '../FormRow/FormRow';
 import BoxCard from '../BoxCard/BoxCard';
 
@@ -28,7 +28,6 @@ const FormLogin = () => {
   useEffect(() =>{
     localStorage.setItem('userToken', token);
   }, [token]);
-
 
   const onSubmit = async (values) => {
     const response = await dispatch(loginUser(values));
@@ -87,7 +86,7 @@ const FormLogin = () => {
         >
           <ChakraLink
             as={ReactRouterLink}
-            to={HOME_PAGE}
+            to={FORGOTTEN_PASSWORD_PAGE}
             variant='custom'
           >Forgot Password?</ChakraLink>
         </Box>

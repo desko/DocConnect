@@ -14,3 +14,9 @@ export const loginUser = createAsyncThunk('user/loginUser', async (userData) => 
 
   return response.data;
 });
+
+export const forgottenPasswordUser = async (email) => {
+  const response = await axios.get(`${baseUrl}/ResetForgottenPassword`, email);
+
+  return response.data;
+};
