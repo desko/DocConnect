@@ -3,7 +3,7 @@ import BoxCard from '../BoxCard/BoxCard';
 import FormRow from '../FormRow/FormRow';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
-import {FORGOTTEN_PASSOWRD_VALIDATION} from '../../common/formConsts';
+import {FORGOTTEN_PASSWORD_VALIDATION} from '../../common/formConsts';
 import {forgottenPasswordUser} from '../../services/servicesUsers';
 
 const FormForgottenPassword = () => {
@@ -45,7 +45,7 @@ const FormForgottenPassword = () => {
           labelText='Email Address *'
           register={register}
           registerName='emailAddress'
-          registerValidation={FORGOTTEN_PASSOWRD_VALIDATION.EMAIL}
+          registerValidation={FORGOTTEN_PASSWORD_VALIDATION.EMAIL}
           error={errors.emailAddress?.message}
           invalidate={errors.emailAddress}
         />
