@@ -19,7 +19,6 @@ import UserAgreement from './pages/UserAgreement';
 import ForgottenPassword from './pages/ForgottenPassword';
 import UserVerification from './pages/UserVerification';
 
-
 function App() {
   return (
     <div className="wrapper">
