@@ -28,15 +28,13 @@ const FormLogin = () => {
   const [networkError, setNetworkError] = useState(false);
 
   useEffect(() =>{
-    localStorage.setItem('uToken', token);
+    localStorage.setItem('uToken', JSON.stringify(token));
   }, [token]);
 
   const onSubmit = async (values) => {
     const response = await dispatch(loginUser(values));
 
-    console.log(response);
     if (response.payload?.errorMessage) {
-      console.log(response.payload.errorMessage);
       setError('emailAddress', {message: response.payload.errorMessage});
       setError('password', {message: response.payload.errorMessage});
       setNetworkError(false);
