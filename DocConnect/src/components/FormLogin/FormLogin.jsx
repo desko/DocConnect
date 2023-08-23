@@ -28,7 +28,7 @@ const FormLogin = () => {
   const [networkError, setNetworkError] = useState(false);
 
   useEffect(() =>{
-    localStorage.setItem('userToken', token);
+    localStorage.setItem('uToken', token);
   }, [token]);
 
   const onSubmit = async (values) => {
