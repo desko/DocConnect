@@ -12,19 +12,29 @@ import FormRow from '../FormRow/FormRow';
 import BoxCard from '../BoxCard/BoxCard';
 import SystemMessage from '../SystemMessage/SystemMessage';
 import FormCheckbox from '../FormCheckbox/FormCheckbox';
+import NetworkError from '../NetworkError/NetworkError';
 
 const FormSignup = () => {
   const form = useForm({mode: 'onTouched'});
   const {register, handleSubmit, formState, watch, setError, control} = form;
   const {errors, isSubmitting, isValid} = formState;
   const [isRegistered, setIsRegistered] = useState(false);
+  const [networkError, setNetworkError] = useState(false);
 
   const onSubmit = async (values) => {
-    const response = await registerUser(values);
-    if (response.data.errorMessage) {
-      setError('emailAddress', {message: response.data.errorMessage});
-    } else if (response.data.httpStatusCode === 201) {
-      setIsRegistered(true);
+    try {
+      const response = await registerUser(values);
+
+      if (response.data.errorMessage) {
+        setError('emailAddress', {message: response.data.errorMessage});
+        setNetworkError(false);
+      }
+      if (response.data.httpStatusCode === 201) {
+        setNetworkError(false);
+        setIsRegistered(true);
+      }
+    } catch (error) {
+      setNetworkError(true);
     }
   };
 
@@ -76,6 +86,10 @@ const FormSignup = () => {
       </Box>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        {
+          networkError && <NetworkError />
+        }
+
         <FormRow
           type='email'
           placeholder='placeholder@email.com'

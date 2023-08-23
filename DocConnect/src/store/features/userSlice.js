@@ -5,7 +5,7 @@ import {loginUser} from '../../services/servicesUsers';
 const initialState = {
   status: 'idle',
   error: null,
-  token: localStorage.getItem('userToken') || '',
+  token: JSON.parse(localStorage.getItem('userToken')) || null,
 };
 
 const userSlice = createSlice({

@@ -7,6 +7,7 @@ import Card from '../Card/Card';
 import CardContent from '../CardContent/CardContent';
 
 import {sortAlphabetically} from '../../store/features/specialtiesSlice';
+import NetworkError from '../NetworkError/NetworkError';
 
 const SpecialtiesController = () => {
   const dispatch = useDispatch();
@@ -22,11 +23,14 @@ const SpecialtiesController = () => {
   if (status === 'loading') {
     return (<Spinner color='red.400' size='xl' display='block' mx='auto' /> );
   }
-  if (status === 'failed') {
+
+  if (
+    (status === 'failed') ||
+    (status === 'succeeded' && typeof specialties !== 'object' && specialties.length === undefined)
+  ) {
     return (
-      <Alert status='error'>
-        <AlertIcon />There was an error processing your request
-      </Alert> );
+      <NetworkError />
+    );
   }
 
   return (
@@ -48,7 +52,7 @@ const SpecialtiesController = () => {
       pt='1.6rem'
     >
       {
-        specialties.map((el) => {
+        specialties.length && specialties?.map((el) => {
           return (
             <GridItem key={el.id}>
               <Card imageUrl={el.imageUrl} content={el.name} Component={CardContent} />
