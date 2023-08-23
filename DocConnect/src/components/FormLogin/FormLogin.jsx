@@ -3,8 +3,6 @@ import {
   Heading,
   Link as ChakraLink,
   Text,
-  Alert,
-  AlertIcon,
 } from '@chakra-ui/react';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
@@ -49,7 +47,6 @@ const FormLogin = () => {
       navigate('/');
     }
     if (response?.error) {
-      console.log(response?.error);
       setNetworkError(true);
     }
   };

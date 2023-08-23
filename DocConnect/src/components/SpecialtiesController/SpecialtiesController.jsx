@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchSpecialties} from '../../services/servicesSpecialties';
 import {useEffect} from 'react';
 
-import {Grid, GridItem, Spinner, AlertIcon, Alert} from '@chakra-ui/react';
+import {Grid, GridItem, Spinner} from '@chakra-ui/react';
 import Card from '../Card/Card';
 import CardContent from '../CardContent/CardContent';
 
