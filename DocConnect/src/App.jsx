@@ -4,11 +4,20 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Header from './components/Header/Header';
 import NotFound from './pages/NotFound';
-import {HOME_PAGE, LOGIN_PAGE, PRIVACY_POLICY_PAGE, SIGNUP_PAGE, USER_AGREEMENT_PAGE} from './common/routes';
+import {
+  HOME_PAGE,
+  LOGIN_PAGE,
+  PRIVACY_POLICY_PAGE,
+  FORGOTTEN_PASSWORD_PAGE,
+  SIGNUP_PAGE,
+  USER_AGREEMENT_PAGE,
+  USER_VERIFICATION,
+} from './common/routes';
 import {Logged} from './hoc/Logged';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import UserAgreement from './pages/UserAgreement';
-
+import ForgottenPassword from './pages/ForgottenPassword';
+import UserVerification from './pages/UserVerification';
 
 function App() {
   return (
@@ -17,9 +26,15 @@ function App() {
 
       <Routes>
         <Route path={HOME_PAGE} element={<Home />}></Route>
+        <Route path={USER_VERIFICATION} element={<UserVerification />}></Route>
         <Route path={LOGIN_PAGE} element={
           <Logged>
             <Login />
+          </Logged>
+        }></Route>
+        <Route path={FORGOTTEN_PASSWORD_PAGE} element={
+          <Logged>
+            <ForgottenPassword />
           </Logged>
         }></Route>
         <Route path={SIGNUP_PAGE} element={

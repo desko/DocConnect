@@ -11,11 +11,12 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {LOGIN_VALIDATION} from '../../common/formConsts';
 import {loginUser} from '../../services/servicesUsers';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
-import {HOME_PAGE, SIGNUP_PAGE} from '../../common/routes';
+import {FORGOTTEN_PASSWORD_PAGE, SIGNUP_PAGE} from '../../common/routes';
 import FormRow from '../FormRow/FormRow';
 import BoxCard from '../BoxCard/BoxCard';
+import NetworkError from '../NetworkError/NetworkError';
 
 const FormLogin = () => {
   const form = useForm({mode: 'onTouched'});
@@ -24,19 +25,29 @@ const FormLogin = () => {
   const {token} = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [networkError, setNetworkError] = useState(false);
 
   useEffect(() =>{
-    localStorage.setItem('userToken', token);
+    localStorage.setItem('uToken', token);
   }, [token]);
-
 
   const onSubmit = async (values) => {
     const response = await dispatch(loginUser(values));
-    if (response.payload.errorMessage) {
+
+    console.log(response);
+    if (response.payload?.errorMessage) {
+      console.log(response.payload.errorMessage);
       setError('emailAddress', {message: response.payload.errorMessage});
       setError('password', {message: response.payload.errorMessage});
-    } else if (response.payload.httpStatusCode === 200) {
+      setNetworkError(false);
+    }
+
+    if (response.payload?.httpStatusCode === 200) {
+      setNetworkError(false);
       navigate('/');
+    }
+    if (response?.error) {
+      setNetworkError(true);
     }
   };
 
@@ -59,6 +70,10 @@ const FormLogin = () => {
       </Box>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        {
+          networkError && <NetworkError />
+        }
+
         <FormRow
           type='email'
           placeholder='placeholder@email.com'
@@ -87,7 +102,7 @@ const FormLogin = () => {
         >
           <ChakraLink
             as={ReactRouterLink}
-            to={HOME_PAGE}
+            to={FORGOTTEN_PASSWORD_PAGE}
             variant='custom'
           >Forgot Password?</ChakraLink>
         </Box>

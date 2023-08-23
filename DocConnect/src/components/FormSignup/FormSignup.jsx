@@ -1,9 +1,4 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Link as ChakraLink,
-} from '@chakra-ui/react';
+import {Box, Heading, Text, Link as ChakraLink} from '@chakra-ui/react';
 import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
@@ -15,21 +10,31 @@ import {LOGIN_PAGE, PRIVACY_POLICY_PAGE, USER_AGREEMENT_PAGE} from '../../common
 import {registerUser} from '../../services/servicesUsers';
 import FormRow from '../FormRow/FormRow';
 import BoxCard from '../BoxCard/BoxCard';
-import SignupSuccess from '../SignupSuccess/SignupSuccess';
+import SystemMessage from '../SystemMessage/SystemMessage';
 import FormCheckbox from '../FormCheckbox/FormCheckbox';
+import NetworkError from '../NetworkError/NetworkError';
 
 const FormSignup = () => {
   const form = useForm({mode: 'onTouched'});
   const {register, handleSubmit, formState, watch, setError, control} = form;
   const {errors, isSubmitting, isValid} = formState;
   const [isRegistered, setIsRegistered] = useState(false);
+  const [networkError, setNetworkError] = useState(false);
 
   const onSubmit = async (values) => {
-    const response = await registerUser(values);
-    if (response.data.errorMessage) {
-      setError('emailAddress', {message: response.data.errorMessage});
-    } else if (response.data.httpStatusCode === 201) {
-      setIsRegistered(true);
+    try {
+      const response = await registerUser(values);
+
+      if (response.data.errorMessage) {
+        setError('emailAddress', {message: response.data.errorMessage});
+        setNetworkError(false);
+      }
+      if (response.data.httpStatusCode === 201) {
+        setNetworkError(false);
+        setIsRegistered(true);
+      }
+    } catch (error) {
+      setNetworkError(true);
     }
   };
 
@@ -46,7 +51,11 @@ const FormSignup = () => {
   };
 
   if (isRegistered) {
-    return <SignupSuccess />;
+    return (
+      <SystemMessage
+        type={'SUCCESSFUL_REGISTRATION'}
+      />
+    );
   }
 
   return (
@@ -56,15 +65,10 @@ const FormSignup = () => {
         'role': 'group',
       }}
     >
-      <Box
-        as='header'
-        pb='3rem'
-      >
-        <Heading
-          as='h2'
-          size='md'
-          pb='.5rem'
-        >Sign up</Heading>
+      <Box as='header' pb='3rem'>
+        <Heading as='h2' size='md' pb='.5rem'>
+          Sign up
+        </Heading>
 
         <Text
           display='inline-flex'
@@ -75,16 +79,17 @@ const FormSignup = () => {
           flexWrap='wrap'
         >
           Already have an account?
-
-          <ChakraLink
-            as={ReactRouterLink}
-            to={LOGIN_PAGE}
-            variant='custom'
-          >Login</ChakraLink>
+          <ChakraLink as={ReactRouterLink} to={LOGIN_PAGE} variant='custom'>
+            Login
+          </ChakraLink>
         </Text>
       </Box>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        {
+          networkError && <NetworkError />
+        }
+
         <FormRow
           type='email'
           placeholder='placeholder@email.com'
