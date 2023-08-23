@@ -5,7 +5,7 @@ import {loginUser} from '../../services/servicesUsers';
 const initialState = {
   status: 'idle',
   error: null,
-  token: localStorage.getItem('userToken') || '',
+  token: JSON.parse(localStorage.getItem('uToken')) || null,
 };
 
 const userSlice = createSlice({
@@ -13,8 +13,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logOut: (state, action) => {
-      state.token = '';
-      localStorage.setItem('userToken', '');
+      state.token = null;
+      localStorage.setItem('uToken', null);
     },
   },
   extraReducers: (builder) => {

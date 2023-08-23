@@ -45,7 +45,7 @@ const FormForgottenPassword = () => {
           labelText='Email Address *'
           register={register}
           registerName='emailAddress'
-          registerValidation={FORGOTTEN_PASSOWRD_VALIDATION.EMAIL}
+          registerValidation={FORGOTTEN_PASSWORD_VALIDATION.EMAIL}
           error={errors.emailAddress?.message}
           invalidate={errors.emailAddress}
         />

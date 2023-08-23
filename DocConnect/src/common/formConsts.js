@@ -112,15 +112,24 @@ export const FORGOTTEN_PASSWORD_VALIDATION = {
   },
 };
 
-export const FORGOTTEN_PASSOWRD_VALIDATION = {
-  EMAIL: {
+export const RESET_PASSWORD_VALIDATION = {
+  PASSWORD: {
     required: {
       value: true,
-      message: 'Please enter your email address.',
+      message: 'Please enter a password.',
+    },
+    minLength: {
+      value: 8,
+      message: 'Password must be at least 8 characters long.',
+    },
+    maxLength: {
+      value: 99,
+      message: 'Password must be less than 100 characters long.',
     },
     pattern: {
-      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-      message: 'Please enter a valid email address.',
+      value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/,
+      // eslint-disable-next-line max-len
+      message: 'Your password must have at least 8 characters, with a mix of uppercase, lowercase, numbers and symbols.',
     },
   },
 };
