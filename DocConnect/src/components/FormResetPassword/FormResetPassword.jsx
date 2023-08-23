@@ -1,17 +1,15 @@
 import {Box, Heading, Text} from '@chakra-ui/react';
 import BoxCard from '../BoxCard/BoxCard';
-import FormRow from '../FormRow/FormRow';
 import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
-import {FORGOTTEN_PASSWORD_VALIDATION} from '../../common/formConsts';
-import {forgottenPasswordUser} from '../../services/servicesUsers';
+import FormRow from '../FormRow/FormRow';
 
-const FormForgottenPassword = () => {
+const FormResetPassword = () => {
   const {register, handleSubmit, formState, getValues} = useForm({mode: 'onTouched'});
   const {errors, isSubmitting, isSubmitted, isValid} = formState;
 
   const onSubmit = async (values) => {
-    await forgottenPasswordUser(values.emailAddress);
+    // await forgottenPasswordUser(values.emailAddress);
   };
 
   return (
@@ -76,4 +74,4 @@ const FormForgottenPassword = () => {
   );
 };
 
-export default FormForgottenPassword;
+export default FormResetPassword;

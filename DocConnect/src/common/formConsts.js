@@ -99,6 +99,19 @@ export const LOGIN_VALIDATION = {
   },
 };
 
+export const FORGOTTEN_PASSWORD_VALIDATION = {
+  EMAIL: {
+    required: {
+      value: true,
+      message: 'Please enter your email address.',
+    },
+    pattern: {
+      value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+      message: 'Please enter a valid email address.',
+    },
+  },
+};
+
 export const FORGOTTEN_PASSOWRD_VALIDATION = {
   EMAIL: {
     required: {

@@ -1,6 +1,7 @@
 export const HOME_PAGE = '/';
 export const LOGIN_PAGE = '/login';
 export const FORGOTTEN_PASSWORD_PAGE = '/login/forgotten-password';
+export const RESET_PASSWORD_PAGE = '/login/reset-password';
 export const SIGNUP_PAGE = '/signup';
 export const SPECIALTIES_PAGE = '/specialties';
 export const USER_VERIFICATION = '/user/verification/:token';
