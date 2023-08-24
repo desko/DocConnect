@@ -24,7 +24,6 @@ const FormSignup = () => {
   const onSubmit = async (values) => {
     try {
       const response = await registerUser(values);
-
       if (response.data.errorMessage) {
         setError('emailAddress', {message: response.data.errorMessage});
         setNetworkError(false);

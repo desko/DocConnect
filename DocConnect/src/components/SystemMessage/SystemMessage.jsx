@@ -15,7 +15,7 @@ const SystemMessage = ({type}) => {
           as='h2'
           size='md'
           pb='.5rem'
-        >{SYSTEM_MESSAGE[type].HEADING}</Heading>
+        >{SYSTEM_MESSAGE[type]?.HEADING}</Heading>
 
         <Text
           display='inline-flex'
@@ -25,7 +25,7 @@ const SystemMessage = ({type}) => {
           }}
           flexWrap='wrap'
         >
-          {SYSTEM_MESSAGE[type].TEXT}
+          {SYSTEM_MESSAGE[type]?.TEXT}
 
           <Text
             as='span'
@@ -39,7 +39,7 @@ const SystemMessage = ({type}) => {
               textDecorationColor: 'transparent',
             }}
           >
-            {SYSTEM_MESSAGE[type].LOGINLINK ? <ChakraLink
+            {SYSTEM_MESSAGE[type]?.LOGINLINK ? <ChakraLink
               as={ReactRouterLink}
               to={LOGIN_PAGE}
               variant='custom'

@@ -1,17 +1,39 @@
-import {useParams} from 'react-router-dom';
-import {useEffect, useState} from 'react';
+import {useSearchParams} from 'react-router-dom';
+import {useEffect, useCallback, useRef, useState} from 'react';
 import SectionWave from '../components/SectionWave/SectionWave';
 import SystemMessage from '../components/SystemMessage/SystemMessage';
-
+import {emailVarificationUser} from '../services/servicesUsers';
 
 const UserVerification = () => {
-  const {token} = useParams();
-  const [type, setType] = useState('SUCCESSFUL_VERIFICATION');
+  const effectRan = useRef(false);
+  const [searchParams] = useSearchParams();
+  const [type, setType] = useState('LOADING');
+  const userId = searchParams.get('userId');
+  const token = searchParams.get('token').replace(/ /g, '+');
+
+  const verificationResponse = useCallback(async () => {
+    try {
+      const response = await emailVarificationUser(userId, token);
+      setType(response?.result);
+    } catch (error) {
+      if (
+        error.response?.data.errorMessage === 'INVALID_TOKEN' ||
+      error.response?.data.errorMessage === 'ALREADY_VERIFIED'
+      ) {
+        setType(error.response.data.errorMessage);
+      } else {
+        setType('ERROR');
+      }
+    }
+  }, [userId, token]);
+
 
   useEffect(() => {
-    // token verification
-  }, [token]);
-
+    if (!effectRan.current) {
+      verificationResponse();
+      effectRan.current = true;
+    }
+  }, [verificationResponse]);
 
   return (
     <SectionWave>
@@ -22,3 +44,5 @@ const UserVerification = () => {
 };
 
 export default UserVerification;
+
+

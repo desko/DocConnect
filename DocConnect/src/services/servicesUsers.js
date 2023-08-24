@@ -20,3 +20,11 @@ export const forgottenPasswordUser = async (email) => {
 
   return response.data;
 };
+
+export const emailVarificationUser = async (userId, token) => {
+  const response = await axios
+      .post(`${baseUrl}/ConfirmUserEmail?userId=${encodeURIComponent(userId)}&token=${encodeURIComponent(token)}`);
+  return response.data;
+};
+
+
