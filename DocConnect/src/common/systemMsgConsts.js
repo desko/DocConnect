@@ -24,4 +24,9 @@ export const SYSTEM_MESSAGE = {
     TEXT: 'An unexpected error has ocurred, please try again.',
     LOGINLINK: false,
   },
+  LOADING: {
+    HEADING: 'Loading...',
+    TEXT: 'Please wait a moment or',
+    LOGINLINK: true,
+  },
 };

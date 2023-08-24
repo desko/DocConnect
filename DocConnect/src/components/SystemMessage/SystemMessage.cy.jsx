@@ -3,7 +3,6 @@ import SystemMessage from './SystemMessage';
 import {ChakraProvider} from '@chakra-ui/react';
 import theme from '../../styles/theme/theme';
 import {BrowserRouter} from 'react-router-dom';
-// import {SYSTEM_MESSAGE} from '../../common/systemMsgConsts';
 
 describe('<SpecialtiesController />', () => {
   it('should render registration success message card', () => {
