@@ -5,7 +5,6 @@ import Btn from '../Btn/Btn';
 import FormRow from '../FormRow/FormRow';
 import {RESET_PASSWORD_VALIDATION} from '../../common/formConsts';
 import {useSearchParams} from 'react-router-dom';
-import {useEffect} from 'react';
 import {resetPasswordUser} from '../../services/servicesUsers';
 
 const FormResetPassword = () => {
@@ -14,15 +13,14 @@ const FormResetPassword = () => {
   const [searchParams] = useSearchParams();
 
   const onSubmit = async (values) => {
-    // eslint-disable-next-line max-len
-    await resetPasswordUser(values.password, values.confirmPassword, searchParams.get('token'), searchParams.get('userId'));
+    const result = await resetPasswordUser(
+        values.password,
+        values.confirmPassword,
+        searchParams.get('token'),
+        searchParams.get('userId'),
+    );
+    console.log(result);
   };
-
-  useEffect(() => {
-    // console.log(searchParams);
-    // console.log(searchParams.get('token'));
-    // console.log(searchParams.get('id'));
-  }, [searchParams]);
 
   const validateConfirmPassword = {
     required: {

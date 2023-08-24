@@ -30,7 +30,7 @@ export const SYSTEM_MESSAGE = {
     LOGIN_LINK: true,
   },
   INVALID_TOKEN_PASSWORD_RESET: {
-    HEDING: 'Congratulations!',
+    HEDING: 'The token has expired or is invalid',
     TEXT: 'You can request a new token here.',
     RESET_LINK: true,
   },
