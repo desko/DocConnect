@@ -26,28 +26,15 @@ const SystemMessage = ({type}) => {
           flexWrap='wrap'
         >
           {SYSTEM_MESSAGE[type].TEXT}
-
-          <Text
-            as='span'
-            color='red.400'
-            textDecoration='underline'
-            textDecorationColor='currentcolor'
-            textDecorationThickness='.2rem'
-            textUnderlineOffset='.3rem'
-            transition='text-decoration-color .4s'
-            _hover={{
-              textDecorationColor: 'transparent',
-            }}
-          >
-            {SYSTEM_MESSAGE[type].LOGINLINK ? <ChakraLink
-              as={ReactRouterLink}
-              to={LOGIN_PAGE}
-              variant='custom'
-            >Go to the Login page</ChakraLink> :
-            ''
-            }
-          </Text>
         </Text>
+
+        {SYSTEM_MESSAGE[type].LOGIN_LINK ? <ChakraLink
+          as={ReactRouterLink}
+          to={LOGIN_PAGE}
+          variant='custom'
+        >Go to the Login page</ChakraLink> :
+        ''
+        }
       </Box>
     </BoxCard>
   );

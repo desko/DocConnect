@@ -11,7 +11,11 @@ const FormForgottenPassword = () => {
   const {errors, isSubmitting, isSubmitted, isValid} = formState;
 
   const onSubmit = async (values) => {
-    await forgottenPasswordUser(values.emailAddress);
+    try {
+      await forgottenPasswordUser(values.emailAddress);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

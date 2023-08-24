@@ -15,8 +15,22 @@ export const loginUser = createAsyncThunk('user/loginUser', async (userData) => 
   return response.data;
 });
 
-export const forgottenPasswordUser = async (email) => {
-  const response = await axios.get(`${baseUrl}/ResetForgottenPassword`, email);
+export const forgottenPasswordUser = async (emailAddress) => {
+  const response = await axios.post(`${baseUrl}/RequestForgottenPassword`, {
+    emailAddress,
+  });
 
   return response.data;
+};
+
+export const resetPasswordUser = async (newPassword, repeatPassword, token, userId) => {
+  try {
+    const response = await axios.post(`${baseUrl}/ResetPassword?userId=${userId}&token=${token}`, {
+      newPassword,
+      repeatPassword,
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
 };
