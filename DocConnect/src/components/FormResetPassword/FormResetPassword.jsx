@@ -4,23 +4,29 @@ import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
 import FormRow from '../FormRow/FormRow';
 import {RESET_PASSWORD_VALIDATION} from '../../common/formConsts';
-import {useSearchParams} from 'react-router-dom';
-import {useEffect} from 'react';
+import {useNavigate, useSearchParams} from 'react-router-dom';
+import {resetPasswordUser} from '../../services/servicesUsers';
+import {RESET_PASSWORD_VALIDATION_LINK} from '../../common/routes';
 
 const FormResetPassword = () => {
+  const navigate = useNavigate();
   const {register, handleSubmit, formState, watch} = useForm({mode: 'onTouched'});
   const {errors, isSubmitting, isValid} = formState;
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const onSubmit = async (values) => {
-    // await forgottenPasswordUser(values.emailAddress);
-  };
+    const data = await resetPasswordUser(
+        values.password,
+        values.confirmPassword,
+        searchParams.get('token'),
+        searchParams.get('userId'),
+    );
 
-  useEffect(() => {
-    // console.log(searchParams);
-    // console.log(searchParams.get('token'));
-    // console.log(searchParams.get('id'));
-  }, [searchParams]);
+    // eslint-disable-next-line chai-friendly/no-unused-expressions
+    data.success ?
+      navigate(RESET_PASSWORD_VALIDATION_LINK+'success') :
+      navigate(RESET_PASSWORD_VALIDATION_LINK+'error');
+  };
 
   const validateConfirmPassword = {
     required: {
