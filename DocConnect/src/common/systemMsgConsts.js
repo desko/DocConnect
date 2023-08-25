@@ -1,3 +1,6 @@
+import TextLink from '../components/TextLink/TextLink';
+import {FORGOTTEN_PASSWORD_PAGE} from './routes';
+
 export const SYSTEM_MESSAGE = {
   SUCCESSFUL_REGISTRATION: {
     HEADING: 'Congratulations!',
@@ -25,13 +28,26 @@ export const SYSTEM_MESSAGE = {
     LOGIN_LINK: false,
   },
   SUCCESSFUL_PASSWORD_RESET: {
-    HEDING: 'Congratulations!',
+    HEADING: 'Congratulations!',
     TEXT: 'Your password has been successfully reset.',
     LOGIN_LINK: true,
   },
   INVALID_TOKEN_PASSWORD_RESET: {
-    HEDING: 'The token has expired or is invalid',
-    TEXT: 'You can request a new token here.',
-    RESET_LINK: true,
+    HEADING: 'The token has expired or is invalid',
+    TEXT_ELEMENT: {
+      element: TextLink,
+      props: {
+        link: {
+          url: FORGOTTEN_PASSWORD_PAGE,
+          text: 'here',
+        },
+        text: 'You can request a new token ',
+      },
+    },
+  },
+  LOADING: {
+    HEADING: 'Loading...',
+    TEXT: 'Please wait a moment or',
+    LOGINLINK: true,
   },
 };

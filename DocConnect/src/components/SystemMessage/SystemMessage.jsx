@@ -15,20 +15,24 @@ const SystemMessage = ({type}) => {
           as='h2'
           size='md'
           pb='.5rem'
-        >{SYSTEM_MESSAGE[type].HEADING}</Heading>
+        >{SYSTEM_MESSAGE[type]?.HEADING}</Heading>
 
-        <Text
-          display='inline-flex'
-          gap={{
-            base: '.5rem',
-            md: '1rem',
-          }}
-          flexWrap='wrap'
-        >
-          {SYSTEM_MESSAGE[type].TEXT}
-        </Text>
+        {
+          SYSTEM_MESSAGE[type]?.TEXT !== undefined ? <Text
+            display='inline-flex'
+            gap={{
+              base: '.5rem',
+              md: '1rem',
+            }}
+            flexWrap='wrap'
+          >
+            {SYSTEM_MESSAGE[type]?.TEXT}
+          </Text> :
+            // eslint-disable-next-line max-len
+            SYSTEM_MESSAGE[type]?.TEXT_ELEMENT.element({text: SYSTEM_MESSAGE[type]?.TEXT_ELEMENT.props.text, link: SYSTEM_MESSAGE[type]?.TEXT_ELEMENT.props.link})
+        }
 
-        {SYSTEM_MESSAGE[type].LOGIN_LINK ? <ChakraLink
+        {SYSTEM_MESSAGE[type]?.LOGIN_LINK ? <ChakraLink
           as={ReactRouterLink}
           to={LOGIN_PAGE}
           variant='custom'
