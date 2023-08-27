@@ -39,7 +39,7 @@ export const resetPasswordUser = async (newPassword, repeatPassword, token, user
           newPassword,
           repeatPassword,
         });
-    return response.data;
+    return response?.data;
   } catch (error) {
     return error;
   }
