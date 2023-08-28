@@ -27,4 +27,15 @@ export const emailVarificationUser = async (userId, token) => {
   return response.data;
 };
 
+export const resendemailVerificationUser = async (token) => {
+  console.log(token);
+  try {
+    const response = await axios
+        .get(`${baseUrl}/ResendEmailVerification`, {headers: {'Authorization': 'Bearer ' + token}});
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
