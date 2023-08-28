@@ -4,15 +4,29 @@ import {
   AlertTitle,
   AlertDescription,
   Flex,
+  useToast,
 } from '@chakra-ui/react';
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
 import Btn from '../Btn/Btn';
-import {resendemailVerificationUser} from '../../services/servicesUsers';
+import {resendEmailVerificationUser} from '../../services/servicesUsers';
 
 const SystemNotification = () => {
+  const toast = useToast();
   const [isSent, setIsSent] = useState(false);
   const {token} = useSelector((store) => store.user);
+
+  const resendEmailHandler = async (token) => {
+    const response = await resendEmailVerificationUser(token);
+    if (response.response?.status > 200) {
+      toast({
+        title: `There was an error sending an email, please try again later.`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
 
 
   return (
@@ -34,11 +48,11 @@ const SystemNotification = () => {
         display= {{'base': 'none', 'md': 'inline'}}
 
       >Please find the verification email in your inbox.</AlertDescription>
-      <Btn text={isSent ? 'Sent' : 'Resend'}
+      <Btn text='Resend'
         customProps={{
-          'onClick': () => {
+          'onClick': async () => {
             setIsSent(true);
-            resendemailVerificationUser(token);
+            resendEmailHandler(token);
           },
           'variant': 'customOutline',
           'isDisabled': isSent,

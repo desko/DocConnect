@@ -29,7 +29,9 @@ const userSlice = createSlice({
         .addCase(loginUser.fulfilled, (state, action) => {
           state.status = 'succeeded';
           state.token = action.payload.result;
-          state.isVerified = jwtDecode(action.payload.result)?.email_verified;
+          if (action.payload.httpStatusCode === 200) {
+            state.isVerified = jwtDecode(action.payload.result).email_verified;
+          }
         })
         .addCase(loginUser.rejected, (state, action) => {
           state.status = 'failed';
