@@ -12,6 +12,8 @@ import {
   SIGNUP_PAGE,
   USER_AGREEMENT_PAGE,
   USER_VERIFICATION,
+  RESET_PASSWORD_PAGE,
+  RESET_PASSWORD_VALIDATION_PAGE,
 } from './common/routes';
 import {Logged} from './hoc/Logged';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -20,6 +22,8 @@ import ForgottenPassword from './pages/ForgottenPassword';
 import UserVerification from './pages/UserVerification';
 import SystemNotification from './components/SystemNotification/SystemNotification';
 import {NotVerified} from './hoc/NotVerified';
+import ResetPassword from './pages/ResetPassword';
+import ResetPasswordValidation from './pages/ResetPasswordValidation';
 
 function App() {
   return (
@@ -41,6 +45,16 @@ function App() {
         <Route path={FORGOTTEN_PASSWORD_PAGE} element={
           <Logged>
             <ForgottenPassword />
+          </Logged>
+        }></Route>
+        <Route path={RESET_PASSWORD_PAGE} element={
+          <Logged>
+            <ResetPassword />
+          </Logged>
+        }></Route>
+        <Route path={RESET_PASSWORD_VALIDATION_PAGE} element={
+          <Logged>
+            <ResetPasswordValidation/>
           </Logged>
         }></Route>
         <Route path={SIGNUP_PAGE} element={
