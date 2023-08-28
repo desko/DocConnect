@@ -4,23 +4,52 @@ import {useForm} from 'react-hook-form';
 import Btn from '../Btn/Btn';
 import FormRow from '../FormRow/FormRow';
 import {RESET_PASSWORD_VALIDATION} from '../../common/formConsts';
-import {useSearchParams} from 'react-router-dom';
-import {useEffect} from 'react';
+import {useNavigate, useSearchParams} from 'react-router-dom';
+import {resetPasswordUser} from '../../services/servicesUsers';
+import {RESET_PASSWORD_VALIDATION_LINK} from '../../common/routes';
+import {useEffect, useState} from 'react';
+import NetworkError from '../NetworkError/NetworkError';
 
 const FormResetPassword = () => {
-  const {register, handleSubmit, formState, watch} = useForm({mode: 'onTouched'});
+  const navigate = useNavigate();
+  const {register, handleSubmit, formState, watch, setError} = useForm({mode: 'onTouched'});
   const {errors, isSubmitting, isValid} = formState;
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const [dataReq, setDataReq] = useState({});
+  const [networkError, setNetworkError] = useState(false);
 
   const onSubmit = async (values) => {
-    // await forgottenPasswordUser(values.emailAddress);
+    const data = await resetPasswordUser(
+        values.password,
+        values.confirmPassword,
+        searchParams.get('token'),
+        searchParams.get('userId'),
+    );
+
+    setDataReq(data);
   };
 
   useEffect(() => {
-    // console.log(searchParams);
-    // console.log(searchParams.get('token'));
-    // console.log(searchParams.get('id'));
-  }, [searchParams]);
+    if (dataReq?.success !== undefined && dataReq?.success) {
+      navigate(RESET_PASSWORD_VALIDATION_LINK + 'success');
+    }
+
+    if (dataReq instanceof Error) {
+      if (dataReq?.response?.data?.success !== undefined && !dataReq?.response?.data?.success) {
+        if (dataReq?.response?.data?.errorMessage === 'INVALID_TOKEN') {
+          navigate(RESET_PASSWORD_VALIDATION_LINK + 'error');
+        }
+        if (dataReq?.response?.data?.errorMessage === 'The new password must be different from the old one.') {
+          setError('password', {message: dataReq?.response?.data?.errorMessage});
+          setError('confirmPassword', {message: dataReq?.response?.data?.errorMessage});
+        }
+      }
+
+      if (dataReq?.response?.request?.status === 404 || dataReq?.response?.request?.status >= 500) {
+        setNetworkError(true);
+      }
+    }
+  }, [dataReq, navigate, setError]);
 
   const validateConfirmPassword = {
     required: {
@@ -53,6 +82,10 @@ const FormResetPassword = () => {
       </Box>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        {
+          networkError && <NetworkError />
+        }
+
         <FormRow
           type='password'
           placeholder='Password'
