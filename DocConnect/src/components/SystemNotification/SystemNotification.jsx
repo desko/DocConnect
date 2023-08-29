@@ -19,12 +19,21 @@ const SystemNotification = () => {
   const resendEmailHandler = async (token) => {
     const response = await resendEmailVerificationUser(token);
     if (response.response?.status > 200) {
-      toast({
-        title: `There was an error sending an email, please try again later.`,
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-      });
+      if (response.response.data.errorMessage === 'EMAIL_ALREADY_SENT') {
+        toast({
+          title: `Confirmation email already sent, please check your inbox.`,
+          status: 'info',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: `There was an error sending an email, please try again later.`,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     }
   };
 
