@@ -13,7 +13,7 @@ export const searchSpecialists = async (startingWith) => {
     const result = response.data.result;
     const transformedResult = result.map((el) => {
       return {
-        label: `${el.firstName} ${el.lastName}`,
+        name: `${el.firstName} ${el.lastName}`,
         value: el.id,
       };
     });
@@ -34,7 +34,7 @@ export const searchCities = async (startingWith) => {
     const result = response.data.result;
     const transformedResult = result.map((el) => {
       return {
-        label: el.cityName,
+        name: el.cityName,
         value: el.id,
       };
     });
