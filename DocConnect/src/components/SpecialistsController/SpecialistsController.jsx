@@ -8,7 +8,11 @@ const SpecialistsController = () => {
     >
       <SearchSpecialists />
 
-      <Grid></Grid>
+      <Grid>
+        {
+
+        }
+      </Grid>
     </Box>
   );
 };
