@@ -38,8 +38,9 @@ const SearchAutocomplete = ({fetcher, setSelected, selected}) => {
 
   return (
     <Box
-      position='relative'
       role='group'
+      position='relative'
+      fontSize='1.6rem'
     >
       <Input
         ref={inputRef}
@@ -51,6 +52,7 @@ const SearchAutocomplete = ({fetcher, setSelected, selected}) => {
         onBlur={() => {
           if (value === '') setOpen(false);
         }}
+        variant='custom'
       />
       {
         selected !== null &&
@@ -62,6 +64,8 @@ const SearchAutocomplete = ({fetcher, setSelected, selected}) => {
           height='100%'
           bgColor='white'
           justifyContent='space-between'
+          alignItems='center'
+          padding='0 1rem'
         >
           {selected.name}
           <Button
@@ -73,6 +77,7 @@ const SearchAutocomplete = ({fetcher, setSelected, selected}) => {
       <Box
         as='ul'
         position='absolute'
+        zIndex='2'
         top='100%'
         left='0'
         width='100%'
@@ -82,20 +87,38 @@ const SearchAutocomplete = ({fetcher, setSelected, selected}) => {
         borderTop='0'
         borderColor='currentColor'
         bgColor='white'
+        padding='1rem'
         transition='opacity .4s'
         opacity={open ? '1' : '0'}
         pointerEvents={open ? 'all' : 'none'}
       >
-        <li>Please select an option</li>
+        <Box
+          as='li'
+        >Please select an option</Box>
         {
           !!results.length && results?.map((el) => {
             return (
-              <li key={el.value}>
-                <Button onClick={() => {
-                  setOpen(false);
-                  selectHandler(el.value);
-                }}>{el.name}</Button>
-              </li>
+              <Box
+                mt='1rem'
+                as='li'
+                key={el.value}
+              >
+                <Button
+                  width='100%'
+                  height='auto'
+                  padding='.5rem'
+                  textAlign='left'
+                  justifyContent='flex-start'
+                  fontSize='inherit'
+                  bgColor='transparent'
+                  onClick={() => {
+                    setOpen(false);
+                    selectHandler(el.value);
+                  }}
+                >
+                  {el.name}
+                </Button>
+              </Box>
             );
           })
         }

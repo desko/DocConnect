@@ -1,5 +1,6 @@
 import {Box} from '@chakra-ui/react';
 import {searchSpecialists, searchCities} from '../../services/servicesSpecialists';
+<<<<<<< HEAD
 import SearchAutocomplete from '../SearchAutocomplete/SearchAutocomplete.jsx';
 import {fetchSpecialists} from '../../services/servicesSpecialists';
 import {useEffect, useState} from 'react';
@@ -19,6 +20,9 @@ const SearchSpecialists = ({setSpecialists}) => {
       fetchData();
     }
   }, [city, name, speciality, setSpecialists]);
+=======
+import SearchAutocomplete from '../SearchAutocomplete/SearchAutocomplete';
+>>>>>>> fdd5ff50380c39bf34ef68a529beb3cfc8e461f3
 
   return (
     <Box>
