@@ -14,12 +14,14 @@ const SystemMessage = ({type}) => {
         <Heading
           as='h2'
           size='md'
-          pb='.5rem'
+          pb='2rem'
+          textAlign='center'
         >{SYSTEM_MESSAGE[type]?.HEADING}</Heading>
 
         {
           SYSTEM_MESSAGE[type]?.TEXT !== undefined ? <Text
             display='inline-flex'
+            pb='1rem'
             gap={{
               base: '.5rem',
               md: '1rem',

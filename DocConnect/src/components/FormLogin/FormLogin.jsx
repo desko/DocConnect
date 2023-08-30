@@ -34,7 +34,7 @@ const FormLogin = () => {
   const onSubmit = async (values) => {
     const response = await dispatch(loginUser(values));
 
-    if (response.payload?.errorMessage) {
+    if (response?.payload?.errorMessage) {
       setError('emailAddress', {message: response.payload.errorMessage});
       setError('password', {message: response.payload.errorMessage});
       setNetworkError(false);

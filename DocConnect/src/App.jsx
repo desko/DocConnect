@@ -21,6 +21,8 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import UserAgreement from './pages/UserAgreement';
 import ForgottenPassword from './pages/ForgottenPassword';
 import UserVerification from './pages/UserVerification';
+import SystemNotification from './components/SystemNotification/SystemNotification';
+import {NotVerified} from './hoc/NotVerified';
 import ResetPassword from './pages/ResetPassword';
 import ResetPasswordValidation from './pages/ResetPasswordValidation';
 import Specialists from './pages/Specialists';
@@ -29,6 +31,10 @@ function App() {
   return (
     <div className="wrapper">
       <Header></Header>
+      <NotVerified>
+        <SystemNotification />
+      </NotVerified>
+
 
       <Routes>
         <Route path={HOME_PAGE} element={<Home />}></Route>
