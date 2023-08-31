@@ -1,6 +1,6 @@
 import {Card as CardChakra, CardBody, Box, Image} from '@chakra-ui/react';
 
-const Card = ({Component, imageUrl, content}) => {
+const Card = ({Component, imageUrl, content, imagePrefix = ''}) => {
   return (
     <CardChakra
       role='group'
@@ -26,7 +26,7 @@ const Card = ({Component, imageUrl, content}) => {
         }
       >
         <Image
-          src={imageUrl}
+          src={imagePrefix+imageUrl}
           alt={content.name || `${content?.firstName} ${content?.lastName}`}
           position='absolute'
           inset='0'

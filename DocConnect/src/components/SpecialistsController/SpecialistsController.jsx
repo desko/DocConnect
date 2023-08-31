@@ -1,4 +1,4 @@
-import {Box, Grid} from '@chakra-ui/react';
+import {Box, Grid, GridItem} from '@chakra-ui/react';
 import SearchSpecialists from '../SearchSpecialists/SearchSpecialists';
 import {useState} from 'react';
 import Card from '../Card/Card';
@@ -28,17 +28,18 @@ const SpecialistsController = () => {
             lg: '5rem 6.2rem',
           }
         }
-        pt='1.6rem'
+        pt='3.6rem'
       >
         {
-          specialists.map((specialist) => {
-            return <li key={specialist.id}>
+          specialists.map((specialist, index) => {
+            return <GridItem key={specialist.id}>
               <Card
                 Component={CardContentSpecialist}
                 imageUrl={specialist.imageUrl}
+                imagePrefix='https://cdntestredhf30zf.azureedge.net/'
                 content={specialist}
               />
-            </li>;
+            </GridItem>;
           })
         }
       </Grid>
