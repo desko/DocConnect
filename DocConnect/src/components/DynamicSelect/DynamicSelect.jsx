@@ -1,9 +1,9 @@
-import {Select} from '@chakra-ui/react';
+import {FormControl, FormLabel, Select} from '@chakra-ui/react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchSpecialties} from '../../services/servicesSpecialties';
 import {useEffect} from 'react';
 
-const DynamicSelect = ({setSelected}) => {
+const DynamicSelect = ({label, setSelected}) => {
   const dispatch = useDispatch();
   useEffect(()=>{
     dispatch(fetchSpecialties());
@@ -17,17 +17,25 @@ const DynamicSelect = ({setSelected}) => {
   };
 
   return (
-    <Select onChange={(e) => selectHandler(e)}>
-      <option>All</option>
-      {
-        specialties.map((specialty) => {
-          return <option
-            key={specialty.id}
-            value={specialty.id}
-          >{specialty.name}</option>;
-        })
-      }
-    </Select>
+    <FormControl>
+      <FormLabel
+        variant='custom'
+      >{label}</FormLabel>
+      <Select
+        onChange={(e) => selectHandler(e)}
+        variant='custom'
+      >
+        <option>All</option>
+        {
+          specialties.map((specialty) => {
+            return <option
+              key={specialty.id}
+              value={specialty.id}
+            >{specialty.name}</option>;
+          })
+        }
+      </Select>
+    </FormControl>
   );
 };
 

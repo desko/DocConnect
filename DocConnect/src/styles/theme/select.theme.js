@@ -1,7 +1,7 @@
-import {inputAnatomy} from '@chakra-ui/anatomy';
+import {selectAnatomy} from '@chakra-ui/anatomy';
 import {createMultiStyleConfigHelpers} from '@chakra-ui/react';
 
-const {definePartsStyle, defineMultiStyleConfig} = createMultiStyleConfigHelpers(inputAnatomy.keys);
+const {definePartsStyle, defineMultiStyleConfig} = createMultiStyleConfigHelpers(selectAnatomy.keys);
 
 const variants = {
   custom: definePartsStyle({
@@ -25,8 +25,8 @@ const variants = {
   }),
 };
 
-const inputTheme = defineMultiStyleConfig({
+const selectTheme = defineMultiStyleConfig({
   variants,
 });
 
-export default inputTheme;
+export default selectTheme;

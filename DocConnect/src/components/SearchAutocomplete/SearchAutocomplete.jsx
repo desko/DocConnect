@@ -1,11 +1,17 @@
-import {Box, Button, Flex, Input} from '@chakra-ui/react';
+import {Box, Button, Flex, FormControl, FormLabel, Input} from '@chakra-ui/react';
 import {useEffect, useRef, useState} from 'react';
+import {
+  autocompleteCover,
+  autocompleteCoverButton,
+  autocompleteDropdown,
+  autocompleteDropdownItem,
+} from './SearchAutocomplete.theme';
+import useClickOutsideHandler from '../../hooks/useClickOutsideHandler';
 
-const SearchAutocomplete = ({fetcher, setSelected, selected}) => {
+const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selected, placeholder}) => {
   const [results, setResults] = useState([]);
-  // const [selected, setSelected] = useState(null);
-  const [value, setValue] = useState('');
   const [open, setOpen] = useState(false);
+  const groupRef = useRef(null);
   const inputRef = useRef(null);
 
   const handleInput = (e) => {
@@ -21,8 +27,14 @@ const SearchAutocomplete = ({fetcher, setSelected, selected}) => {
         setResults([]);
       }
     };
+
     fetchData();
   }, [value, setResults, fetcher]);
+
+  // click outside handler
+  useClickOutsideHandler(groupRef, () => {
+    setOpen(false);
+  });
 
   const selectHandler = (value) => {
     setSelected(results.find((el) => el.value === value));
@@ -33,97 +45,91 @@ const SearchAutocomplete = ({fetcher, setSelected, selected}) => {
   const clearHandler = () => {
     setSelected(null);
     setValue('');
-    inputRef.current.focus();
+    setOpen(false);
   };
 
   return (
-    <Box
-      role='group'
-      position='relative'
+    <FormControl
       fontSize='1.6rem'
     >
-      <Input
-        ref={inputRef}
-        value={value}
-        onInput={handleInput}
-        onFocus={() => {
-          setOpen(true);
-        }}
-        onBlur={() => {
-          if (value === '') setOpen(false);
-        }}
+      <FormLabel
         variant='custom'
-      />
-      {
-        selected !== null &&
-        <Flex
-          position='absolute'
-          top='0'
-          left='0'
-          width='100%'
-          height='100%'
-          bgColor='white'
-          justifyContent='space-between'
-          alignItems='center'
-          padding='0 1rem'
-        >
-          {selected.name}
-          <Button
-            onClick={clearHandler}
-          >X</Button>
-        </Flex>
-      }
+      >{label}</FormLabel>
 
       <Box
-        as='ul'
-        position='absolute'
-        zIndex='2'
-        top='100%'
-        left='0'
-        width='100%'
-        maxH='30rem'
-        overflowY='auto'
-        border='.1rem solid'
-        borderTop='0'
-        borderColor='currentColor'
-        bgColor='white'
-        padding='1rem'
-        transition='opacity .4s'
-        opacity={open ? '1' : '0'}
-        pointerEvents={open ? 'all' : 'none'}
+        role='group'
+        position='relative'
+        ref={groupRef}
       >
-        <Box
-          as='li'
-        >Please select an option</Box>
+        <Input
+          variant='custom'
+          borderColor={value.length ? 'bodyText' : 'quicksilver.400'}
+          color={value.length ? 'bodyText' : 'quicksilver.400'}
+          ref={inputRef}
+          value={value}
+          onInput={handleInput}
+          placeholder={placeholder}
+          bgColor='white'
+          _focus={value.length ? {
+            borderBottomRadius: '0',
+            borderColor: 'bodyText',
+            borderBottomColor: 'transparent',
+          } : null}
+          onFocus={() => {
+            setOpen(true);
+          }}
+        />
         {
-          !!results.length && results?.map((el) => {
-            return (
-              <Box
-                mt='1rem'
-                as='li'
-                key={el.value}
-              >
-                <Button
-                  width='100%'
-                  height='auto'
-                  padding='.5rem'
-                  textAlign='left'
-                  justifyContent='flex-start'
-                  fontSize='inherit'
-                  bgColor='transparent'
-                  onClick={() => {
-                    setOpen(false);
-                    selectHandler(el.value);
-                  }}
-                >
-                  {el.name}
-                </Button>
-              </Box>
-            );
-          })
+          selected !== null &&
+          <Flex
+            {...autocompleteCover}
+          >
+            {selected.name}
+            <Button
+              {...autocompleteCoverButton}
+              onClick={clearHandler}
+            >X</Button>
+          </Flex>
         }
+
+        <Box
+          as='ul'
+          {...autocompleteDropdown}
+          border={value.length ? '.1rem solid' : '0'}
+          padding={ value.length ? '1rem' : '0' }
+          opacity={open ? '1' : '0'}
+          pointerEvents={open ? 'all' : 'none'}
+        >
+          {
+            !!(results?.length) && <Box
+              as='li'
+              padding='0 .5rem'
+            >Please select an option</Box>
+          }
+          {
+            !!results.length && results?.map((el) => {
+              return (
+                <Box
+                  mt='1rem'
+                  as='li'
+                  key={el.value}
+                >
+                  <Button
+                    {...autocompleteDropdownItem}
+                    onClick={() => {
+                      setOpen(false);
+                      selectHandler(el.value);
+                    }}
+                  >
+                    {el.name}
+                  </Button>
+                </Box>
+              );
+            })
+          }
+        </Box>
       </Box>
-    </Box>
+    </FormControl>
   );
 };
 

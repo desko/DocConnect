@@ -5,9 +5,6 @@ import {useState} from 'react';
 const SpecialistsController = () => {
   const [specialists, setSpecialists] = useState([]);
 
-
-  console.log(specialists);
-
   return (
     <Box
       aria-label='Specialists'

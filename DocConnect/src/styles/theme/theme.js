@@ -11,7 +11,7 @@ import formLabelTheme from './formLabel.theme';
 import buttonTheme from '../../components/Btn/Btn.theme';
 import linkTheme from './link.theme';
 import checkboxTheme from './checkbox.theme';
-
+import selectTheme from './select.theme';
 
 const theme = extendTheme({
   colors,
@@ -26,6 +26,7 @@ const theme = extendTheme({
     Button: buttonTheme,
     Link: linkTheme,
     Checkbox: checkboxTheme,
+    Select: selectTheme,
   },
   breakpoints,
 });
