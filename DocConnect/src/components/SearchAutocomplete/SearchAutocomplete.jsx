@@ -20,8 +20,8 @@ const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selec
 
   useEffect(() => {
     const fetchData = async () => {
-      if (value.length > 2) {
-        const response = await fetcher(value);
+      if (value.trim().length > 2) {
+        const response = await fetcher(value.trim() !== '' ? value.trim() : 'null');
         setResults(response);
       } else {
         setResults([]);

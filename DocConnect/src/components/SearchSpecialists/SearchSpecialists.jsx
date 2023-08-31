@@ -13,9 +13,9 @@ const SearchSpecialists = ({setSpecialists}) => {
   const [speciality, setSpeciality] = useState(null);
 
   useEffect(() =>{
-    if (city !== null || (name !== null || nameValue.length > 2) || speciality !== null) {
+    if (city !== null || (name !== null || nameValue.trim().length > 2) || speciality !== null) {
       const fetchData = async () => {
-        const result = await fetchSpecialists(city?.value, speciality?.id, name?.name || nameValue );
+        const result = await fetchSpecialists(city?.value, speciality?.id, name?.name || nameValue.trim());
         setSpecialists(result);
       };
       fetchData();
