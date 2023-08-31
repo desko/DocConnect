@@ -27,7 +27,7 @@ const Card = ({Component, imageUrl, content}) => {
       >
         <Image
           src={imageUrl}
-          alt={content.name || content}
+          alt={content.name || `${content?.firstName} ${content?.lastName}`}
           position='absolute'
           inset='0'
           w='100%'
