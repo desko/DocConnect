@@ -1,11 +1,12 @@
-import {Card as CardChakra, CardBody, Box, Image} from '@chakra-ui/react';
-
-const Card = ({Component, imageUrl, content, imagePrefix = ''}) => {
+import {Card as CardChakra, CardBody, Box, Image, Link as ChakraLink} from '@chakra-ui/react';
+import {Link as ReactRouterLink} from 'react-router-dom';
+const Card = ({Component, imageUrl, content, imagePrefix = '', link='#'}) => {
   return (
     <CardChakra
       role='group'
       variant='custom'
       aria-label='Card'
+      position='relative'
     >
       <Box
         as='figure'
@@ -45,6 +46,16 @@ const Card = ({Component, imageUrl, content, imagePrefix = ''}) => {
       <CardBody>
         <Component content={content} />
       </CardBody>
+      <ChakraLink
+        as={ReactRouterLink}
+        to={link}
+        position='absolute'
+        zIndex='2'
+        top='0'
+        left='0'
+        width='100%'
+        height='100%'
+      ></ChakraLink>
     </CardChakra>
   );
 };

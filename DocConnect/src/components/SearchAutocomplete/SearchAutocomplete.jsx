@@ -1,5 +1,5 @@
 import {Box, Button, Flex, FormControl, FormLabel, Input} from '@chakra-ui/react';
-import {useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {
   autocompleteCover,
   autocompleteCoverButton,
@@ -7,34 +7,25 @@ import {
   autocompleteDropdownItem,
 } from './SearchAutocomplete.theme';
 import useClickOutsideHandler from '../../hooks/useClickOutsideHandler';
+// import {debounce} from 'lodash';
 
 const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selected, placeholder}) => {
+  const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const groupRef = useRef(null);
   const inputRef = useRef(null);
 
+  const debounceTimer = useRef(null);
+  const debounce = useCallback((callback, time = 300) => {
+    clearTimeout(debounceTimer.current);
+    debounceTimer.current = setTimeout(callback, time);
+  }, []);
+
   const handleInput = (e) => {
+    setLoading(true);
     setValue(e.target.value);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (value.trim().length > 2) {
-        const response = await fetcher(value.trim() !== '' ? value.trim() : 'null');
-        setResults(response);
-      } else {
-        setResults([]);
-      }
-    };
-
-    fetchData();
-  }, [value, setResults, fetcher]);
-
-  // click outside handler
-  useClickOutsideHandler(groupRef, () => {
-    setOpen(false);
-  });
 
   const selectHandler = (value) => {
     setSelected(results.find((el) => el.value === value));
@@ -47,6 +38,25 @@ const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selec
     setValue('');
     setOpen(false);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (value.trim().length > 2) {
+        const response = await fetcher(value.trim() !== '' ? value.trim() : 'null');
+        setResults(response);
+      } else {
+        setResults([]);
+      }
+      setLoading(false);
+    };
+
+    debounce((fetchData));
+  }, [value, setResults, fetcher, debounce]);
+
+  // click outside handler
+  useClickOutsideHandler(groupRef, () => {
+    setOpen(false);
+  });
 
   return (
     <FormControl
@@ -62,6 +72,7 @@ const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selec
         ref={groupRef}
       >
         <Input
+          autoComplete='off'
           variant='custom'
           borderColor={value.length ? 'bodyText' : 'quicksilver.400'}
           color={value.length ? 'bodyText' : 'quicksilver.400'}
@@ -70,7 +81,7 @@ const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selec
           onInput={handleInput}
           placeholder={placeholder}
           bgColor='white'
-          _focus={value.length ? {
+          _focus={value.length && !loading ? {
             borderBottomRadius: '0',
             borderColor: 'bodyText',
             borderBottomColor: 'transparent',
@@ -95,10 +106,10 @@ const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selec
         <Box
           as='ul'
           {...autocompleteDropdown}
-          border={value.length ? '.1rem solid' : '0'}
-          padding={ value.length ? '1rem' : '0' }
-          opacity={open ? '1' : '0'}
-          pointerEvents={open ? 'all' : 'none'}
+          border={value.length && !loading ? '.1rem solid' : '0'}
+          padding={ value.length && !loading ? '1rem' : '0' }
+          opacity={open && !loading ? '1' : '0'}
+          pointerEvents={open && !loading ? 'all' : 'none'}
         >
           {
             !!(results?.length) && <Box
@@ -119,6 +130,7 @@ const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selec
                     onClick={() => {
                       setOpen(false);
                       selectHandler(el.value);
+                      groupRef.current.dispatchEvent(new Event('customchange'));
                     }}
                   >
                     {el.name}

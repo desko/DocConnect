@@ -1,29 +1,37 @@
 import {GridItem, Grid} from '@chakra-ui/react';
 import {searchSpecialists, searchCities} from '../../services/servicesSpecialists';
 import SearchAutocomplete from '../SearchAutocomplete/SearchAutocomplete.jsx';
-import {fetchSpecialists} from '../../services/servicesSpecialists';
-import {useEffect, useState} from 'react';
-import DynamicSelect from '../DynamicSelect/DynamicSelect';
+import Select from '../Select/Select';
+import {useCallback, useEffect, useRef} from 'react';
 
-const SearchSpecialists = ({setSpecialists}) => {
-  const [cityValue, setCityValue] = useState('');
-  const [city, setCity] = useState(null);
-  const [nameValue, setNameValue] = useState('');
-  const [name, setName] = useState(null);
-  const [speciality, setSpeciality] = useState(null);
+const SearchSpecialists = ({
+  specialtyState,
+  cityState,
+  cityValueState,
+  nameState,
+  nameValueState,
+  selectOptions,
+  setChanged,
+}) => {
+  const {cityValue, setCityValue} = cityValueState;
+  const {city, setCity} = cityState;
+  const {nameValue, setNameValue} = nameValueState;
+  const {name, setName} = nameState;
+  const {specialty, setSpecialty} = specialtyState;
+  const groupRef = useRef(null);
 
-  useEffect(() =>{
-    if (city !== null || (name !== null || nameValue.trim().length > 2) || speciality !== null) {
-      const fetchData = async () => {
-        const result = await fetchSpecialists(city?.value, speciality?.id, name?.name || nameValue.trim());
-        setSpecialists(result);
-      };
-      fetchData();
-    }
-  }, [city, name, speciality, setSpecialists, nameValue]);
+  const changeHandler = useCallback((e) => {
+    setChanged(true);
+  }, [setChanged]);
+
+  useEffect(() => {
+    groupRef.current.addEventListener('customchange', changeHandler);
+  }, [groupRef, changeHandler]);
 
   return (
     <Grid
+      ref={groupRef}
+      onChange={changeHandler}
       templateColumns={{
         base: 'repeat(1, minmax(0, 1fr))',
         md: 'repeat(3, minmax(0, 1fr))',
@@ -47,8 +55,10 @@ const SearchSpecialists = ({setSpecialists}) => {
       </GridItem>
 
       <GridItem>
-        <DynamicSelect
-          setSelected={setSpeciality}
+        <Select
+          options={selectOptions}
+          value={specialty}
+          setSelected={setSpecialty}
           label='Specialty'
         />
       </GridItem>

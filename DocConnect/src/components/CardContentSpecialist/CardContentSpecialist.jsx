@@ -24,6 +24,7 @@ const CardContentSpecialist = ({content}) => {
 
         <Text
           as='strong'
+          color='red.400'
         >
           {content?.specialityName}
         </Text>
@@ -66,6 +67,8 @@ const CardContentSpecialist = ({content}) => {
         styleProps={{
           width: '100%',
           marginTop: 'auto',
+          position: 'relative',
+          zIndex: '3',
         }}
       />
     </Flex>
