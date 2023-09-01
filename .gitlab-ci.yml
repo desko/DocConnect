@@ -53,4 +53,4 @@ release:
     - swa deploy --verbose=silly ./dist -d $API_TOKEN -w ./ --env production
     - echo "Done"
   only:
-    - test
+    - main
