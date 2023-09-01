@@ -45,22 +45,25 @@ const CardContentSpecialist = ({content}) => {
         </Flex>
       </Box>
 
-      <Flex
-        as='address'
-        gap='.5rem'
-        pb='2rem'
-      >
-        <IconLocation style={{
-          flex: '0 0 auto',
-          marginTop: '.5rem',
-        }}/>
-
-        <Text
-          as='span'
+      {
+        content?.address !== '' &&
+        <Flex
+          as='address'
+          gap='.5rem'
+          pb='2rem'
         >
-          {content?.address || 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, autem.'}
-        </Text>
-      </Flex>
+          <IconLocation style={{
+            flex: '0 0 auto',
+            marginTop: '.5rem',
+          }}/>
+
+          <Text
+            as='span'
+          >
+            {content?.address || null}
+          </Text>
+        </Flex>
+      }
 
       <Btn
         text='Schedule an Appointment'
