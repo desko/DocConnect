@@ -7,6 +7,7 @@ import {useSearchParams} from 'react-router-dom';
 import {fetchSpecialists} from '../../services/servicesSpecialists';
 import {fetchSpecialties} from '../../services/servicesSpecialties';
 import {useDispatch, useSelector} from 'react-redux';
+import Pagination from '../Pagination/Pagination';
 
 const SpecialistsController = () => {
   const dispatch = useDispatch();
@@ -19,11 +20,14 @@ const SpecialistsController = () => {
   const [name, setName] = useState(null);
   const [specialty, setSpecialty] = useState(Number(searchParams.get('specialtyId')) || '');
   const [changed, setChanged] = useState(!!Number(searchParams.get('specialtyId')) || false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [specialistsPerPage] = useState(9);
 
   useEffect(() => {
     setSearchParams({
       specialtyId: specialty || '',
     });
+    setCurrentPage(1);
   }, [specialty, setSearchParams]);
 
   const debounceTimer = useRef(null);
@@ -60,6 +64,10 @@ const SpecialistsController = () => {
     }
   }, [dispatch, specialties]);
 
+  // Pagination
+  const indexOfLastSpecialist = currentPage * specialistsPerPage;
+  const indexOfFirstSpecialist =indexOfLastSpecialist - specialistsPerPage;
+  const currentSpecialists = specialists.slice(indexOfFirstSpecialist, indexOfLastSpecialist);
 
   return (
     <Box
@@ -114,7 +122,7 @@ const SpecialistsController = () => {
           pt='3.6rem'
         >
           {
-            specialists.map((specialist, index) => {
+            currentSpecialists.map((specialist, index) => {
               return <GridItem key={specialist.id}>
                 <Card
                   Component={CardContentSpecialist}
@@ -127,6 +135,16 @@ const SpecialistsController = () => {
           }
         </Grid>
       }
+      { specialists.length > 0 && specialists.length > specialistsPerPage ?
+      <Pagination
+        itemsPerPage={specialistsPerPage}
+        totalItems={specialists.length}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+      /> :
+      ``
+      }
+
     </Box>
   );
 };
