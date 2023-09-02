@@ -1,6 +1,6 @@
 import {Button, Flex, IconButton} from '@chakra-ui/react';
 import {ArrowLeftIcon, ArrowRightIcon, ChevronRightIcon, ChevronLeftIcon} from '@chakra-ui/icons';
-import {paginatorStyle, paginationButtonStyle} from './Pagination.theme';
+import {paginatorStyle, numberButtonStyle, arrowButtonStyle} from './Pagination.theme';
 
 
 const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => {
@@ -42,13 +42,13 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
         onClick={pagianteFirst}
         icon={<ArrowLeftIcon />}
         isDisabled={currentPage === 1 ? true : false}
-        {...paginationButtonStyle}/>
+        {...arrowButtonStyle}/>
       <IconButton
         as='li'
         onClick={pagiantePrev}
         icon={<ChevronLeftIcon />}
         isDisabled={currentPage === 1 ? true : false}
-        {...paginationButtonStyle}
+        {...arrowButtonStyle}
         fontSize='20px'
       />
 
@@ -57,7 +57,7 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
           as='li'
           key={number}
           onClick={(e) => paginate(number, e)}
-          {...paginationButtonStyle}
+          {...numberButtonStyle}
           isActive = {currentPage === number ? true : false}
 
         >
@@ -69,14 +69,14 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
         onClick={paginateNext}
         icon={<ChevronRightIcon />}
         isDisabled={currentPage === itemNumbers.length ? true : false}
-        {...paginationButtonStyle}
+        {...arrowButtonStyle}
         fontSize='20px'/>
       <IconButton
         as='li'
         onClick={paginateLast}
         icon={<ArrowRightIcon />}
         isDisabled={currentPage === itemNumbers.length ? true : false}
-        {...paginationButtonStyle}/>
+        {...arrowButtonStyle}/>
     </Flex>
   );
 };
