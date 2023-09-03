@@ -1,13 +1,12 @@
-import {Button, Flex, IconButton} from '@chakra-ui/react';
+import {Box, Button, Flex, IconButton} from '@chakra-ui/react';
 import {ArrowLeftIcon, ArrowRightIcon, ChevronRightIcon, ChevronLeftIcon} from '@chakra-ui/icons';
-import {paginatorStyle, numberButtonStyle, arrowButtonStyle} from './Pagination.theme';
-
+import {paginatorStyle, numberButtonStyle, arrowButtonStyle, iconButtonStyle} from './Pagination.theme';
 
 const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => {
-  const itemNumbers = [];
+  const pageNumbers = [];
 
   for (let i =1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
-    itemNumbers.push(i);
+    pageNumbers.push(i);
   }
 
   const paginate = (pageNumber, e) =>{
@@ -22,13 +21,13 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
   };
 
   const paginateNext = () => {
-    if (currentPage < itemNumbers.length) {
+    if (currentPage < pageNumbers.length) {
       setCurrentPage((old) => old + 1);
     }
   };
 
   const paginateLast = () =>{
-    setCurrentPage(itemNumbers.length);
+    setCurrentPage(pageNumbers.length);
   };
 
   const pagianteFirst = () =>{
@@ -36,47 +35,74 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
   };
 
   return (
-    <Flex as='ul' {...paginatorStyle}>
-      <IconButton
-        as='li'
-        onClick={pagianteFirst}
-        icon={<ArrowLeftIcon />}
-        isDisabled={currentPage === 1 ? true : false}
-        {...arrowButtonStyle}/>
-      <IconButton
-        as='li'
-        onClick={pagiantePrev}
-        icon={<ChevronLeftIcon />}
-        isDisabled={currentPage === 1 ? true : false}
-        {...arrowButtonStyle}
-        fontSize='20px'
-      />
+    <Flex
+      as='ul'
+      {...paginatorStyle}
+    >
+      <li>
+        <IconButton
+          onClick={pagianteFirst}
+          icon={<ArrowLeftIcon {...iconButtonStyle} />}
+          isDisabled={currentPage === 1}
+          {...arrowButtonStyle}
+          style={{
+            '--icon-width': '1rem',
+          }}
+        />
+      </li>
 
-      {itemNumbers.map((number) => (
-        <Button
-          as='li'
-          key={number}
-          onClick={(e) => paginate(number, e)}
-          {...numberButtonStyle}
-          isActive = {currentPage === number ? true : false}
+      <li>
+        <IconButton
+          onClick={pagiantePrev}
+          icon={<ChevronLeftIcon {...iconButtonStyle} />}
+          isDisabled={currentPage === 1}
+          {...arrowButtonStyle}
+          fontSize='20px'
+        />
+      </li>
 
-        >
-          {number}
-        </Button>
-      ))}
-      <IconButton
-        as='li'
-        onClick={paginateNext}
-        icon={<ChevronRightIcon />}
-        isDisabled={currentPage === itemNumbers.length ? true : false}
-        {...arrowButtonStyle}
-        fontSize='20px'/>
-      <IconButton
-        as='li'
-        onClick={paginateLast}
-        icon={<ArrowRightIcon />}
-        isDisabled={currentPage === itemNumbers.length ? true : false}
-        {...arrowButtonStyle}/>
+      {
+        pageNumbers.map((number) => {
+          return (
+            number <= currentPage + 2 &&
+            number >= currentPage - 2
+          ) ? (
+            <Box
+              as='li'
+              key={number}
+            >
+              <Button
+                onClick={(e) => paginate(number, e)}
+                {...numberButtonStyle}
+                isActive = {currentPage === number}
+              >
+                {number}
+              </Button>
+            </Box>
+          ) : null;
+        })
+      }
+
+      <li>
+        <IconButton
+          onClick={paginateNext}
+          icon={<ChevronRightIcon {...iconButtonStyle} />}
+          isDisabled={currentPage === pageNumbers.length}
+          {...arrowButtonStyle}
+          fontSize='20px'/>
+      </li>
+
+      <li>
+        <IconButton
+          onClick={paginateLast}
+          icon={<ArrowRightIcon {...iconButtonStyle} />}
+          isDisabled={currentPage === pageNumbers.length}
+          {...arrowButtonStyle}
+          style={{
+            '--icon-width': '1rem',
+          }}
+        />
+      </li>
     </Flex>
   );
 };

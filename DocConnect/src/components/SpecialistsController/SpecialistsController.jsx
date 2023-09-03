@@ -66,7 +66,7 @@ const SpecialistsController = () => {
 
   // Pagination
   const indexOfLastSpecialist = currentPage * specialistsPerPage;
-  const indexOfFirstSpecialist =indexOfLastSpecialist - specialistsPerPage;
+  const indexOfFirstSpecialist = indexOfLastSpecialist - specialistsPerPage;
   const currentSpecialists = specialists.slice(indexOfFirstSpecialist, indexOfLastSpecialist);
 
   return (
@@ -135,14 +135,15 @@ const SpecialistsController = () => {
           }
         </Grid>
       }
-      { specialists.length > 0 && specialists.length > specialistsPerPage ?
-      <Pagination
-        itemsPerPage={specialistsPerPage}
-        totalItems={specialists.length}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      /> :
-      ``
+
+      {
+        specialists.length > 0 && specialists.length > specialistsPerPage ?
+        <Pagination
+          itemsPerPage={specialistsPerPage}
+          totalItems={specialists.length}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        /> : null
       }
 
     </Box>

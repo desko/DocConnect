@@ -7,7 +7,6 @@ import {
   autocompleteDropdownItem,
 } from './SearchAutocomplete.theme';
 import useClickOutsideHandler from '../../hooks/useClickOutsideHandler';
-// import {debounce} from 'lodash';
 
 const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selected, placeholder}) => {
   const [loading, setLoading] = useState(false);
