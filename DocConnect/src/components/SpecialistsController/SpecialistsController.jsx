@@ -1,4 +1,4 @@
-import {Box, Grid, GridItem, Spinner} from '@chakra-ui/react';
+import {Box, Grid, GridItem, Spinner, Text} from '@chakra-ui/react';
 import SearchSpecialists from '../SearchSpecialists/SearchSpecialists';
 import {useEffect, useCallback, useState, useRef} from 'react';
 import Card from '../Card/Card';
@@ -67,7 +67,7 @@ const SpecialistsController = () => {
   // Pagination
   const indexOfLastSpecialist = currentPage * specialistsPerPage;
   const indexOfFirstSpecialist = indexOfLastSpecialist - specialistsPerPage;
-  const currentSpecialists = specialists.slice(indexOfFirstSpecialist, indexOfLastSpecialist);
+  const currentSpecialists = specialists?.slice(indexOfFirstSpecialist, indexOfLastSpecialist);
 
   return (
     <Box
@@ -122,12 +122,11 @@ const SpecialistsController = () => {
           pt='3.6rem'
         >
           {
-            currentSpecialists.map((specialist, index) => {
+            currentSpecialists?.map((specialist, index) => {
               return <GridItem key={specialist.id}>
                 <Card
                   Component={CardContentSpecialist}
                   imageUrl={specialist.imageUrl}
-                  imagePrefix='https://cdntestredhf30zf.azureedge.net/'
                   content={specialist}
                 />
               </GridItem>;
@@ -137,13 +136,17 @@ const SpecialistsController = () => {
       }
 
       {
-        specialists.length > 0 && specialists.length > specialistsPerPage ?
+        specialists?.length > 0 && specialists.length > specialistsPerPage ?
         <Pagination
           itemsPerPage={specialistsPerPage}
           totalItems={specialists.length}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
         /> : null
+      }
+
+      {
+        !loading && changed && specialists?.length === 0 && <Text textAlign='center'>No results found</Text>
       }
 
     </Box>

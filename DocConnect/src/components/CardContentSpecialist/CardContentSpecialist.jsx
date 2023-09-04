@@ -23,6 +23,7 @@ const CardContentSpecialist = ({content}) => {
         </Heading>
 
         <Text
+          aria-label='specialty'
           as='strong'
           color='red.400'
         >
@@ -30,6 +31,8 @@ const CardContentSpecialist = ({content}) => {
         </Text>
 
         <Flex
+          role='group'
+          aria-label='rating'
           position='absolute'
           top='1rem'
           right='0'

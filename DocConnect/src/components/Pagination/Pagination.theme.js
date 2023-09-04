@@ -1,4 +1,5 @@
-export const paginatorStyle ={
+export const paginatorStyle = {
+  listStyleType: 'none',
   margin: '2rem 0',
   gap: {
     base: '.8rem',

@@ -7,7 +7,9 @@ const Select = ({label, setSelected, value, options}) => {
   };
 
   return (
-    <FormControl>
+    <FormControl
+      aria-label={label}
+    >
       <FormLabel
         variant='custom'
       >
@@ -19,7 +21,7 @@ const Select = ({label, setSelected, value, options}) => {
         onChange={selectHandler}
         variant='custom'
       >
-        <option>All</option>
+        <option value=''>All</option>
 
         {
           options.map((option) => {

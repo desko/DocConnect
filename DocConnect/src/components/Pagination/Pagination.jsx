@@ -41,6 +41,7 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
     >
       <li>
         <IconButton
+          aria-label='first'
           onClick={pagianteFirst}
           icon={<ArrowLeftIcon {...iconButtonStyle} />}
           isDisabled={currentPage === 1}
@@ -53,6 +54,7 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
 
       <li>
         <IconButton
+          aria-label='previous'
           onClick={pagiantePrev}
           icon={<ChevronLeftIcon {...iconButtonStyle} />}
           isDisabled={currentPage === 1}
@@ -85,6 +87,7 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
 
       <li>
         <IconButton
+          aria-label='next'
           onClick={paginateNext}
           icon={<ChevronRightIcon {...iconButtonStyle} />}
           isDisabled={currentPage === pageNumbers.length}
@@ -94,6 +97,7 @@ const Pagination = ({itemsPerPage, totalItems, setCurrentPage, currentPage}) => 
 
       <li>
         <IconButton
+          aria-label='last'
           onClick={paginateLast}
           icon={<ArrowRightIcon {...iconButtonStyle} />}
           isDisabled={currentPage === pageNumbers.length}
