@@ -59,6 +59,8 @@ const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selec
 
   return (
     <FormControl
+      aria-label={label}
+      data-label={label}
       fontSize='1.6rem'
     >
       <FormLabel
@@ -92,6 +94,8 @@ const SearchAutocomplete = ({label, fetcher, value, setValue, setSelected, selec
         {
           selected !== null &&
           <Flex
+            aria-label='selected'
+            role='status'
             {...autocompleteCover}
           >
             {selected.name}
