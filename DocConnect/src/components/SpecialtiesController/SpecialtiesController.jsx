@@ -14,11 +14,11 @@ const SpecialtiesController = () => {
   const {specialties, status} = useSelector((store) => store.specialties);
 
   useEffect(() =>{
-    if (status === 'idle') {
+    if (status === 'idle' && !specialties.length) {
       dispatch(fetchSpecialties());
       dispatch(sortAlphabetically());
     }
-  }, [status, dispatch]);
+  }, [status, dispatch, specialties]);
 
   if (status === 'loading') {
     return (<Spinner color='red.400' size='xl' display='block' mx='auto' /> );
@@ -55,7 +55,12 @@ const SpecialtiesController = () => {
         specialties.length && specialties?.map((el) => {
           return (
             <GridItem key={el.id}>
-              <Card imageUrl={el.imageUrl} content={el.name} Component={CardContent} />
+              <Card
+                imageUrl={el.imageUrl}
+                content={el.name}
+                Component={CardContent}
+                link={`/specialists?specialtyId=${el.id}`}
+              />
             </GridItem>
           );
         })

@@ -11,6 +11,7 @@ const variants = {
       border: '.2rem inset rgba(0, 0, 0, .15)',
       bgColor: 'offwhite.400',
       color: 'inherit',
+      height: '100%',
     },
     body: {
       p: '1.7rem 1.5rem 3rem',
