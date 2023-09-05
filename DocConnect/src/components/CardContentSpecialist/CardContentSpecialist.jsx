@@ -1,9 +1,12 @@
-import {Box, Flex, Heading, Text} from '@chakra-ui/react';
+import {Box, Flex, Heading, Text, useDisclosure} from '@chakra-ui/react';
 import Btn from '../Btn/Btn';
 import {ReactComponent as IconStar} from '../../assets/icon-star.svg';
 import {ReactComponent as IconLocation} from '../../assets/icon-location.svg';
+import ModalAppointments from '../ModalAppointments/ModalAppointments';
 
 const CardContentSpecialist = ({content}) => {
+  const {isOpen, onOpen, onClose} = useDisclosure();
+
   return (
     <Flex
       flexDirection='column'
@@ -76,6 +79,14 @@ const CardContentSpecialist = ({content}) => {
           position: 'relative',
           zIndex: '3',
         }}
+        customProps={{
+          onClick: onOpen,
+        }}
+      />
+
+      <ModalAppointments
+        isOpen={isOpen}
+        handleClose={onClose}
       />
     </Flex>
   );
