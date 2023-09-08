@@ -19,9 +19,9 @@ const SpecialistsController = () => {
   const [nameValue, setNameValue] = useState('');
   const [name, setName] = useState(null);
   const [specialty, setSpecialty] = useState(Number(searchParams.get('specialtyId')) || '');
-  const [changed, setChanged] = useState(!!Number(searchParams.get('specialtyId')) || false);
+  const [changed, setChanged] = useState(!!Number(searchParams.get('specialtyId')) || true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [specialistsPerPage] = useState(9);
+  const [specialistsPerPage] = useState(30);
 
   useEffect(() => {
     setSearchParams({
@@ -136,7 +136,7 @@ const SpecialistsController = () => {
       }
 
       {
-        specialists?.length > 0 && specialists.length > specialistsPerPage ?
+        !loading && specialists?.length > 0 && specialists.length > specialistsPerPage ?
         <Pagination
           itemsPerPage={specialistsPerPage}
           totalItems={specialists.length}

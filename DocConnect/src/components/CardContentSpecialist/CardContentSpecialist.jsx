@@ -3,9 +3,11 @@ import Btn from '../Btn/Btn';
 import {ReactComponent as IconStar} from '../../assets/icon-star.svg';
 import {ReactComponent as IconLocation} from '../../assets/icon-location.svg';
 import ModalAppointments from '../ModalAppointments/ModalAppointments';
+import {useSelector} from 'react-redux';
 
 const CardContentSpecialist = ({content}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
+  const {token} = useSelector((store) => store.user);
 
   return (
     <Flex
@@ -47,7 +49,7 @@ const CardContentSpecialist = ({content}) => {
           >
             <IconStar />
           </Box>
-          {content?.rating}
+          {Math.floor(Number(content?.rating) * 10) / 10}
         </Flex>
       </Box>
 
@@ -55,12 +57,12 @@ const CardContentSpecialist = ({content}) => {
         content?.address !== '' &&
         <Flex
           as='address'
+          alignItems='center'
           gap='.5rem'
           pb='2rem'
         >
           <IconLocation style={{
             flex: '0 0 auto',
-            marginTop: '.5rem',
           }}/>
 
           <Text
@@ -72,7 +74,7 @@ const CardContentSpecialist = ({content}) => {
       }
 
       <Btn
-        text='Schedule an Appointment'
+        text={token ? 'Schedule an Appointment' : 'Login to Schedule an Appointment'}
         styleProps={{
           width: '100%',
           marginTop: 'auto',
@@ -81,13 +83,16 @@ const CardContentSpecialist = ({content}) => {
         }}
         customProps={{
           onClick: onOpen,
+          isDisabled: !token,
         }}
       />
 
-      <ModalAppointments
-        isOpen={isOpen}
-        handleClose={onClose}
-      />
+      {
+        isOpen && token && <ModalAppointments
+          isOpen={isOpen}
+          handleClose={onClose}
+        />
+      }
     </Flex>
   );
 };
