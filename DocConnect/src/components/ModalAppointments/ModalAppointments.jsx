@@ -26,12 +26,14 @@ const ModalAppointments = ({isOpen, handleClose}) => {
       onClose={handleClose}
       isOpen={isOpen}
       scrollBehavior='outside'
+      isCentered
+      variant='custom'
     >
       <ModalOverlay />
 
       <ModalContent
         maxW={{
-          base: 'calc(100% - 4rem)',
+          base: '100%',
           lg: '77.6rem',
         }}
         width='100%'
@@ -39,6 +41,14 @@ const ModalAppointments = ({isOpen, handleClose}) => {
           base: '1.5rem 2rem',
           md: '3.2rem 4rem',
         }}
+        // top={{
+        //   base: '2rem',
+        //   lg: '0',
+        // }}
+        // bottom={{
+        //   base: '2rem',
+        //   lg: '0',
+        // }}
       >
         <ModalHeader
           padding='1rem 0'
