@@ -9,22 +9,26 @@ import {
 } from '@chakra-ui/react';
 import {ReactComponent as IconLocation} from '../../assets/icon-location.svg';
 
-const CustomAccordion = () => {
+const CustomAccordion = ({doctorName, date, address, specialty}) => {
+  console.log(doctorName);
+
   return (
     <Accordion allowMultiple display='flex' flexDirection='column' gap='1.5rem'>
       <AccordionItem>
-
         <AccordionButton border='1px solid gray' borderRadius='4px 4px 0 0'>
-          <Flex flex='1' textAlign='left' flexDirection='row' fontSize='15px'>
-            <Flex flexDirection='column' margin='0.5rem 1rem'>
+          <Flex flex='1' flexDirection={{'base': 'column', 'sm': 'row'}} fontSize='15px' gap='2rem'>
+            <Flex flexDirection='column' alignItems='start' width='10rem'>
               <Text fontWeight='bold'>Date</Text>
-              <Text>04/22/22</Text>
+              <Text>{date}</Text>
             </Flex>
-            <Flex flexDirection='column' margin='0.5rem 1rem'>
+            <Flex flexDirection='column' alignItems='start' width='12rem'>
               <Text fontWeight='bold'>Doctor</Text>
-              <Text>Elizabeth Cliford</Text>
+              <Text textAlign='left'>{doctorName}</Text>
             </Flex>
-
+            <Flex flexDirection='column' alignItems='start' width='10rem'>
+              <Text fontWeight='bold'>Specialty</Text>
+              <Text>{specialty}</Text>
+            </Flex>
           </Flex>
           <AccordionIcon />
         </AccordionButton>
@@ -43,7 +47,7 @@ const CustomAccordion = () => {
                 as='span'
                 pt='.4rem'
               >
-      23475 Glacier View Dr, Eagle River, Alaska 99577, USA
+                {address}
               </Text>
             </Flex>
           </Flex>

@@ -45,7 +45,7 @@ export const searchCities = async (startingWith) => {
 };
 
 export const fetchSpecialists = async (cityId = null, specialtyId = null, doctorName = null) => {
-  const data = await axios.get(baseUrl, {params: {
+  const data = await axios.get(baseUrl + 'a', {params: {
     cityId,
     specialtyId,
     doctorName,
