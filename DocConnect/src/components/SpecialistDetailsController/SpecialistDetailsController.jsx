@@ -17,12 +17,11 @@ const SpecialistDetailsController = () => {
     lastName: 'Everett',
     address: '09956 Joanna Junctions Suite 403',
     // eslint-disable-next-line max-len
-    educationSummary: '- 2005 Master of Science, Pediatric Nurse Practitioner, University of Cincinnati, Cincinnati, Ohio \n- 2003 Bachelor of Science, Psychology, Western Kentucky University, Bowling Green, Kentucky\n- 2004 Certified Pediatric Nurse Practitioner, Kentucky Board\n- 2005 Master of Science, Pediatric Nurse Practitioner, Kentucky Board\n- 2013 - 2020\n- 2002-2005\n- 2000-2004\n- 2008-Present\n- 2008-Present\n- 2004-Present\n- 2003-2004\n\nThis doctor’s certifications are:\n\n- ACHPN Certified Pediatric Nurse Practitioner\n- 2016 - 2021\n- 2016-2021\n- 2016 - 2021\n\nThis doctor’s board certifications are:\n\n- Pediatrics\n- 2005-present\n- 2005-present\n\nSpecialties:\n- Pediatric Primary Care\n- Immunizations and Vaccines\n- Asthma\n- ADD/ADHD\n- ADHD\n- ADHD & Depression\n- Acute care',
+    educationSummary: 'Dr. Michael Miller is a gastroenterologist based in Portland, Oregon. With over 15 years of experience, he specializes in the diagnosis, treatment, and prevention of digestive system disorders. He received his medical degree from the University of California, San Francisco, and completed a gastroenterology fellowship at Columbia University. Dr. Miller is a member of several professional organizations, including the American Gastroenterological Association and the American College of Gastroenterology.',
     rating: 2.3333333333333335,
   };
 
   const summaryArray = response?.educationSummary.split('\n');
-  console.log(summaryArray);
 
   useEffect(() => {
     console.log(id);
