@@ -5,14 +5,14 @@ const baseUrl = `${import.meta.env.VITE_BASE_URL}/Appointments`;
 export const createUserAppointment = async (userId, doctorId, dateObject, token) => {
   try {
     const response = await axios.post(`${baseUrl}/ScheduleAppointment`, {
-      // Headers: {
-      //   Authorization: token ? `Bearer ${token}` : null,
-      // },
-      // body: {
       doctorId,
       userId,
       date: formatDateAndTime(dateObject),
-      // },
+    },
+    {
+      headers: {
+        'Authorization': token ? `Bearer ${token}` : null,
+      },
     });
     console.log(response);
     return response;
