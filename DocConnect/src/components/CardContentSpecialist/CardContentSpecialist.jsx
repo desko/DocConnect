@@ -91,6 +91,7 @@ const CardContentSpecialist = ({content}) => {
         isOpen && token && <ModalAppointments
           isOpen={isOpen}
           handleClose={onClose}
+          doctorId={content.id}
         />
       }
     </Flex>

@@ -13,11 +13,18 @@ import Btn from '../Btn/Btn';
 import CalendarSlider from '../CalendarSlider/CalendarSlider';
 import {useState} from 'react';
 import {dateFormatter, getDayNameFromDateObject} from '../../common/helpers';
-const ModalAppointments = ({isOpen, handleClose}) => {
+import {createUserAppointment} from '../../services/servicesAppointments';
+import {useSelector} from 'react-redux';
+
+const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
+  const {userId, token} = useSelector((store) => store.user);
   const [selected, setSelected] = useState(null);
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = () => {
+    console.log(selected);
+    const data = createUserAppointment(userId, doctorId, selected, token);
+    console.log(data);
     setSuccess(true);
   };
 
@@ -41,14 +48,6 @@ const ModalAppointments = ({isOpen, handleClose}) => {
           base: '1.5rem 2rem',
           md: '3.2rem 4rem',
         }}
-        // top={{
-        //   base: '2rem',
-        //   lg: '0',
-        // }}
-        // bottom={{
-        //   base: '2rem',
-        //   lg: '0',
-        // }}
       >
         <ModalHeader
           padding='1rem 0'

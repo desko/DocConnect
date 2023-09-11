@@ -59,6 +59,15 @@ export const getDayNameFromDateObject = (locale, dateObject) => {
   return dayName;
 };
 
+export const formatDateAndTime = (dateObject) => {
+  const year = dateObject.year.toString();
+  const month = (dateObject.month + 1).toString().padStart(2, '0');
+  const date = dateObject.date.toString().padStart(2, '0');
+  const hour = dateObject.hour.toString().padStart(2, '0');
+
+  // Return the formatted string
+  return `${year}-${month}-${date}T${hour}:00`;
+}
 
 export const checkDateCollission = (date, dateList) => {
   const match = dateList.find((el) => {

@@ -9,6 +9,9 @@ const initialState = {
   isVerified: JSON.parse(localStorage.getItem('uToken')) ?
     jwtDecode(JSON.parse(localStorage.getItem('uToken'))).email_verified :
     null,
+  userId: JSON.parse(localStorage.getItem('uToken')) ?
+    jwtDecode(JSON.parse(localStorage.getItem('uToken'))).sub :
+    null,
 };
 
 const userSlice = createSlice({
@@ -19,11 +22,12 @@ const userSlice = createSlice({
       state.token = null;
       localStorage.setItem('uToken', null);
       state.isVerified = null;
+      state.userId = null;
     },
   },
   extraReducers: (builder) => {
     builder
-        .addCase(loginUser.pending, (state, action) =>{
+        .addCase(loginUser.pending, (state, action) => {
           state.status = 'loading';
         })
         .addCase(loginUser.fulfilled, (state, action) => {
@@ -31,6 +35,7 @@ const userSlice = createSlice({
           state.token = action.payload.result;
           if (action.payload.httpStatusCode === 200) {
             state.isVerified = jwtDecode(action.payload.result).email_verified;
+            state.userId = jwtDecode(action.payload.result).sub;
           }
         })
         .addCase(loginUser.rejected, (state, action) => {
