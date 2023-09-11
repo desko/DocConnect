@@ -15,6 +15,7 @@ import {
   RESET_PASSWORD_PAGE,
   RESET_PASSWORD_VALIDATION_PAGE,
   SPECIALISTS_PAGE,
+  SPECIALISTS_DETAILS_PAGE,
 } from './common/routes';
 import {Logged} from './hoc/Logged';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -26,6 +27,7 @@ import {NotVerified} from './hoc/NotVerified';
 import ResetPassword from './pages/ResetPassword';
 import ResetPasswordValidation from './pages/ResetPasswordValidation';
 import Specialists from './pages/Specialists';
+import SpecialistDetails from './pages/SpecialistDetails';
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
       <Routes>
         <Route path={HOME_PAGE} element={<Home />}></Route>
         <Route path={SPECIALISTS_PAGE} element={<Specialists />}></Route>
+        <Route path={SPECIALISTS_DETAILS_PAGE} element={<SpecialistDetails />}></Route>
         <Route path={USER_VERIFICATION} element={<UserVerification />}></Route>
         <Route path={LOGIN_PAGE} element={
           <Logged>
