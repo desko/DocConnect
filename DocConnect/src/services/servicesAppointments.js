@@ -21,6 +21,19 @@ export const createUserAppointment = async (userId, doctorId, dateObject, token)
   }
 };
 
+export const getUpcomingAppointments = async (userId, token, userLocalTime) => {
+  try {
+    const data = await axios.get(
+        `${baseUrl}/AllUpcomingAppointments?userId=${userId}&patientLocalDate=${userLocalTime}`,
+        {headers: {
+          'Authorization': 'Bearer ' + token,
+        }});
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getUserAppointments = async (userId) => {
 
 };

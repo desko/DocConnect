@@ -123,11 +123,13 @@ const SpecialistsController = () => {
         >
           {
             currentSpecialists?.map((specialist, index) => {
+              // console.log(specialist);
               return <GridItem key={specialist.id}>
                 <Card
                   Component={CardContentSpecialist}
                   imageUrl={specialist.imageUrl}
                   content={specialist}
+                  link={`${specialist.id}`}
                 />
               </GridItem>;
             })
