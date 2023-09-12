@@ -6,32 +6,29 @@ import {ReactComponent as IconStar} from '../../assets/icon-star.svg';
 import {useSelector} from 'react-redux';
 import Btn from '../Btn/Btn';
 import {getSpecialist} from '../../services/servicesSpecialists';
+import NetworkError from '../NetworkError/NetworkError';
 
 const SpecialistDetailsController = () => {
   const {token} = useSelector((store) => store.user);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState({});
+  const [error, setError] = useState(false);
   const {id} = useParams();
-
-  const response = {
-    imageUrl: '/images/generated_14.png',
-    specialityName: 'Dermatology',
-    firstName: 'Sabrina',
-    lastName: 'Everett',
-    address: '09956 Joanna Junctions Suite 403',
-    // eslint-disable-next-line max-len
-    doctorSummary: 'Dr. Michael Miller is a gastroenterologist based in Portland, Oregon. With over 15 years of experience, he specializes in the diagnosis, treatment, and prevention of digestive system disorders. He received his medical degree from the University of California, San Francisco, and completed a gastroenterology fellowship at Columbia University. Dr. Miller is a member of several professional organizations, including the American Gastroenterological Association and the American College of Gastroenterology.',
-    rating: 2.3333333333333335,
-  };
-
-  // useEffect(() => {
-  //   console.log(results);
-  // }, [results]);
 
   useEffect(() => {
     setLoading(true);
     const getDoctorInfo = async () => {
       const res = await getSpecialist(id);
+
+      if (res === null) {
+        setError(true);
+        return;
+      }
+
+      if (res.status >= 400) {
+        setError(true);
+        return;
+      }
 
       setResults(res);
     };
@@ -39,8 +36,9 @@ const SpecialistDetailsController = () => {
     getDoctorInfo().then(() => {
       setLoading(false);
     });
-    // TODO: Add error handling
   }, [id]);
+
+  if (error) return <NetworkError />;
 
   return (
     <Box>

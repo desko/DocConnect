@@ -9,7 +9,7 @@ export const getSpecialist = async (id) => {
     const result = response.data.result;
     return result;
   } catch (error) {
-    return error;
+    return error.response;
   }
 };
 
