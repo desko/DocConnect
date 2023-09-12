@@ -11,3 +11,4 @@ export const SPECIALISTS_DETAILS_PAGE = '/specialists/:id';
 export const USER_VERIFICATION = '/user/verification';
 export const PRIVACY_POLICY_PAGE = '/privacy-policy';
 export const USER_AGREEMENT_PAGE = '/user-agreement';
+export const APPOINTMENTS_PAGE = '/appointments';
