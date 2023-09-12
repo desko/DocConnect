@@ -12,11 +12,13 @@ const AppointmentsController = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [appointmentsPerPage] = useState(6);
   const [error, setError] = useState(false);
+  const userTime = new Date();
+  const userLocalTime = userTime.toLocaleString('en-US');
 
   useEffect(() => {
     const fetchAppointments = async () => {
       setLoading(true);
-      const data = await getUpcomingAppointments(userId, token);
+      const data = await getUpcomingAppointments(userId, token, userLocalTime);
       if (data.status === 200) {
         setUpcomingAppointments(data.data.result);
         setLoading(false);
@@ -27,7 +29,7 @@ const AppointmentsController = () => {
     };
 
     fetchAppointments();
-  }, [userId, token]);
+  }, [userId, token, userLocalTime]);
 
 
   // Pagination

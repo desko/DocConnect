@@ -51,11 +51,15 @@ describe('AppointmentsDetails', () =>{
     cy.findByRole('button', {name: /date 11\/12\/2023 doctor jonathan walker specialty/i}).as('appointmentButton');
   });
 
-  it('should render with all elements', () =>{
+  it('should render all elements', () => {
     cy.get('@upcomingButton').should('exist');
     cy.get('@upcomingTab').should('exist');
     cy.get('@appointmentButton').should('exist');
     cy.get('@pastButton').should('be.disabled');
+  });
+
+  it('should render all 3 appointments', () => {
+    cy.get('@upcomingTab').find('button').its('length').should('eq', 3);
   });
 
   it('should open and close more details', () => {

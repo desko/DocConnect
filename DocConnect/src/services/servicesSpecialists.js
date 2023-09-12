@@ -2,6 +2,17 @@ import axios from 'axios';
 
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/Specialists`;
 
+export const getSpecialist = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/${id}`);
+
+    const result = response.data.result;
+    return result;
+  } catch (error) {
+    return error.response;
+  }
+};
+
 export const searchSpecialists = async (startingWith) => {
   try {
     const response = await axios.get(`${baseUrl}/SpecialistNameSuggestion`, {

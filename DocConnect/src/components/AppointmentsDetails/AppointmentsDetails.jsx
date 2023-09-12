@@ -1,24 +1,20 @@
 import {Tabs, TabList, TabPanels, Tab, TabPanel} from '@chakra-ui/react';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
+import {
+  tabContainer,
+  tabPanel,
+  tabsContainer,
+} from './appointmentsDetails.theme';
 
 const AppointmentsDetails = ({upcomingAppointments}) => {
   return (
-    <Tabs isFitted padding="1rem 0" colorScheme='red.400'>
+    <Tabs isFitted {...tabsContainer}>
       <TabList borderBottom='2px solid gray' >
-        <Tab
-          fontSize={{base: '15px', sm: '20px'}}
-          _selected={{color: 'red.400', borderBottom: '2px'}}
-          color='gray'
-        >Upcoming appointments</Tab>
-        <Tab
-          fontSize={{base: '15px', sm: '20px'}}
-          _selected={{color: 'red.400', borderBottom: '2px'}}
-          color='gray'
-          isDisabled
-        >Past appointments</Tab>
+        <Tab {...tabContainer}>Upcoming appointments</Tab>
+        <Tab {...tabContainer} isDisabled >Past appointments</Tab>
       </TabList>
       <TabPanels>
-        <TabPanel display='flex' flexDirection='column' gap='1rem'>
+        <TabPanel {...tabPanel}>
           {
             upcomingAppointments?.map((appointment) => {
               return <CustomAccordion
