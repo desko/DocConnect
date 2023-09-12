@@ -29,11 +29,15 @@ const AppointmentsController = () => {
     fetchAppointments();
   }, [userId, token]);
 
-  console.log(upcomingAppointments);
+
+  // Pagination
+  const indexOfLastAppointment = currentPage * appointmentsPerPage;
+  const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
+  const currentAppointments = upcomingAppointments?.slice(indexOfFirstAppointment, indexOfLastAppointment);
 
   return (
     <Box variant='unstyled' backgroundColor='offwhite.400' borderRadius='15px' padding='2rem'>
-      <AppointmentsDetails upcomingAppointments={upcomingAppointments} pastAppointments={[]}/>
+      <AppointmentsDetails upcomingAppointments={currentAppointments} pastAppointments={[]}/>
       {
         loading &&
         <Spinner color='red.400' size='xl' display='block' mt='3.6rem' mx='auto' />
