@@ -29,6 +29,8 @@ const AppointmentsController = () => {
     fetchAppointments();
   }, [userId, token]);
 
+  console.log(upcomingAppointments);
+
   return (
     <Box variant='unstyled' backgroundColor='offwhite.400' borderRadius='15px' padding='2rem'>
       <AppointmentsDetails upcomingAppointments={upcomingAppointments} pastAppointments={[]}/>

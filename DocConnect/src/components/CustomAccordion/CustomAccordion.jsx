@@ -10,8 +10,6 @@ import {
 import {ReactComponent as IconLocation} from '../../assets/icon-location.svg';
 
 const CustomAccordion = ({doctorName, date, address, specialty}) => {
-  console.log(doctorName);
-
   return (
     <Accordion allowMultiple display='flex' flexDirection='column' gap='1.5rem'>
       <AccordionItem>

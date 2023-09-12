@@ -2,7 +2,6 @@ import {Tabs, TabList, TabPanels, Tab, TabPanel} from '@chakra-ui/react';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 
 const AppointmentsDetails = ({upcomingAppointments}) => {
-  console.log(upcomingAppointments);
   return (
     <Tabs isFitted padding="1rem 0" colorScheme='red.400'>
       <TabList borderBottom='2px solid gray' >
@@ -27,7 +26,7 @@ const AppointmentsDetails = ({upcomingAppointments}) => {
                 doctorName={appointment.doctorName}
                 date={appointment.date}
                 address={appointment.address}
-                specialty={appointment.specialty}
+                specialty={appointment.doctorSpecialty}
               />;
             })
           }
