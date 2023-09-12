@@ -7,10 +7,11 @@ import {useSelector} from 'react-redux';
 import Btn from '../Btn/Btn';
 import {getSpecialist} from '../../services/servicesSpecialists';
 import NetworkError from '../NetworkError/NetworkError';
+import {cardAbout, cardAddress, cardContainer, cardContainerBanner, cardContainerContent, cardContainerFlex, cardContainerHeader, cardHeaderFigure, cardHeaderImage} from './SpecialistDetailsController.theme';
 
 const SpecialistDetailsController = () => {
   const {token} = useSelector((store) => store.user);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [results, setResults] = useState({});
   const [error, setError] = useState(false);
   const {id} = useParams();
@@ -19,13 +20,13 @@ const SpecialistDetailsController = () => {
     setLoading(true);
     const getDoctorInfo = async () => {
       const res = await getSpecialist(id);
-
+      console.log(res);
       if (res === null) {
         setError(true);
         return;
       }
 
-      if (res.status >= 400) {
+      if (res?.status >= 400) {
         setError(true);
         return;
       }
@@ -50,83 +51,28 @@ const SpecialistDetailsController = () => {
       {
         !loading && <>
           <Box
-            borderRadius='1.5rem'
-            overflow='hidden'
-            bgColor='white'
-            boxShadow='0 .2rem .2rem 0 rgba(0,0,0, .25)'
-            mb='3.5rem'
+            {...cardContainer}
           >
             <Box
-              pb={{
-                base: '13rem',
-                md: '18%',
-                lg: '15%',
-              }}
-              bgGradient='linear(to-r, red.400, red.500)'
+              {...cardContainerBanner}
             >
             </Box>
 
             <Flex
-              flexDirection={{
-                base: 'column',
-                md: 'row',
-              }}
-              justifyContent='space-between'
-              padding={{
-                base: '3rem 2rem',
-                md: '3rem 2rem',
-                lg: '4.8rem 4.5rem 3.5rem',
-              }}
+              {...cardContainerFlex}
             >
               <Box
-                flex={{
-                  md: '0 0 33%',
-                  lg: '0 0 25%',
-                  xl: '0 0 20%',
-                }}
-                textAlign={{
-                  base: 'center',
-                  md: 'initial',
-                }}
-                pb={{
-                  base: '2rem',
-                  md: '0',
-                }}
+                {...cardContainerHeader}
               >
                 <Box
                   as='figure'
-                  position='relative'
-                  aspectRatio='1'
-                  borderRadius='50%'
-                  border='1rem solid'
-                  borderColor='white'
-                  overflow='hidden'
-                  lineHeight='0'
-                  maxW={{
-                    base: 'min(25rem, 100%)',
-                    md: 'unset',
-                  }}
-                  mb='1rem'
-                  mt={{
-                    base: '-12.5rem',
-                    md: '-65%',
-                    lg: '-75%',
-                    xl: '-85%',
-                  }}
-                  mx={{
-                    base: 'auto',
-                    md: '0',
-                  }}
+                  {...cardHeaderFigure}
                 >
                   <Image
                     src={`${results?.imageUrl}`}
                     alt={`${results?.firstName} ${results?.lastName}`}
-                    position='absolute'
-                    top='0'
-                    left='0'
-                    width='100%'
-                    height='100%'
-                    objectFit='cover' />
+                    {...cardHeaderImage}
+                  />
                 </Box>
 
                 <Box>
@@ -147,7 +93,7 @@ const SpecialistDetailsController = () => {
                   </Flex>
 
                   <Heading
-                    as='h1'
+                    as='h2'
                     size='lg'
                   >
                     {`${results?.firstName} ${results?.lastName}`}
@@ -163,33 +109,26 @@ const SpecialistDetailsController = () => {
               </Box>
 
               <Box
-                flex={{
-                  md: '0 0 60%',
-                  lg: '0 0 65%',
-                  xl: '0 0 70%',
-                }}
+                {...cardContainerContent}
               >
-                {results?.address !== '' &&
-              <Flex
-                alignItems='center'
-                justifyContent={{
-                  base: 'center',
-                  md: 'flex-start',
-                }}
-                as='address'
-                gap='.5rem'
-                pb='2rem'
-              >
-                <IconLocation style={{
-                  flex: '0 0 auto',
-                }} />
+                {
+                  results?.address !== '' &&
+                  <Flex
+                    role='group'
+                    aria-label='address'
+                    {...cardAddress}
+                  >
+                    <IconLocation style={{
+                      flex: '0 0 auto',
+                    }} />
 
-                <Text
-                  as='span'
-                >
-                  {results?.address || null}
-                </Text>
-              </Flex>}
+                    <Text
+                      as='span'
+                    >
+                      {results?.address || null}
+                    </Text>
+                  </Flex>
+                }
 
                 <Btn
                   text={token ? 'Schedule an Appointment' : 'Login to Schedule an Appointment'}
@@ -204,14 +143,15 @@ const SpecialistDetailsController = () => {
                   }} />
               </Box>
             </Flex>
-          </Box><Box
-            borderRadius='1.5rem'
-            padding='3rem'
-            bgColor='white'
-            boxShadow='0 .2rem .2rem 0 rgba(0,0,0, .25)'
+          </Box>
+
+          <Box
+            role='group'
+            aria-label={`About ${results?.firstName} ${results?.lastName}`}
+            {...cardAbout}
           >
             <Heading
-              as='h2'
+              as='h3'
               size='md'
               pb='3rem'
             >{`About ${results?.firstName} ${results?.lastName}`}</Heading>
