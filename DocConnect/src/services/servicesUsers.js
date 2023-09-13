@@ -60,15 +60,3 @@ export const resendEmailVerificationUser = async (token) => {
     return error;
   }
 };
-
-export const createUserAppointment = async (userId, doctorId, dateObject) => {
-
-};
-
-export const getUserAppointments = async (userId) => {
-
-};
-
-export const getDoctorAppointments = async (doctorId) => {
-
-};

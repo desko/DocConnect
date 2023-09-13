@@ -8,6 +8,7 @@ import {fetchSpecialists} from '../../services/servicesSpecialists';
 import {fetchSpecialties} from '../../services/servicesSpecialties';
 import {useDispatch, useSelector} from 'react-redux';
 import Pagination from '../Pagination/Pagination';
+import { sortSpecialistAlphabetically } from '../../common/helpers';
 
 const SpecialistsController = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const SpecialistsController = () => {
           (name?.name.length > 2 ? name?.name : '') || (nameValue.trim().length > 2 ? nameValue.trim() : ''),
       );
 
-      setSpecialists(result);
+      setSpecialists(sortSpecialistAlphabetically(result));
       setLoading(false);
     };
 

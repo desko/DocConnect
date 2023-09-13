@@ -25,19 +25,50 @@ export const getUpcomingAppointments = async (userId, token, userLocalTime) => {
   try {
     const data = await axios.get(
         `${baseUrl}/AllUpcomingAppointments?userId=${userId}&patientLocalDate=${userLocalTime}`,
-        {headers: {
-          'Authorization': 'Bearer ' + token,
-        }});
+        {
+          headers: {
+            'Authorization': 'Bearer ' + token,
+          },
+        },
+    );
     return data;
   } catch (error) {
     return error;
   }
 };
 
-export const getUserAppointments = async (userId) => {
+export const getUserAppointments = async (userId, token) => {
+  try {
+    const response = await axios.get(
+        `${baseUrl}/UserTakenHours?userId=${userId}`,
+        {
+          headers: {
+            'Authorization': 'Bearer ' + token,
+          },
+        },
+    );
+    const data = response.data.result;
 
+    return data;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const getDoctorAppointments = async (doctorId) => {
+export const getDoctorAppointments = async (doctorId, token) => {
+  try {
+    const response = await axios.get(
+        `${baseUrl}/DoctorTakenHours?doctorId=${doctorId}`,
+        {
+          headers: {
+            'Authorization': 'Bearer ' + token,
+          },
+        },
+    );
+    const data = response.data.result;
 
+    return data;
+  } catch (error) {
+    return error;
+  }
 };

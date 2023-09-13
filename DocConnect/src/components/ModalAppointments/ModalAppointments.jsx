@@ -11,15 +11,36 @@ import {
 } from '@chakra-ui/react';
 import Btn from '../Btn/Btn';
 import CalendarSlider from '../CalendarSlider/CalendarSlider';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {dateFormatter, getDayNameFromDateObject} from '../../common/helpers';
-import {createUserAppointment} from '../../services/servicesAppointments';
+import {createUserAppointment, getDoctorAppointments, getUserAppointments} from '../../services/servicesAppointments';
 import {useSelector} from 'react-redux';
 
 const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
   const {userId, token} = useSelector((store) => store.user);
   const [selected, setSelected] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [docAppointments, setDocAppointments] = useState([]);
+  const [userAppointments, setuserAppointments] = useState([]);
+
+  useEffect(() => {
+    const fetchDoctorApointments = async () => {
+      const res = await getDoctorAppointments(doctorId, token);
+      console.log(res);
+
+      setDocAppointments(res);
+    };
+
+    const fetchUserApointments = async () => {
+      const res = await getUserAppointments(doctorId, token);
+      console.log(res);
+
+      setuserAppointments(res);
+    };
+
+    fetchDoctorApointments();
+    // fetchUserApointments();
+  }, [doctorId, token, userId]);
 
   const handleSubmit = () => {
     console.log(selected);
@@ -70,6 +91,8 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
             !success && <CalendarSlider
               selected={selected}
               setSelected={setSelected}
+              userAppointments={userAppointments}
+              doctorAppointments={docAppointments}
             />
           }
           {

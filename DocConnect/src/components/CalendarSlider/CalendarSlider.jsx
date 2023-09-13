@@ -8,6 +8,7 @@ import {
   dateFormatter,
   getDayNameFromDateObject,
   generateDatesOneMonthLaterWithoutWeekends,
+  formatDateAndTime,
 } from '../../common/helpers';
 import {useRef} from 'react';
 import {ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons';
@@ -127,6 +128,10 @@ const CalendarSlider = ({selected, setSelected, userAppointments = [], doctorApp
 
                   {
                     APPOINTMENTS_HOURS.map((hour) => {
+                      const dateObject = {
+                        ...date,
+                        hour,
+                      };
                       let isCurrent = false;
                       if (
                         selected?.hour === hour &&
@@ -137,22 +142,20 @@ const CalendarSlider = ({selected, setSelected, userAppointments = [], doctorApp
                         isCurrent = true;
                       }
 
-                      // TODO: check is date collision
-                      // let isDisabled = false;
+                      const isDisabledDoctor = doctorAppointments.includes(formatDateAndTime(dateObject));
+                      const isDisabledUser = userAppointments.includes(formatDateAndTime(dateObject));
 
+                      const isDisabled = isDisabledDoctor || isDisabledUser;
                       return (
                         <Btn
                           key={dateFormatter('en-US', date)+hour}
                           customProps={{
                             'variant': 'customOutlineTransparent',
-                            'onClick': () => {
-                              setSelected({
-                                ...date,
-                                hour,
-                              });
-                            },
+                            'onClick': !isDisabled ? () => {
+                              setSelected(dateObject);
+                            } : null,
                             'data-active': isCurrent || null,
-                            // 'isDisabled': isDisabled,
+                            'isDisabled': isDisabled,
                           }}
                           type='button'
                           text={hour}

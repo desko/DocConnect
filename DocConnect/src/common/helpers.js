@@ -67,7 +67,7 @@ export const formatDateAndTime = (dateObject) => {
 
   // Return the formatted string
   return `${year}-${month}-${date}T${hour}:00`;
-}
+};
 
 export const checkDateCollission = (date, dateList) => {
   const match = dateList.find((el) => {
@@ -84,4 +84,13 @@ export const checkDateCollission = (date, dateList) => {
   });
 
   return !!match;
+};
+
+export const sortSpecialistAlphabetically = (arr) => {
+  return arr.map((el) => el).sort((a, b) => {
+    const nameA = `${a.firstName} ${a.lastName}`;
+    const nameB = `${b.firstName} ${b.lastName}`;
+
+    return nameA.localeCompare(nameB);
+  });
 };
