@@ -14,7 +14,7 @@ export const createUserAppointment = async (userId, doctorId, dateObject, token)
         'Authorization': token ? `Bearer ${token}` : null,
       },
     });
-    console.log(response);
+
     return response;
   } catch (error) {
     return error;

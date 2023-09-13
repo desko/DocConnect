@@ -32,7 +32,7 @@ const SpecialistDetailsController = () => {
     setLoading(true);
     const getDoctorInfo = async () => {
       const res = await getSpecialist(id);
-      console.log(res);
+
       if (res === null) {
         setError(true);
         return;

@@ -61,6 +61,10 @@ const variants = {
     color: 'bodyText',
     _hover: {
       bgColor: 'red.100',
+      _disabled: {
+        color: 'bodyText',
+        bgColor: 'red.200',
+      },
     },
     _active: {
       bgColor: 'red.500',

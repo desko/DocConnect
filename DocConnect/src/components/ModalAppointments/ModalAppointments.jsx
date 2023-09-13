@@ -8,32 +8,39 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import Btn from '../Btn/Btn';
 import CalendarSlider from '../CalendarSlider/CalendarSlider';
 import {useEffect, useState} from 'react';
 import {dateFormatter, getDayNameFromDateObject} from '../../common/helpers';
 import {createUserAppointment, getDoctorAppointments, getUserAppointments} from '../../services/servicesAppointments';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import NetworkError from '../NetworkError/NetworkError';
+import {logOut} from '../../store/features/userSlice';
+import {useNavigate} from 'react-router-dom';
+import { LOGIN_PAGE } from '../../common/routes';
 
 const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const navigate = useNavigate();
   const {userId, token} = useSelector((store) => store.user);
   const [selected, setSelected] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [submited, setSubmited] = useState(false);
   const [docAppointments, setDocAppointments] = useState([]);
   const [userAppointments, setuserAppointments] = useState([]);
 
   useEffect(() => {
     const fetchDoctorApointments = async () => {
       const res = await getDoctorAppointments(doctorId, token);
-      console.log(res);
 
       setDocAppointments(res);
     };
 
     const fetchUserApointments = async () => {
       const res = await getUserAppointments(doctorId, token);
-      console.log(res);
 
       setuserAppointments(res);
     };
@@ -42,11 +49,39 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
     // fetchUserApointments();
   }, [doctorId, token, userId]);
 
-  const handleSubmit = () => {
-    console.log(selected);
-    const data = createUserAppointment(userId, doctorId, selected, token);
+  const handleSubmit = async () => {
+    const data = await createUserAppointment(userId, doctorId, selected, token);
+    setSubmited(true);
+
     console.log(data);
-    setSuccess(true);
+
+    if (
+      data?.response?.status === 400 &&
+      data?.response?.data?.errorMessage === 'The patient already has this appointment hour taken!'
+    ) {
+      setSubmited(false);
+      setSuccess(false);
+      toast({
+        title: 'Ooops...',
+        description: 'You already have an appointment for that hour.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+
+    if (data?.code === 'ERR_NETWORK') {
+      dispatch(logOut());
+      navigate(LOGIN_PAGE);
+    }
+
+    if (data?.response?.status >= 402) {
+      setSuccess(false);
+    }
+
+    if (data?.status === 201) {
+      setSuccess(true);
+    }
   };
 
   return (
@@ -88,7 +123,7 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
           padding='1rem 0'
         >
           {
-            !success && <CalendarSlider
+            !submited && !success && <CalendarSlider
               selected={selected}
               setSelected={setSelected}
               userAppointments={userAppointments}
@@ -96,11 +131,16 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
             />
           }
           {
-            success && <Box>
+            submited && success && <Box>
               <Text>
                 Successfuly made appointment for
                 {` ${getDayNameFromDateObject('en-US', selected)} ${dateFormatter('en-US', selected)} ${selected.hour}`}
               </Text>
+            </Box>
+          }
+          {
+            submited && !success && <Box>
+              <NetworkError />
             </Box>
           }
         </ModalBody>
@@ -113,7 +153,7 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
           gap='1rem'
         >
           {
-            !success && <>
+            !submited && !success && <>
               <Btn
                 text='Cancel'
                 type='button'
@@ -133,7 +173,7 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
             </>
           }
           {
-            success && <Btn
+            submited && <Btn
               text='Close'
               type='button'
               customProps={{

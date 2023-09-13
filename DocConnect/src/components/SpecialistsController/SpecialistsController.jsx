@@ -123,8 +123,7 @@ const SpecialistsController = () => {
           pt='3.6rem'
         >
           {
-            currentSpecialists?.map((specialist, index) => {
-              // console.log(specialist);
+            currentSpecialists?.map((specialist) => {
               return <GridItem key={specialist.id}>
                 <Card
                   Component={CardContentSpecialist}
