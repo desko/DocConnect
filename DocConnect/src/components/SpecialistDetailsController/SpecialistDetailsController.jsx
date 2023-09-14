@@ -160,6 +160,7 @@ const SpecialistDetailsController = () => {
                     isOpen={isOpen}
                     handleClose={onClose}
                     doctorId={id}
+                    doctorName={`${results?.firstName} ${results?.lastName}`}
                   />
                 }
               </Box>

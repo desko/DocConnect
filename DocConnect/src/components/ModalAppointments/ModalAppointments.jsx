@@ -21,7 +21,7 @@ import {logOut} from '../../store/features/userSlice';
 import {useNavigate} from 'react-router-dom';
 import {LOGIN_PAGE} from '../../common/routes';
 
-const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
+const ModalAppointments = ({isOpen, handleClose, doctorId, doctorName}) => {
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
@@ -52,8 +52,6 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
   const handleSubmit = async () => {
     const data = await createUserAppointment(userId, doctorId, selected, token);
     setSubmited(true);
-
-    console.log(data);
 
     if (
       data?.response?.status === 400 &&
@@ -96,6 +94,7 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
       <ModalOverlay />
 
       <ModalContent
+        aria-label={doctorName}
         maxW={{
           base: '100%',
           lg: '77.6rem',

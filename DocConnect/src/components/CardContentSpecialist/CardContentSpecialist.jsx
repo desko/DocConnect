@@ -92,6 +92,7 @@ const CardContentSpecialist = ({content}) => {
           isOpen={isOpen}
           handleClose={onClose}
           doctorId={content.id}
+          doctorName={`${content?.firstName} ${content?.lastName}`}
         />
       }
     </Flex>
