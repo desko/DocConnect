@@ -60,5 +60,3 @@ export const resendEmailVerificationUser = async (token) => {
     return error;
   }
 };
-
-

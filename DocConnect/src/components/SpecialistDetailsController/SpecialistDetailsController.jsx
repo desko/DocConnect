@@ -1,4 +1,4 @@
-import {Box, Flex, Heading, Image, Spinner, Text} from '@chakra-ui/react';
+import {Box, Flex, Heading, Image, Spinner, Text, useDisclosure} from '@chakra-ui/react';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {ReactComponent as IconLocation} from '../../assets/icon-location.svg';
@@ -7,9 +7,21 @@ import {useSelector} from 'react-redux';
 import Btn from '../Btn/Btn';
 import {getSpecialist} from '../../services/servicesSpecialists';
 import NetworkError from '../NetworkError/NetworkError';
-import {cardAbout, cardAddress, cardContainer, cardContainerBanner, cardContainerContent, cardContainerFlex, cardContainerHeader, cardHeaderFigure, cardHeaderImage} from './SpecialistDetailsController.theme';
+import {
+  cardAbout,
+  cardAddress,
+  cardContainer,
+  cardContainerBanner,
+  cardContainerContent,
+  cardContainerFlex,
+  cardContainerHeader,
+  cardHeaderFigure,
+  cardHeaderImage,
+} from './SpecialistDetailsController.theme';
+import ModalAppointments from '../ModalAppointments/ModalAppointments';
 
 const SpecialistDetailsController = () => {
+  const {isOpen, onOpen, onClose} = useDisclosure();
   const {token} = useSelector((store) => store.user);
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState({});
@@ -20,7 +32,7 @@ const SpecialistDetailsController = () => {
     setLoading(true);
     const getDoctorInfo = async () => {
       const res = await getSpecialist(id);
-      console.log(res);
+
       if (res === null) {
         setError(true);
         return;
@@ -139,8 +151,18 @@ const SpecialistDetailsController = () => {
                     },
                   }}
                   customProps={{
+                    onClick: onOpen,
                     isDisabled: !token,
                   }} />
+
+                {
+                  isOpen && token && <ModalAppointments
+                    isOpen={isOpen}
+                    handleClose={onClose}
+                    doctorId={id}
+                    doctorName={`${results?.firstName} ${results?.lastName}`}
+                  />
+                }
               </Box>
             </Flex>
           </Box>

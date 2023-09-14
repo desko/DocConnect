@@ -43,6 +43,43 @@ const variants = {
       bgColor: 'red.100',
     },
   }),
+  customOutlineTransparent: defineStyle({
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textTransform: 'capitalize',
+    lineHeight: '1',
+    height: 'auto',
+    transition: 'background-color .4s, border-color .4s, color .4s',
+    padding: '1.3rem 1.2rem',
+    fontWeight: '700',
+    fontSize: '1.6rem',
+    borderRadius: '.5rem',
+    border: '.2rem solid',
+    borderColor: 'bodyText',
+    bgColor: 'transparent',
+    color: 'bodyText',
+    _hover: {
+      bgColor: 'red.100',
+      _disabled: {
+        color: 'bodyText',
+        bgColor: 'red.200',
+      },
+    },
+    _active: {
+      bgColor: 'red.500',
+      borderColor: 'transparent',
+      color: 'white',
+    },
+    _disabled: {
+      bgColor: 'red.200',
+      borderColor: 'transparent',
+      _hover: {
+        color: 'bodyText',
+        bgColor: 'red.200',
+      },
+    },
+  }),
   hamburger: defineStyle({
     display: {
       base: 'inline-flex',

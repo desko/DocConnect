@@ -28,7 +28,7 @@ const Card = ({Component, imageUrl, content, imagePrefix = '', link='#'}) => {
       >
         <Image
           src={imagePrefix+imageUrl}
-          alt={content.name || `${content?.firstName} ${content?.lastName}`}
+          alt={typeof content !== 'string' ? `${content?.firstName} ${content?.lastName}` : content}
           position='absolute'
           inset='0'
           w='100%'
@@ -47,6 +47,7 @@ const Card = ({Component, imageUrl, content, imagePrefix = '', link='#'}) => {
         <Component content={content} />
       </CardBody>
       <ChakraLink
+        aria-label={typeof content !== 'string' ? `${content?.firstName} ${content?.lastName}` : content}
         as={ReactRouterLink}
         to={link}
         position='absolute'

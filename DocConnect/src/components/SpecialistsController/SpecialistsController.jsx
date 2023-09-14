@@ -8,6 +8,7 @@ import {fetchSpecialists} from '../../services/servicesSpecialists';
 import {fetchSpecialties} from '../../services/servicesSpecialties';
 import {useDispatch, useSelector} from 'react-redux';
 import Pagination from '../Pagination/Pagination';
+import { sortSpecialistAlphabetically } from '../../common/helpers';
 
 const SpecialistsController = () => {
   const dispatch = useDispatch();
@@ -19,9 +20,9 @@ const SpecialistsController = () => {
   const [nameValue, setNameValue] = useState('');
   const [name, setName] = useState(null);
   const [specialty, setSpecialty] = useState(Number(searchParams.get('specialtyId')) || '');
-  const [changed, setChanged] = useState(!!Number(searchParams.get('specialtyId')) || false);
+  const [changed, setChanged] = useState(!!Number(searchParams.get('specialtyId')) || true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [specialistsPerPage] = useState(9);
+  const [specialistsPerPage] = useState(30);
 
   useEffect(() => {
     setSearchParams({
@@ -45,7 +46,7 @@ const SpecialistsController = () => {
           (name?.name.length > 2 ? name?.name : '') || (nameValue.trim().length > 2 ? nameValue.trim() : ''),
       );
 
-      setSpecialists(result);
+      setSpecialists(sortSpecialistAlphabetically(result));
       setLoading(false);
     };
 
@@ -122,8 +123,7 @@ const SpecialistsController = () => {
           pt='3.6rem'
         >
           {
-            currentSpecialists?.map((specialist, index) => {
-              // console.log(specialist);
+            currentSpecialists?.map((specialist) => {
               return <GridItem key={specialist.id}>
                 <Card
                   Component={CardContentSpecialist}
@@ -138,7 +138,7 @@ const SpecialistsController = () => {
       }
 
       {
-        specialists?.length > 0 && specialists.length > specialistsPerPage ?
+        !loading && specialists?.length > 0 && specialists.length > specialistsPerPage ?
         <Pagination
           itemsPerPage={specialistsPerPage}
           totalItems={specialists.length}

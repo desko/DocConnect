@@ -46,7 +46,7 @@ export const cardContainerHeader = {
 
 export const cardHeaderFigure = {
   position: 'relative',
-  aspectRatio: '1',
+  aspectRatio: '1/1',
   borderRadius: '50%',
   border: '1rem solid',
   borderColor: 'white',
