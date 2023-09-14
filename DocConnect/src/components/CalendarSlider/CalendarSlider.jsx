@@ -28,6 +28,7 @@ const CalendarSlider = ({selected, setSelected, userAppointments = [], doctorApp
       >
         <IconButton
           ref={prevRef}
+          role='button'
           aria-label='previous'
           style={{
             '--icon-width': '3rem',
@@ -52,7 +53,7 @@ const CalendarSlider = ({selected, setSelected, userAppointments = [], doctorApp
         />
         <IconButton
           ref={nextRef}
-          aria-label='previous'
+          aria-label='next'
           style={{
             '--icon-width': '3rem',
           }}
@@ -107,6 +108,8 @@ const CalendarSlider = ({selected, setSelected, userAppointments = [], doctorApp
                 key={dateFormatter('en-US', date)}
               >
                 <Flex
+                  role='group'
+                  aria-label={`${dateFormatter('en-US', date)} hours`}
                   flexDirection='column'
                   gap='1.6rem'
                 >
@@ -156,6 +159,7 @@ const CalendarSlider = ({selected, setSelected, userAppointments = [], doctorApp
                             } : null,
                             'data-active': isCurrent || null,
                             'isDisabled': isDisabled,
+                            'aria-label': hour,
                           }}
                           type='button'
                           text={hour}
