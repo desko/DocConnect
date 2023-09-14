@@ -19,7 +19,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import NetworkError from '../NetworkError/NetworkError';
 import {logOut} from '../../store/features/userSlice';
 import {useNavigate} from 'react-router-dom';
-import { LOGIN_PAGE } from '../../common/routes';
+import {LOGIN_PAGE} from '../../common/routes';
 
 const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
   const dispatch = useDispatch();
@@ -65,6 +65,7 @@ const ModalAppointments = ({isOpen, handleClose, doctorId}) => {
         title: 'Ooops...',
         description: 'You already have an appointment for that hour.',
         status: 'error',
+        position: 'top',
         duration: 5000,
         isClosable: true,
       });
