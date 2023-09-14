@@ -59,14 +59,17 @@ const ModalAppointments = ({isOpen, handleClose, doctorId, doctorName}) => {
     ) {
       setSubmited(false);
       setSuccess(false);
-      toast({
-        title: 'Ooops...',
-        description: 'You already have an appointment for that hour.',
-        status: 'error',
-        position: 'top',
-        duration: 5000,
-        isClosable: true,
-      });
+      if (!toast.isActive('taken hour')) {
+        toast({
+          id: 'taken hour',
+          title: 'Ooops...',
+          description: 'You already have an appointment for that hour.',
+          status: 'error',
+          position: 'bottom',
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     }
 
     if (data?.code === 'ERR_NETWORK') {

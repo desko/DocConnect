@@ -14,7 +14,10 @@ export const infoContainer = {
   flex: '1',
   flexDirection: {'base': 'column', 'sm': 'row'},
   fontSize: '15px',
-  gap: '2rem',
+  gap: {
+    base: '1rem',
+    sm: '2rem',
+  },
 };
 
 export const info = {
@@ -28,4 +31,5 @@ export const moreInfo = {
   padding: '3rem 2.5rem',
   border: '1px solid gray',
   borderRadius: '0 0 4px 4px',
+  borderTop: 0,
 };
