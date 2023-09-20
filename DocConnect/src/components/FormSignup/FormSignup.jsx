@@ -22,17 +22,26 @@ const FormSignup = () => {
   const [networkError, setNetworkError] = useState(false);
 
   const onSubmit = async (values) => {
-    try {
-      const response = await registerUser(values);
-      if (response.data.errorMessage) {
-        setError('emailAddress', {message: response.data.errorMessage});
-        setNetworkError(false);
-      }
-      if (response.data.httpStatusCode === 201) {
-        setNetworkError(false);
-        setIsRegistered(true);
-      }
-    } catch (error) {
+    const response = await registerUser(values);
+
+    if (response?.data?.httpStatusCode === 201) {
+      setNetworkError(false);
+      setIsRegistered(true);
+    }
+
+    if (response?.response?.data?.success === false && response?.response?.data?.errorMessage) {
+      const err = response.response.data.errorMessage;
+      const replaceMessage = 'This email is already registered by another user.';
+      const message = err === replaceMessage ? 'Invalid email address' : err;
+      setError('emailAddress', {message});
+      setNetworkError(false);
+    }
+
+    if (
+      response?.code === 'ERR_NETWORK' ||
+      response?.status === 0 ||
+      response?.response?.status > 400
+    ) {
       setNetworkError(true);
     }
   };

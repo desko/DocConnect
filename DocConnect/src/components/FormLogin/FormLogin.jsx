@@ -33,7 +33,6 @@ const FormLogin = () => {
 
   const onSubmit = async (values) => {
     const response = await dispatch(loginUser(values));
-    console.log(response);
 
     if (response?.payload?.success === false && response?.payload?.errorMessage) {
       setError('emailAddress', {message: response.payload.errorMessage});
