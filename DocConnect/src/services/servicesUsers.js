@@ -5,14 +5,24 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/User`;
 
 export const registerUser = async (userData) => {
-  const data = await axios.post(`${baseUrl}/Register`, userData);
-  return data;
+  try {
+    const data = await axios.post(`${baseUrl}/Register`, userData);
+    return data;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const loginUser = createAsyncThunk('user/loginUser', async (userData) => {
-  const response = await axios.post(`${baseUrl}/Login`, userData);
+  try {
+    const response = await axios.post(`${baseUrl}/Login`, userData, {
+      validateStatus: (status) => status,
+    });
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return error;
+  }
 });
 
 export const forgottenPasswordUser = async (emailAddress) => {
