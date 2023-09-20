@@ -10,9 +10,15 @@ export const registerUser = async (userData) => {
 };
 
 export const loginUser = createAsyncThunk('user/loginUser', async (userData) => {
-  const response = await axios.post(`${baseUrl}/Login`, userData);
+  try {
+    const response = await axios.post(`${baseUrl}/Login`, userData, {
+      validateStatus: (status) => status,
+    });
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return error;
+  }
 });
 
 export const forgottenPasswordUser = async (emailAddress) => {

@@ -33,8 +33,9 @@ const FormLogin = () => {
 
   const onSubmit = async (values) => {
     const response = await dispatch(loginUser(values));
+    console.log(response);
 
-    if (response?.payload?.errorMessage) {
+    if (response?.payload?.success === false && response?.payload?.errorMessage) {
       setError('emailAddress', {message: response.payload.errorMessage});
       setError('password', {message: response.payload.errorMessage});
       setNetworkError(false);
@@ -44,7 +45,11 @@ const FormLogin = () => {
       setNetworkError(false);
       navigate('/');
     }
-    if (response?.error) {
+    if (
+      response?.payload?.code === 'ERR_NETWORK' ||
+      response?.payload?.status === 0 ||
+      response?.response?.status > 400
+    ) {
       setNetworkError(true);
     }
   };
