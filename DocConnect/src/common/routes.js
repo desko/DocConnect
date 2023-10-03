@@ -1,0 +1,14 @@
+export const HOME_PAGE = '/';
+export const LOGIN_PAGE = '/login';
+export const FORGOTTEN_PASSWORD_PAGE = '/login/forgotten-password';
+export const RESET_PASSWORD_PAGE = '/login/reset-password';
+export const RESET_PASSWORD_VALIDATION_PAGE = '/login/reset-password/:status';
+export const RESET_PASSWORD_VALIDATION_LINK = '/login/reset-password/';
+export const SIGNUP_PAGE = '/signup';
+export const SPECIALTIES_PAGE = '/specialties';
+export const SPECIALISTS_PAGE = '/specialists';
+export const SPECIALISTS_DETAILS_PAGE = '/specialists/:id';
+export const USER_VERIFICATION = '/user/verification';
+export const PRIVACY_POLICY_PAGE = '/privacy-policy';
+export const USER_AGREEMENT_PAGE = '/user-agreement';
+export const APPOINTMENTS_PAGE = '/appointments';
